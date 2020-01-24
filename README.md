@@ -4,7 +4,7 @@ este es el repocitorio OFICIAL del proyecto veterinaria petshop de donde se va a
 ## Antes de empezar 
 Estas instrucciones le proporcionarán una copia del proyecto en funcionamiento en su máquina local para fines de desarrollo y prueba. Consulte la implementación para obtener notas sobre cómo implementar el proyecto en un sistema en vivo.
 
-### PreRequisitos
+### PRERequisitos
 A continuacion se van a presentar los requisitos que debe tener si va a ejecutar el proyecto como desarrollador 
 ```
 Tener instalado nodejs 
