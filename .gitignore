@@ -1,1 +1,4 @@
- node_modules/
+*.jpg
+*.png
+/node_modules
+/holamelapela
