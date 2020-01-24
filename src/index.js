@@ -1,6 +1,6 @@
 const express =  require('express');
 const app = express();
-// hola
+// Coneccion con base de datos
 require('./database');
 //confugurando el puerto
 app.set('port',process.env.PORT || 3000);
