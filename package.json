@@ -1,0 +1,24 @@
+{
+  "name": "proyecto-sena-2020",
+  "version": "1.0.0",
+  "description": "este es el repocitorio OFICIAL del proyecto veterinaria petshop de donde se va a estar trabajando hasta acabar el proyecto y sus unicos colaboradores son **Andres Ballen** y **Ivan Caviedes**",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ITSKY152/Proyecto-Sena-2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ITSKY152/Proyecto-Sena-2020/issues"
+  },
+  "homepage": "https://github.com/ITSKY152/Proyecto-Sena-2020#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.9",
+    "nodemon": "^2.0.2"
+  }
+}
