@@ -18,20 +18,15 @@ export default class header extends Component {
 						<li><a href="./gallery-single.html">Single gallery</a></li>
 						<li><a href="./blog.html">Blog</a></li>
 						<li><a href="./contact.html">Contact</a></li>
+						<h6 className="text-center">Tienes cuenta?</h6>
+						<li className="text-center"><button type="button" class="btn btn-primary w-50 ">Iniciar sesion</button></li>
 					</ul>
-					<div class="social-links-warp">
-						<div class="social-links">
-							<a href="">
-								<i class="fa fa-behance"></i>
-							</a>
-							<a href=""><i class="fa fa-dribbble"></i></a>
-							<a href=""><i class="fa fa-twitter"></i></a>
-							<a href=""><i class="fa fa-facebook"></i></a>
-							<a href=""><i class="fa fa-pinterest"></i></a>
-						</div>
-					</div>
+					<h5 className="text-center">Chequea el repocitorio oficial <i fa class="fa fa-github"></i> 
+					<a href="https://github.com/ITSKY152?tab=repositories"> Aqui!</a>
+					</h5>
 				</div>
-				<div class="copyright">Colorlib 2018  @ All rights reserved</div>
+				
+				<div class="copyright">Todos los derechos reservados a: </div>
 			</header>
 		)
 	}
