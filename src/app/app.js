@@ -1,36 +1,15 @@
 import React, { Component } from 'react'
+import Navbar from './components/index/navbar'
+import Aside from './components/index/aside'
+
 
 export default class app extends Component {
     render() {
         return (
-            <div>
-                <a href="./Login.html">hola</a>
-                pepe
-                <h1 className = "text-primary">hola2</h1>
-
-                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="img/logotipos-de-unicornios-7.png" alt="First slide" />
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="img/logotipos-de-unicornios-28.jpg" alt="Second slide" />
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="img/logotipos-de-unicornios-7.png" alt="Third slide" />
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </div>
+            <div id="page">
+                <Navbar/>
+                <Aside/>
             </div>
-
         )
     }
 }
