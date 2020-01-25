@@ -4,7 +4,8 @@ export default class app extends Component {
     render() {
         return (
             <div>
-                <h1>hola</h1>
+                <a href="./Login.html">hola</a>
+                <h1 className = "text-primary">hola2</h1>
             </div>
         )
     }
