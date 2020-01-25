@@ -4,6 +4,7 @@
   "description": "este es el repocitorio OFICIAL del proyecto veterinaria petshop de donde se va a estar trabajando hasta acabar el proyecto y sus unicos colaboradores son **Andres Ballen** y **Ivan Caviedes**",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src index.js",
     "webpack": "webpack --mode development --watch"
   },
