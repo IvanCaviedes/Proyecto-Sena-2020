@@ -5,9 +5,9 @@ export default class app extends Component {
         return (
             <div>
                 <a href="./Login.html">hola</a>
-<<<<<<< HEAD
+                pepe
                 <h1 className = "text-primary">hola2</h1>
-=======
+
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
@@ -29,8 +29,6 @@ export default class app extends Component {
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
->>>>>>> 509a2aa2a0f17930b497f2391aa8a0b23d12816a
             </div>
 
         )
