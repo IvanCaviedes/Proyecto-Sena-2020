@@ -15,8 +15,6 @@ export default class header extends Component {
 					<ul class="main-menu">
 						<li class="active"><a href="./home.html">Home</a></li>
 						<li><a href="./gallery.html">Gallery</a></li>
-						<li><a href="./gallery-single.html">Single gallery</a></li>
-						<li><a href="./blog.html">Blog</a></li>
 						<li><a href="./contact.html">Contact</a></li>
 						<h6 className="text-center">Tienes cuenta?</h6>
 						<li className="text-center"><button type="button" class="btn btn-primary w-50 ">Iniciar sesion</button></li>
