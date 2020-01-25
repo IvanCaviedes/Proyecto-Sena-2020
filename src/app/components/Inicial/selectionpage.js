@@ -24,7 +24,7 @@ export default class selectionpage extends Component {
                             <a href="" class="site-btn">Read More</a>
                         </div>
                         <div class="next-slide-show set-bg" data-setbg="img/slider-bg-1.jpg">
-                            <a href="#slide-1" class="ns-btn">Next</a>
+                            <a href="#slide-3" class="ns-btn">Next</a>
                         </div>
                     </div>
                 </div>

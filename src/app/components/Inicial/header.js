@@ -27,7 +27,6 @@ export default class header extends Component {
 						<a href=""><i class="fa fa-facebook"></i></a>
 						<a href=""><i class="fa fa-pinterest"></i></a>
 					</div>
-					<div class="social-text">Find us on</div>
 				</div>
 			</div>
 			<div class="copyright">Colorlib 2018  @ All rights reserved</div>
