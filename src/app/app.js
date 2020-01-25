@@ -4,6 +4,7 @@ export default class app extends Component {
     render() {
         return (
             <div>
+                <a href="./Login.html">hola</a>
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
