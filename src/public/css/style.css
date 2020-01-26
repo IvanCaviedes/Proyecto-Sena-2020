@@ -528,7 +528,7 @@ ol {
 }
 
 .slider-item {
-	height: 803px;
+	height: 668px;
 	padding-bottom: 77px;
 }
 
@@ -536,6 +536,8 @@ ol {
 	width: 395px;
 	padding: 90px 50px 100px 0;
 	background: #fff;
+	opacity: 75%;
+	text-align: center;
 }
 
 .slider-item .si-text-box span {
