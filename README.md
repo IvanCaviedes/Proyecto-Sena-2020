@@ -22,6 +22,9 @@ Abrir una consola y arrastrar el documento install y dar Enter.
 
 Ojo tiene que estar la consola ubicada en la carpeta del proyecto
 ```
+
+**Ejemplo**
+<img src="https://i.imgur.com/YJDDMmy.png">
 este comando instalara todas las dependencias del proyecto despues de esto...
 
 ```
