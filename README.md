@@ -25,10 +25,11 @@ Ojo tiene que estar la consola ubicada en la carpeta del proyecto
 
 **Ejemplo**
 <img src="https://i.imgur.com/YJDDMmy.png">
-este comando instalara todas las dependencias del proyecto despues de esto...
+despues de esto se instalara el proyecto y se ejecutara 
 
+* **Opcion2**
 ```
- En consola ejecutamos el comando **npm start**
+ Entrar por medio de consola a la carpeta backend **cd backend** y ejecutar el siguiente comando **npm install* luego de que haya instalado todo ejecutar el comando **npm start*, hacer lo mismo para la carpeta frontend **cd frontend**, **npm install**, **npm start**
 ```
 
 ## Desarrollado en 
