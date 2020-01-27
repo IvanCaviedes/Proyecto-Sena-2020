@@ -1,11 +1,12 @@
 const express =  require('express');
 const app = express();
+const path = require('path')
 // Coneccion con base de datos
 require('./database');
 //confugurando el puerto
 app.set('port',process.env.PORT || 4000);
 
-app.use(__dirname,'public')
+app.use(express.static(path.join(__dirname+"/Public")))  
 
 //iniciando servidor
 app.listen(app.get('port'),()=>{
