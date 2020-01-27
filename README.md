@@ -16,7 +16,7 @@ tener mongodb instalado
 ### Instalacion
 Segir estos pasos para tener una buena instalacion 
 
-**Opcion 1**
+* **Opcion 1**
 ```
 Abrir una consola y arrastrar el documento install y dar Enter.
 
