@@ -15,13 +15,27 @@ tener mongodb instalado
 
 ### Instalacion
 Segir estos pasos para tener una buena instalacion 
-```
-En consola ejecutar el siguiente comando **npm i** 
-```
-este comando instalara todas las dependencias del proyecto despues de esto...
 
+* **Opcion 1**
 ```
- En consola ejecutamos el comando **npm start**
+Abrir una consola y arrastrar el documento install y dar Enter.
+
+Ojo tiene que estar la consola ubicada en la carpeta del proyecto
+```
+
+**Ejemplo**
+<img src="https://i.imgur.com/YJDDMmy.png">
+despues de esto se instalara el proyecto y se ejecutara 
+
+* **Opcion2**
+```
+ Entrar por medio de consola a la carpeta backend 
+
+ **cd backend** y ejecutar el siguiente comando **npm install* 
+
+ luego de que haya instalado todo ejecutar el comando **npm start*, 
+ 
+ hacer lo mismo para la carpeta frontend **cd frontend**, **npm install**, **npm start**
 ```
 
 ## Desarrollado en 

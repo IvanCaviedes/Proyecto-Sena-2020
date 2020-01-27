@@ -7,12 +7,7 @@ export default class app extends Component {
     render() {
         return (
             <div>
-                <Top />
-                <div class="main-warp">
-                    <Header />
-                    <Selection />
-                </div>
-                <Buscar />
+            <h1>hola</h1>
             </div>
         )
     }
