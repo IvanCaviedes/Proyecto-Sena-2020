@@ -5,7 +5,7 @@ export default class selectionpage extends Component {
         return (
             <div class="page-section home-page">
                 <div class="hero-slider owl-carousel">
-                    <div class="slider-item d-flex align-items-center set-bg" data-setbg="https://i.imgur.com/VRaEppj.jpg" data-hash="slide-1">
+                    <div class="slider-item d-flex align-items-center set-bg" data-setbg="https://i.imgur.com/KBzejqS.jpg" data-hash="slide-1">
                         <div  class="si-text-box transpaert">
                             <span>Mascotas </span>
                             <h2>Cuidados</h2>
