@@ -1,0 +1,122 @@
+/* Galley Area css
+============================================================================================ */
+.home_blog_area{
+	
+}
+.home_blog_inner{
+	margin-bottom: -50px;
+}
+.h_blog_item{
+	margin-bottom: 50px;
+	.col-lg-6{
+		vertical-align: middle;
+		align-self: center;
+	}
+	.h_blog_img{
+		border-radius: 10px;
+	}
+	.h_blog_text{
+		padding-top: 60px;
+		padding-bottom: 60px;
+		.h_blog_text_inner{
+			background: #fff;
+			padding: 75px 90px;
+			border-radius: 10px;
+			&.left{
+				margin-left: -67px;
+				position: relative;
+				z-index: 2;
+			}
+			&.right{
+				margin-right: -67px;
+				position: relative;
+				z-index: 2;
+			}
+			h4{
+				color: $dip;
+				font-size: 42px;
+				margin-bottom: 15px;
+			}
+			p{
+				margin-bottom: 30px;
+			}
+		}
+	}
+}
+/* End Gallery Area css
+============================================================================================ */
+
+/* Portfolio Details Area css
+============================================================================================ */
+.portfolio_details_area{
+	
+}
+.portfolio_details_inner{
+	.row{
+		margin-bottom: 65px;
+	}
+	p{
+		margin-bottom: 30px;
+		font-size: 14px;
+		&:last-child{
+			margin-bottom: 0px;
+		}
+	}
+	.portfolio_right_text{
+		padding-left: 98px;
+		h4{
+			color: $dip;
+			font-size: 21px;
+			text-transform: uppercase;
+			margin-bottom: 18px;
+		}
+		p{
+			margin-bottom: 25px;
+			font-size: 14px;
+		}
+		.list{
+			li{
+				margin-bottom: 7px;
+				span{
+					font-size: 14px;
+					color: $dip;
+					font-weight: bold;
+					width: 97px;
+					display: inline-block;
+				}
+				color: $pfont;
+				font-weight: normal;
+				font-size: 14px;
+				&:last-child{
+					margin-bottom: 0px;
+				}
+				i{
+					color: #f1cd09;
+				}
+			}
+		}
+	}
+}
+
+.social_details{
+	margin-top: 50px;
+	li{
+		display: inline-block;
+		margin-right: 14px;
+		a{
+			font-size: 14px;
+			i{
+				color: $dip !important;
+				&:hover{
+					color: $baseColor !important;
+				}
+			}
+		}
+		&:last-child{
+			margin-right: 0px;
+		}
+	}
+}
+
+/* End Portfolio Details Area css
+============================================================================================ */

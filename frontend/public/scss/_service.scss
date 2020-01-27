@@ -1,0 +1,58 @@
+/* Service Area css
+============================================================================================ */
+.service_area{
+	
+}
+.service_inner{
+	.service_img{
+		
+	}
+	.service_text{
+		background: #f9f9ff;
+		height: 100%;
+		padding-left: 40px;
+		padding-right: 40px;
+		padding-top: 95px;
+		h4{
+			color: $dip;
+			font-size: 20px;
+			line-height: 27px;
+			margin-bottom: 15px;
+		}
+		p{
+			margin-bottom: 0px;
+		}
+	}
+}
+/* End Service Area css
+============================================================================================ */
+
+/* About Area css
+============================================================================================ */
+.about_area{
+	
+}
+.about_inner{
+	.col-lg-6{
+		vertical-align: middle;
+		align-self: center;
+	}
+	.about_text{
+		h3{
+			color: $dip;
+			font-size: 36px;
+			margin-bottom: 18px;
+		}
+		h5{
+			font-size: 16px;
+			color: $dip;
+			font-family: $rob;
+			margin-bottom: 10px;
+		}
+		p{
+			margin-bottom: 0px;
+		}
+	}
+}
+/* End About Area css
+============================================================================================ */

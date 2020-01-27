@@ -5,10 +5,10 @@ import Cliente from './components/cliente'
 function App() {
   return (
     <Router>
-      <div className="container p-4">
+      {/* <div className="container p-4"> */}
         <Route path="/" exact component={Cliente} />
 {/*        <Route path="/edit/:id" component={CreateNote} />
- */}     </div>
+ */}   {/*   </div> */}
     </Router>
   );
 }
