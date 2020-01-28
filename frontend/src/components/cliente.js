@@ -11,13 +11,13 @@ export default class index extends Component {
     render() {
         return (
             <div>
-               <Header/>
-               <Baner/>
-               <Blog/>
-               <Servicio/>
-               <Feed/>
-               <Insta/>
-               <Footer/>
+                <Header />
+                <Baner />
+                <Blog />
+                <Servicio/>
+                <Feed />
+                <Insta />
+                <Footer />
             </div>
         )
     }

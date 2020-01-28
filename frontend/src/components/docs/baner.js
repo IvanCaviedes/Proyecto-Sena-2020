@@ -10,7 +10,7 @@ export default class buscar extends Component {
 						<div class="banner_content text-center">
 							<h3>pet shop</h3>
 							<p>los animales son lo mas importante para nostros</p>
-							<a class="main_btn" href="#">galeria de fotos</a>
+							<a class="main_btn" href="/">galeria de fotos</a>
 						</div>
 					</div>
 				</div>

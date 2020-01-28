@@ -22,7 +22,7 @@ export default class loader extends Component {
 								<div class="h_blog_text_inner left">
 									<h4>Alimentación <br />para tus mascotas</h4>
 									<p>es lo más importanete para que tu mascota cresca sana y fuerte</p>
-									<a class="main_btn2" href="#">ver más</a>
+									<a class="main_btn2" href="/">ver más</a>
 								</div>
 							</div>
 						</div>
@@ -33,7 +33,7 @@ export default class loader extends Component {
 								<div class="h_blog_text_inner right">
 									<h4>Spreading <br />Peace to world</h4>
 									<p>If you are looking at blank cassette on the web you may be very confused at the difference in price you may see some.</p>
-									<a class="main_btn2" href="#">Explore Gallery</a>
+									<a class="main_btn2" href="/">Explore Gallery</a>
 								</div>
 							</div>
 						</div>
@@ -54,7 +54,7 @@ export default class loader extends Component {
 								<div class="h_blog_text_inner left">
 									<h4>Spreading <br />Peace to world</h4>
 									<p>If you are looking at blank cassette on the web you may be very confused at the difference in price you may see some.</p>
-									<a class="main_btn2" href="#">Explore Gallery</a>
+									<a class="main_btn2" href="/">Explore Gallery</a>
 								</div>
 							</div>
 						</div>
@@ -65,7 +65,7 @@ export default class loader extends Component {
 								<div class="h_blog_text_inner right">
 									<h4>Spreading <br />Peace to world</h4>
 									<p>If you are looking at blank cassette on the web you may be very confused at the difference in price you may see some.</p>
-									<a class="main_btn2" href="#">Explore Gallery</a>
+									<a class="main_btn2" href="/">Explore Gallery</a>
 								</div>
 							</div>
 						</div>
