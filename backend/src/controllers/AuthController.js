@@ -1,20 +1,28 @@
+//Base de Datos collection Usuario
 const User = require('../models/User');
+//Bcryp
 const bcrypt = require('bcrypt');
+//Config
 const CONFIG = require('../config/config');
-
+//Jsonwebtoken
 const jwt = require('jsonwebtoken');
 
-//Username
-//Password
+//Datos necesarios
+
+//       Username
+//       Password
 
 function login(req,res){
     let username = req.body.username;
     let password = req.body.password;
 
+    //Busca si existe
     User.findOne({username})
         .then(user => {
             if(!user) return res.status(404).send({message: 'EL USUARIO NO EXISTE'});
+            //Si existe
             bcrypt.compare(password,user.password)
+            //si es la contraseña correcta
                   .then(match => {
                         if(match){
                             payload = {
@@ -24,11 +32,13 @@ function login(req,res){
                                 role: user.role
                             }
                             //Acceso
+                            //Crea token secreto
                             jwt.sign(payload,CONFIG.SECRET_TOKEN,function(error,token){
                                 if(error){
                                     res.status(500).send({error});
                                 }else{
-                                    res.status(200).send({message: 'Acceso',token});
+                                    //Envia el token y los datos del usuario
+                                    res.status(200).send({message: 'Acceso',token,payload});
                                 }
                             })
                         }else{
