@@ -16,7 +16,8 @@ function show(req,res){
 }
 
 function create(req,res){
-    new User(req.body).save().then(user => res.status(201).send({user})).catch(error => res.status(500).send({error}));
+    mensaje = "usuario creado correctamente"
+    new User(req.body).save().then(user => res.status(201).send({mensaje,user})).catch(error => res.status(500).send({error}));
 }
 
 function update(req,res){

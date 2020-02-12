@@ -1,16 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Cliente from './components/cliente'
-
+import { BrowserRouter as Router, Switch, Redirect, Route } from 'react-router-dom'
+import PrivateRoute from './auth'
+import Login from './components/Login'
+import Dashboard from './components/DashBoard'
+import Logout from './components/logout'
 function App() {
   return (
     <Router>
-      {/* <div className="container p-4"> */}
-        <Route path="/" exact component={Cliente} />
-{/*        <Route path="/edit/:id" component={CreateNote} />
- */}   {/*   </div> */}
+      <Switch>
+        <Route path="/" exact component={Login} />
+        <PrivateRoute path="/admin" exact component={Dashboard} />
+        <Route path="/logout" exact component={Logout} />
+      </Switch>
+      <Redirect
+        to={{
+          pathname: '/',
+          state: { mensaje: 'Usuario no autorizado' }
+        }}
+      />
     </Router>
   );
 }
-
 export default App;

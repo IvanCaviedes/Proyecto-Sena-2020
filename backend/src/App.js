@@ -1,13 +1,22 @@
 //Express
 const express = require('express');
-//Bodyparser
-const bodyParser = require('body-parser');
+//Cors 
+const cors = require('cors')
 //Path
 const path = require('path')
 //Morgan
 const morgan = require('morgan')
 //Ejecutando express
 const App = express();
+
+App.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 
 //Procesador de peticiones
 App.use(morgan('dev'))
@@ -18,8 +27,8 @@ const AuthToken = require('./middlewares/AuthToken');
 App.use(AuthToken);
 
 //Manejador de json
-App.use(bodyParser.json());
-App.use(bodyParser.urlencoded({ extended: false }));
+App.use(cors());
+App.use(express.json());
 
 //Rutas
 const Product = require('./routes/product');
