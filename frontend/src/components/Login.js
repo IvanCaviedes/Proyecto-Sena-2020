@@ -56,7 +56,7 @@ iniciosesion = (e)=> {
                     ) :''
                 }
             
-            <a href="./Cliente.html">ircion</a>
+            <a href="./cliente/html/Cliente.html">ircion</a>
             
             </div>
         )
