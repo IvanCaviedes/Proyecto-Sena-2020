@@ -55,6 +55,9 @@ iniciosesion = (e)=> {
                     <h1>{this.state.mensaje}</h1>
                     ) :''
                 }
+            
+            <a href="./Cliente.html">ircion</a>
+            
             </div>
         )
     }

@@ -12,12 +12,6 @@ function App() {
         <PrivateRoute path="/admin" exact component={Dashboard} />
         <Route path="/logout" exact component={Logout} />
       </Switch>
-      <Redirect
-        to={{
-          pathname: '/',
-          state: { mensaje: 'Usuario no autorizado' }
-        }}
-      />
     </Router>
   );
 }
