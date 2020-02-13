@@ -4,11 +4,13 @@ import PrivateRoute from './auth'
 import Login from './components/Login'
 import Dashboard from './components/DashBoard'
 import Logout from './components/logout'
+import Registro from './components/registro'
 function App() {
   return (
     <Router>
       <Switch>
         <Route path="/" exact component={Login} />
+        <Route path="/register" exact component={Registro} />
         <PrivateRoute path="/admin" exact component={Dashboard} />
         <Route path="/logout" exact component={Logout} />
       </Switch>

@@ -31,28 +31,11 @@ export default class menulogreg extends Component {
                             </div>
 
                             <ul class="navbar-nav ml-auto">
+
                                 <li class="nav-item">
-                                    <a class="nav-link nav-link-icon" href="../index.html">
-                                        <i class="ni ni-planet"></i>
-                                        <span class="nav-link-inner--text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link nav-link-icon" href="../examples/register.html">
-                                        <i class="ni ni-circle-08"></i>
-                                        <span class="nav-link-inner--text">Register</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link nav-link-icon" href="../examples/login.html">
-                                        <i class="ni ni-key-25"></i>
-                                        <span class="nav-link-inner--text">Login</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link nav-link-icon" href="../examples/profile.html">
+                                    <a class="nav-link nav-link-icon" href="./cliente/html/Cliente.html">
                                         <i class="ni ni-single-02"></i>
-                                        <span class="nav-link-inner--text">Profile</span>
+                                        <span class="nav-link-inner--text">HomePage</span>
                                     </a>
                                 </li>
                             </ul>
