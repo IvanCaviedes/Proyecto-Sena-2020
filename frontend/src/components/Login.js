@@ -47,6 +47,7 @@ export default class Login extends Component {
 
     render() {
         return (
+            <div className="bg-default">
             <div className="main-content">
                 <Navlog />
                 <Header />
@@ -71,7 +72,7 @@ export default class Login extends Component {
                                         ) : ''
                                     }
                                     <form role="form">
-                                        <div class="form-group mb-3">
+                                        <div class="form-group mb-5">
                                             <div class="input-group input-group-alternative">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
@@ -108,6 +109,7 @@ export default class Login extends Component {
                     </div>
                 </div>
             </div>
+        </div>
         )
     }
 }
