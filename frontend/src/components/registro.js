@@ -33,12 +33,22 @@ export default class registro extends Component {
                                             <div class="form-group mb-3 col-6">
                                                 <div class="input-group input-group-alternative">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                                        <span class="input-group-text"><i class="ni ni-satisfied"></i></span>
                                                     </div>
-                                                    <input class="form-control" placeholder="UserName" type="text" onChange={e => this.email = e.target.value} />
+                                                    <input class="form-control" placeholder="Nombre" type="text" onChange={e => this.name = e.target.value} />
                                                 </div>
                                             </div>
                                             <div class="form-group col-6">
+                                                <div class="input-group input-group-alternative">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                                                    </div>
+                                                    <input class="form-control" placeholder="Nombre de suario" type="text" onChange={e => this.username = e.target.value} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group mb-3 col-6">
                                                 <div class="input-group input-group-alternative">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
@@ -46,46 +56,27 @@ export default class registro extends Component {
                                                     <input class="form-control" placeholder="Contraseña" type="password" onChange={e => this.password = e.target.value} />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                            <div class="form-group mb-3 col-6">
+                                                <div class="input-group input-group-alternative">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                                    </div>
+                                                    <input class="form-control" placeholder="Correo" type="mail" onChange={e => this.email = e.target.value} />
                                                 </div>
-                                                <input class="form-control" placeholder="Contraseña" type="password" onChange={e => this.password = e.target.value} />
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="input-group input-group-alternative">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                                </div>
-                                                <input class="form-control" placeholder="Contraseña" type="password" onChange={e => this.password = e.target.value} />
-                                            </div>
-                                        </div>
-                                        <div class="input-group mb-3">
+                                        <div class="input-group mb-1">
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text">
                                                     <input type="checkbox" aria-label="Checkbox for following text input" />
                                                 </div>
                                             </div>
-                                            <a download="terminos y condiciones" href="url_del_fichero" class="input-group-text text-primary"><small> Terminos y condiciones</small></a>
+                                            <a download="terminos y condiciones" href="https://drive.google.com/drive/u/0/my-drive" class="input-group-text text-primary"><small> Terminos y condiciones</small></a>
                                         </div>
                                         <div class="text-center">
                                             <button type="button" class="btn btn-primary my-4" onClick={this.iniciosesion} >Iniciar sesión</button>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-4">
-                                    <a href="#" class="text-light"><small>¿Olvido su clave?</small></a>
-                                </div>
-                                <div class="col-5">
-                                    <a download="terminos y condiciones" href="url_del_fichero" class="text-light"><small>Terminos y condiciones</small></a>
-                                </div>
-                                <div class="col-3 text-right">
-                                    {/*  <Link to="/register" class="text-light"><small>Crear cuenta</small></Link> */}
                                 </div>
                             </div>
                         </div>
