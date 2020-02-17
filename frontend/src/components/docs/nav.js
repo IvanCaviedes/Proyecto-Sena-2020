@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 
 import Tab from './tablero'
+import Menu from './menudash'
+import Header from './header'
 
 export default class nav extends Component {
     render() {
         return (
-            <div >
+            <div className="float-right" style={{width:'82%'}}>
                 <div class="md-6">
                 <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
                     <div class="container-fluid">
@@ -62,8 +64,13 @@ export default class nav extends Component {
                         </ul>
                     </div>
                 </nav>
-                </div>
+                </div> 
+                <div >
                 <Tab/>
+           
+                </div>
+                <Menu/>
+            
             </div>
         )
     }
