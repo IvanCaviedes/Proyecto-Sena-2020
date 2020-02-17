@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+import Tab from './tablero'
 export default class menudash extends Component {
     render() {
         return (
@@ -148,7 +149,7 @@ export default class menudash extends Component {
       </div>
                         </div>
   </nav>
-  
+            <Tab/>
             </div>
             
                 )

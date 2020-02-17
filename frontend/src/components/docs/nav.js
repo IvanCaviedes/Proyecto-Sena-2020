@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import Tab from './tablero'
+
 export default class nav extends Component {
     render() {
         return (
@@ -61,6 +63,7 @@ export default class nav extends Component {
                     </div>
                 </nav>
                 </div>
+                <Tab/>
             </div>
         )
     }

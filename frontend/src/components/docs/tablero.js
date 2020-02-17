@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 
-import Nav from './nav'
 
 export default class tablero extends Component {
     render() {
         return (
             <div>
-            <Nav/>
                 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
                     <div class="container-fluid">
                         <div class="header-body">
