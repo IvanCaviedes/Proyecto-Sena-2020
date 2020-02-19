@@ -97,7 +97,7 @@ export default class menudash extends Component {
                                     <a class="nav-link " href="./examples/maps.html">
                                         <i class="ni ni-pin-3 text-orange"></i> Maps</a></li>
                                 <li class="nav-item">
-                                    <a class="nav-link " href="./examples/profile.html">
+                                    <a class="nav-link " href="../frontend/src/components/usuarios.js">
                                         <i class="ni ni-single-02 text-yellow"></i> User profile</a></li>
                                 <li class="nav-item">
                                     <a class="nav-link " href="./examples/tables.html">

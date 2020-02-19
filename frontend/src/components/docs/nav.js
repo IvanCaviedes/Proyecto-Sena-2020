@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 
-import Tab from './tablero'
-import Menu from './menudash'
-import Header from './header'
+/* import Tab from './tablero'
+ */import Menu from './menudash'
+/* import Header from './header'
+ */import For from './formulario'
 
 export default class nav extends Component {
     render() {
@@ -66,8 +67,7 @@ export default class nav extends Component {
                 </nav>
                 </div> 
                 <div >
-                <Tab/>
-           
+           <For/>
                 </div>
                 <Menu/>
             
