@@ -11,6 +11,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    imageUrl:{
+        type:String
+    },
+    public_id:{
+        type:String
+    },
     role: {
         type: String,
         default: 'regular',

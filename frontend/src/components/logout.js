@@ -2,7 +2,7 @@ import { Component } from 'react'
 
 export default class logout extends Component {
     componentWillMount(){
-        localStorage.removeItem('token');
+        localStorage.clear();
         this.props.history.push('/');
     }
     render() {

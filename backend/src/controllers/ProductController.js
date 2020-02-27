@@ -50,6 +50,9 @@ function find(req,res,next){
         next();
     })
 }
+function prueba(req,res,next){
+console.log(req.body)
+}
 
 module.exports = {
     index,
@@ -57,5 +60,6 @@ module.exports = {
     create,
     update,
     remove,
-    find
+    find,
+    prueba
 }

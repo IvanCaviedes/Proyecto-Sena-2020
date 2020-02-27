@@ -29,11 +29,12 @@ function login(req,res){
                                 username: user.username,
                                 email: user.email,
                                 name: user.name,
-                                role: user.role
+                                role: user.role,
+                                id:user._id
                             }
                             //Acceso
                             //Crea token secreto
-                            jwt.sign(payload,CONFIG.SECRET_TOKEN,function(error,token){
+                            jwt.sign(payload,CONFIG.SECRET_TOKEN,{ expiresIn: '24h'},function(error,token){
                                 if(error){
                                     res.status(500).send({error});
                                 }else{
