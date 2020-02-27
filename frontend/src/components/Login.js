@@ -41,9 +41,74 @@ export default class Login extends Component {
             this.setState({ datoserror: { icon: 'fat-remove', color: 'primary' } })
             this.toggleModal('notificationModal')
         }
+        this.comprobar()
 
     }
 
+    comprobar = (e)=>{
+        const envio = {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/user/', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('Usuario no existe')
+            })
+            .then(token => {
+                if(token.message === 'NO CONTENT'){
+                    this.toggleModal('formModal3')
+                }
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
+
+    primero = (e) =>{
+        e.preventDefault();
+        const datos = {
+            password:this.password,
+            email:this.email,
+            username:this.username,
+            name:this.name,
+            role:'admin'
+        }
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/user/register', envio)
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            }
+            this.setState({ mensaje: "Usuario no creado" })
+            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.toggleModal('notificationModal')
+            throw new Error('Usuario no creado')
+        })
+        .then(token => {
+            this.props.history.push('/admin');
+            return;
+        })
+        .catch(e => {
+            this.setState({ mensaje: e.message })
+        })
+
+    }
 
     iniciosesion = (e) => {
         e.preventDefault();
@@ -88,6 +153,7 @@ export default class Login extends Component {
     }
 
     recuperar = (e) => {
+        e.preventDefault();
         const envio = {
             method: 'GET',
             headers: new Headers({
@@ -96,16 +162,16 @@ export default class Login extends Component {
                 'Accept': 'application/json'
             }),
         };
-        const ruta = ''
+
         fetch(`http://localhost:4000/user/username/${this.username}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
                 }
-                this.setState({ mensaje: "Usuario no existe" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.setState({ mensaje: "Si digitaste bien el usuario te llegara un codigo al correo" })
+                this.setState({ datoserror: { icon: 'bell-55', color: 'primary' } })
                 this.toggleModal('notificationModal')
-                throw new Error('Usuario no existe')
+                throw new Error('Si digitaste bien el usuario te llegara un codigo al correo')
             })
             .then(token => {
                 this.envio();
@@ -118,7 +184,7 @@ export default class Login extends Component {
 
     envio = (e) => {
         const datos = {
-            username:this.username
+            username: this.username
         }
         const envio = {
             method: 'POST',
@@ -134,29 +200,50 @@ export default class Login extends Component {
                 if (response.ok) {
                     return response.json()
                 }
-                this.setState({ mensaje: "Usuario no existe" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                this.toggleModal('notificationModal')
-                throw new Error('Usuario no existe')
+                throw new Error('Error')
             })
             .then(token => {
-                if (token.message === 'PASSWORD INCORRECTA') {
-                    this.setState({ mensaje: "Pasword incorrecta" })
-                    this.setState({ datoserror: { icon: 'bell-55', color: 'warning' } })
-                    this.toggleModal('notificationModal')
-                } else {
-                    localStorage.setItem('token', token.token);
-                    localStorage.setItem('datos', JSON.stringify(token.payload))
-                    this.props.history.push('/admin');
-                }
+                this.setState({ mensaje: "Si digitaste bien el usuario te llegara un codigo al correo" })
+                this.setState({ datoserror: { icon: 'bell-55', color: 'primary' } })
+                this.toggleModal('notificationModal')
                 return;
             })
             .catch(e => {
-                this.setState({ mensaje: e.message })
+                console.log(e)
             })
     }
     registrar = (e) => {
-        alert('registrar')
+        e.preventDefault();
+        const datos = {
+            username: this.username,
+            email: this.email,
+            name:this.name
+        }
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/correos/registrar', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('Error')
+            })
+            .then(token => {
+                this.setState({ mensaje: "Tus datos los tendra el adminstrador te llegara un correo si te crearon la cuenta con exito" })
+                this.setState({ datoserror: { icon: 'bell-55', color: 'primary' } })
+                this.toggleModal('notificationModal')
+                return;
+            })
+            .catch(e => {
+                console.log(e)
+            })
     }
     render() {
         return (
@@ -384,7 +471,7 @@ export default class Login extends Component {
                                     <h2>Deseas solicitar cuenta ?</h2>
                                     <p>Danos tus datos y despues de un tiempo obtendras respuesta al correo</p>
                                 </div>
-                                <Form role="form">
+                                <Form role="form" onSubmit={this.registrar}>
                                     <FormGroup className="mb-3">
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
@@ -392,7 +479,7 @@ export default class Login extends Component {
                                                     <i className="ni ni-single-02" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="Nombre Completo" type="text" />
+                                            <Input placeholder="Nombre Completo" type="text" onChange={e => this.name = e.target.value} required/>
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -402,7 +489,7 @@ export default class Login extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="Email" type="email" />
+                                            <Input placeholder="Email" type="email" onChange={e => this.email = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -412,15 +499,84 @@ export default class Login extends Component {
                                                     <i class="fas fa-phone"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="Telefono" type="number" />
+                                            <Input placeholder="Username" type="text" onChange={e => this.username = e.target.value} required/>
                                         </InputGroup>
                                     </FormGroup>
                                     <div className="text-center">
                                         <Button
                                             className="my-4"
                                             color="primary"
-                                            type="button"
-                                            onClick={this.registrar}
+                                            type="submit"
+                                        >
+                                            Enviar Peticion
+                        </Button>
+                                    </div>
+                                </Form>
+                            </CardBody>
+                        </Card>
+                    </div>
+                </Modal>
+
+                <Modal
+                    className="modal-dialog-centered"
+                    size="sm"
+                    backdrop="static"
+                    isOpen={this.state.formModal3}
+                    toggle={() => this.toggleModal("formModal3")}
+                >
+                    <div className="modal-body p-0">
+                        <Card className="bg-secondary shadow border-0">
+                            <CardBody className="px-lg-5 py-lg-5">
+                                <div className="text-center text-muted mb-4">
+                                    <h2>Bienvenido eres el Primer Usuario</h2>
+                                    <p>Danos tus datos y te daremos acceso a la Plataforma</p>
+                                </div>
+                                <Form role="form" onSubmit={this.primero}>
+                                    <FormGroup className="mb-3">
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="ni ni-single-02" />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="username" type="text" onChange={e => this.username = e.target.value} required/>
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="ni ni-email-83" />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="Email" type="email" onChange={e => this.email = e.target.value} required />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i class="fas fa-phone"></i>
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="password" type="text" onChange={e => this.password = e.target.value} required/>
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i class="fas fa-phone"></i>
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="nombre completo" type="text" onChange={e => this.name = e.target.value} required/>
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <div className="text-center">
+                                        <Button
+                                            className="my-4"
+                                            color="primary"
+                                            type="submit"
                                         >
                                             Enviar Peticion
                         </Button>

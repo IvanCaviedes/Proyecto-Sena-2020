@@ -3,8 +3,12 @@ const User = require('../models/User');
 function index(req,res){
     User.find({})
         .then(users => {
-            if(users.length) return res.status(200).send({users});
-            return res.status(204).send({message: 'NO CONTENT'});
+            if(users.length){
+                return res.status(200).send({users});
+            } else{
+                return res.send({message: 'NO CONTENT'});
+            }
+            
         }).catch(error => res.status(500).send({error}));
 }
 
