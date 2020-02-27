@@ -165,7 +165,7 @@ export default class Login extends Component {
                 <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
                     <div class="container">
                         <a class="navbar-brand" href="dashboard.html">
-                            <img src="../assets/img/brand/white.png" />
+                            <img src="https://i.imgur.com/Rh524kA.png" />
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -190,7 +190,7 @@ export default class Login extends Component {
                             {/* <hr class="d-lg-none" /> */}
                             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                                 <li class="nav-item d-lg-block ml-lg-2">
-                                    <a href="http://localhost:3000/" class="btn btn-neutral btn-icon">
+                                    <a href="http://localhost:4000/" class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
                                             <i class="fas fa-home mr-2"></i>
                                         </span>
