@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Menudash from './Dashboard/navbar'
 import Nav from './Dashboard/Navusuario'
-/* import Ven from './Dashboard/ventas' */
+import Ven from './Dashboard/ventas'
 import Nop from './Dashboard/esto'
 
 
@@ -11,12 +11,12 @@ export default class DashBoard extends Component {
         return (
             <div>
                 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-                    <Menudash />
+                <Menudash />
                 </nav>
                 <div class="main-content">
                     <Nav />
                     <Nop/>
-                    {/* <Ven/> */}
+                    <Ven/>
                 </div>
             </div>
         )

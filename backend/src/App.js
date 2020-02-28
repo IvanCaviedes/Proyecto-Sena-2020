@@ -59,7 +59,8 @@ App.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 }) 
-
+//Archivos estaticos
+App.use('/public',express.static(path.join(__dirname,'./public')))
 //Manejador de json
 
 App.use(bodyParser.json());
@@ -79,10 +80,12 @@ App.use('/user', User);
 App.use('/auth', Auth);
 App.use('/correos', correos);
 
-
 App.use('/',(req,res)=>{
-    res.render('hoquesea')
+    res.render('Ejemmplo')
 })
+
+
+
 //manejador de errores
 /* App.use(function (req, res, next) {
     res.status(404).sendFile(path.join(__dirname + "/Public/Error/404.html"));
