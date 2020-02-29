@@ -81,7 +81,7 @@ App.use('/auth', Auth);
 App.use('/correos', correos);
 
 App.use('/',(req,res)=>{
-    res.render('Ejemmplo')
+    res.render('navbar')
 })
 
 
