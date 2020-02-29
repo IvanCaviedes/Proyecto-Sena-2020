@@ -724,17 +724,16 @@ textarea::-ms-input-placeholder{
     padding: 5px;
 }
 
-/*for image bg*/
-/*.img-bg{
-  background: url(../images/home-msg.jpg) no-repeat center top fixed;
-  background-size
+/* for image bg */
+.img-bg{
+  background: url(https://i.imgur.com/KBzejqS.jpg) no-repeat center top fixed;
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   width: 100%;
   overflow: hidden;
-}*/
+}
 
 
 .transform_scal_rotate:hover img{ 
@@ -910,7 +909,7 @@ Nav Menu style
     position: relative;
 }
 .home{
-    background: url(../images/background/homepage-bg.jpg) no-repeat top center;
+    background: url(https://i.imgur.com/KBzejqS.jpg) no-repeat top center;
 }
 .service-banner{
     background: url(../images/background/services-bg.jpg) no-repeat bottom center;
