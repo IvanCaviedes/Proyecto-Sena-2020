@@ -1,4 +1,5 @@
 const User = require('../models/User');
+var nodemailer = require('nodemailer');
 
 function index(req,res){
     User.find({})
@@ -21,7 +22,41 @@ function show(req,res){
 
 function create(req,res){
     mensaje = "usuario creado correctamente"
-    new User(req.body).save().then(user => res.status(201).send({mensaje,user})).catch(error => res.status(500).send({error}));
+    new User(req.body).save()
+                        .then(user => {
+                                        res.status(201).send({mensaje,user})
+                                        
+                                        var transporter = nodemailer.createTransport({
+                                            host: "smtp-mail.outlook.com", // hostname
+                                            secureConnection: false, // TLS requires secureConnection to be false
+                                            port: 587, // port for secure SMTP
+                                            tls: {
+                                                ciphers: 'SSLv3'
+                                            },
+                                            auth: {
+                                                user: 'ivancaviedes99@outlook.com',
+                                                pass: '99120900389ivan'
+                                            }
+                                        });
+                                        var mailOptions = {
+                                            from: 'ivancaviedes99@outlook.com',
+                                            to: user.email,
+                                            subject: 'Cuenta Creada exitosamente',
+                                            text: `Ya puedes ingresar al sistemas de informacion este es tu usuario y tu contraseña "${user.username}"`
+                                        };
+                                        transporter.sendMail(mailOptions, function (error, info) {
+                                            if (error) {
+                                                console.log(error);
+                                                res.status(500).send(req.body)
+                                            } else {
+                                                console.log('Email enviado')
+                                                res.send({mensaje:'Correo enviado'})
+                                            }
+                                        });
+                                
+                                
+                                    })
+                        .catch(error => res.status(500).send({error}));
 }
 
 function update(req,res){
