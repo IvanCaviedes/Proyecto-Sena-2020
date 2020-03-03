@@ -49,18 +49,18 @@ App.use(multer({storage}).single('image'))
 const AuthToken = require('./middlewares/AuthToken');
 App.use(AuthToken);
 
+//Archivos estaticos
+App.use('/public',express.static(path.join(__dirname,'./public')))
 
 //middleware peticiones
 
 App.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-COntrol-Allow-Request-Method');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 }) 
-//Archivos estaticos
-App.use('/public',express.static(path.join(__dirname,'./public')))
 //Manejador de json
 
 App.use(bodyParser.json());
@@ -74,18 +74,18 @@ const Product = require('./routes/product');
 const User = require('./routes/user');
 const Auth = require('./routes/auth');
 const correos = require('./routes/correos')
+const Diseño = require('./routes/Diseño')
 
 App.use('/product', Product);
 App.use('/user', User);
 App.use('/auth', Auth);
 App.use('/correos', correos);
+/* App.use('/',Diseño) */
+
 
 App.use('/',(req,res)=>{
-    res.render('hoquesea')
-})
-
-
-
+    res.render('productos')
+    })
 //manejador de errores
 /* App.use(function (req, res, next) {
     res.status(404).sendFile(path.join(__dirname + "/Public/Error/404.html"));

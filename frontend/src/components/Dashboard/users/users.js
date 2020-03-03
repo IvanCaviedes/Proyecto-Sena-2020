@@ -78,14 +78,21 @@ export default class users extends Component {
     }
 
     listar = (e) => {
+        const token12 = localStorage.getItem('token')
+        const headers = new Headers();
+        headers.append("Content-Type","application/json")
+        headers.append("Origin", "http://localhost:4000")
+        headers.append("Accept", "application/json")
+        headers.append('Authorization',`Bearer ${token12}`)
+        headers.append('Access-Control-Allow-Origin', '*')
+        headers.append('Access-Control-Allow-Headers','Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method')
+        headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+        headers.append('Allow', 'GET, POST, OPTIONS, PUT, DELETE')
         const envio = {
             method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
-                'Accept': 'application/json'
-            }),
+            headers: headers,
         };
+        console.log('>>>>>>>>>>>>>>',envio)
         fetch('http://localhost:4000/user/', envio)
             .then(response => {
                 if (response.ok) {
@@ -413,7 +420,7 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="email" onChange={e => this.email = e.target.value} placeholder={this.state.usuario.email} value={this.state.borrar}required />
+                                            <Input type="email" onChange={e => this.email = e.target.value} placeholder={this.state.usuario.email}required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
