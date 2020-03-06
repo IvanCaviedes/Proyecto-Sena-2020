@@ -12,7 +12,8 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i"
+                rel="stylesheet">
 
 
         <link rel="stylesheet" href="public/cliente/assets/css/slick.css">
@@ -38,20 +39,16 @@
         <script src="public/cliente/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
 </head>
-<body>
-    {{>navbar}}
-    {{>home}}
-    {{>about}}
-    {{>gallery}}
-    {{>testimonial}}
-    {{!-- {{>models}} --}}
-    {{>contact}}
-    {{>company}}
-    {{>scrollUp}}
-    {{>footer}}
-    {{{body}}}
 
-{{!-- scripts --}}
+<body>
+        {{>carga}}
+        {{>navbar}}
+        {{>home}}
+        {{{body}}}
+        {{>scrollUp}}
+        {{>footer}}
+
+        {{!-- scripts --}}
 
         <script src="public/cliente/assets/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="public/cliente/assets/js/vendor/bootstrap.min.js"></script>
@@ -62,8 +59,6 @@
         <script src="public/cliente/assets/js/slick.min.js"></script>
         <script src="public/cliente/assets/js/jquery.collapse.js"></script>
         <script src="public/cliente/assets/js/bootsnav.js"></script>
-
-
 
         <script src="public/cliente/assets/js/plugins.js"></script>
         <script src="public/cliente/assets/js/main.js"></script>

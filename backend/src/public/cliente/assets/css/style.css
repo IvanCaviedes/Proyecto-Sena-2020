@@ -915,13 +915,14 @@ Nav Menu style
     background: url(../images/background/services-bg.jpg) no-repeat bottom center;
 }
 .model-banner{
-    background: url(../images/background/model-bg.jpg) no-repeat bottom center;
+    background: url(https://i.imgur.com/b4Q0x0v.jpg) no-repeat bottom center;
 }
 .contact-banner{
     background: url(../images/background/contact-bg.jpg) no-repeat bottom center;
 }
 .about-banner{
-    background: url(../images/background/about-bg.jpg) no-repeat bottom center;
+    background: /* url(https://i.imgur.com/KBzejqS.jpg)  */no-repeat bottom center;
+    
 }
 .blog-banner{
     background: url(../images/background/blog-bg.jpg) no-repeat bottom center;
@@ -958,7 +959,6 @@ Home Section style
 }
 
 
-
 /*
 About section style
 ====================*/
@@ -974,7 +974,7 @@ About section style
 }
 .photo_border{
     width:100%;
-    height: 100%;
+    height:100%;
     position: absolute;
     left:5%;
     top:5%;
