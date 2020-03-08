@@ -21,7 +21,7 @@ export default class users extends Component {
             datoserror: {},
             usuario: {},
             mensaje: '',
-            borrar:''
+            borrar: ''
         }
     }
 
@@ -29,26 +29,18 @@ export default class users extends Component {
         this.listar()
     }
     eliminarusuario(id) {
-        const idlog = JSON.parse(localStorage.getItem('datos')).id
-        if (window.confirm('Estas seguro de eliminar este usuario?')) {
-            if (id === idlog) {
-                this.setState({ mensaje: "No te puedes eliminar a ti mismo" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                this.toggleModal('notificationModal')
-            }
-            else {
-                const envio = {
-                    method: 'DELETE',
-                    headers: new Headers({
-                        'Content-Type': 'application/json',
-                        'Origin': 'http://localhost:4000',
-                        'Accept': 'application/json'
-                    }),
-                };
-                fetch(`http://localhost:4000/user/_id/${id}`, envio)
-                    .then(alert('usuario eliminado'), this.listar())
-                    .catch(e => console.log(e))
-            }
+        if (window.confirm('Estas seguro de eliminar este producto?')) {
+            const envio = {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Origin': 'http://localhost:4000',
+                    'Accept': 'application/json'
+                }),
+            };
+            fetch(`http://localhost:4000/product/_id/${id}`, envio)
+                .then(alert('producto eliminado'), this.listar())
+                .catch(e => console.log(e))
         }
     }
     ActualizarUsuario = (id) => {
@@ -60,15 +52,15 @@ export default class users extends Component {
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/user/_id/${id}`, envio)
+        fetch(`http://localhost:4000/product/_id/${id}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('Usuario no existe')
+                throw new Error('producto no existe')
             })
             .then(token => {
-                this.setState({ usuario: token.users[0] })
+                this.setState({ usuario: token.products[0] })
                 this.toggleModal('formModal2')
                 return;
             })
@@ -85,15 +77,15 @@ export default class users extends Component {
                 'Content-Type': 'application/json',
                 'Origin': 'http://localhost:4000',
                 'Accept': 'application/json',
-                'Authorization':`Bearer ${token12}`,
+                'Authorization': `Bearer ${token12}`,
                 'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers':'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }),
         };
         console.log()
-        fetch('http://localhost:4000/user/', envio)
+        fetch('http://localhost:4000/product/', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -101,7 +93,7 @@ export default class users extends Component {
                 throw new Error('Usuario no creado')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.users })
+                this.setState({ Tusuarios: token.products })
                 return;
             })
             .catch(e => {
@@ -117,17 +109,16 @@ export default class users extends Component {
 
     UserNew = (e) => {
         e.preventDefault();
-        if (this.rol === undefined) {
-            this.setState({ mensaje: "Añade un rol por favor" })
+        if (this.categoria === undefined) {
+            this.setState({ mensaje: "Añade una categoria por favor" })
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
             const datos = {
-                password: this.username,
-                email: this.email,
-                username: this.username,
                 name: this.name,
-                role: this.rol
+                stock: this.stock,
+                price: this.price,
+                category: this.categoria
             }
             const envio = {
                 method: 'POST',
@@ -138,18 +129,18 @@ export default class users extends Component {
                     'Accept': 'application/json'
                 }),
             };
-            fetch('http://localhost:4000/user/register', envio)
+            fetch('http://localhost:4000/product/create', envio)
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "Usuario no creado" })
+                    this.setState({ mensaje: "producto no creado" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
-                    throw new Error('Usuario no creado')
+                    throw new Error('producto no creado')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "Usuario creado" })
+                    this.setState({ mensaje: "producto creado" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -164,17 +155,18 @@ export default class users extends Component {
     actualizar2 = (e) => {
         const id_d = this.state.usuario._id;
         e.preventDefault();
-        if (this.rol === undefined) {
-            this.setState({ mensaje: "Añade un rol por favor" })
+        if (this.categoria === undefined) {
+            this.setState({ mensaje: "Añade una categoria por favor" })
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
             const datos = {
-                email: this.email,
                 name: this.name,
-                role: this.rol
+                stock: this.stock,
+                price: this.price,
+                category: this.categoria
             }
-           const envio = {
+            const envio = {
                 method: 'PUT',
                 body: JSON.stringify(datos),
                 headers: new Headers({
@@ -184,18 +176,18 @@ export default class users extends Component {
                 }),
             };
             console.log(envio)
-            fetch(`http://localhost:4000/user/_id/${id_d}`, envio)
+            fetch(`http://localhost:4000/product/_id/${id_d}`, envio)
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "Usuario no actualizado" })
+                    this.setState({ mensaje: "producto no actualizado" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
-                    throw new Error('Usuario no creado')
+                    throw new Error('producto no creado')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "Usuario actualizado" })
+                    this.setState({ mensaje: "producto actualizado" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -203,18 +195,18 @@ export default class users extends Component {
                 })
                 .catch(e => {
                     console.log(e)
-                }) 
+                })
         }
     }
     render() {
         return (
             <div>
-                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(http://localhost:4000/public/img/notocar/user.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
+                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(http://localhost:4000/public/img/notocar/producto.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
                     <span class="mask bg-gradient-default opacity-8"></span>
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
                             <div class="col-lg-8 col-md-10">
-                                <h5 class="display-3 text-white">Estas En la seccion de usuarios</h5>
+                                <h5 class="display-3 text-white">Estas En la seccion de Productos</h5>
                                 <p class="text-white mt-0 mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum itaque tempore suscipit ipsa rem, dolorem atque corporis soluta facere ullam similique quidem eius quibusdam nobis, recusandae veniam. Totam, tempore ipsam!</p>
                             </div>
                         </div>
@@ -258,7 +250,7 @@ export default class users extends Component {
 
                                         <div class="row align-items-center">
                                             <div class="col-8">
-                                                <h6 class="heading-small text-muted mb-4">Informacion del usuario</h6>
+                                                <h6 class="heading-small text-muted mb-4">Informacion del producto</h6>
                                             </div>
                                             <div class="col-4 text-right">
                                                 <button type="submit" class="btn btn-sm btn-primary">Agregar</button>
@@ -268,32 +260,33 @@ export default class users extends Component {
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-username">Nombre Completo</label>
-                                                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre Completo" onChange={e => this.name = e.target.value} required />
+                                                        <label class="form-control-label" for="input-username">Nombre Producto</label>
+                                                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre" onChange={e => this.name = e.target.value} required />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-email">Correo Electronico</label>
-                                                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="tucorreo@correo.com" onChange={e => this.email = e.target.value} required />
+                                                        <label class="form-control-label" for="input-email">precio</label>
+                                                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="5000" onChange={e => this.price = e.target.value} required />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-first-name">UserName</label>
-                                                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="Username" onChange={e => this.username = e.target.value} required />
+                                                        <label class="form-control-label" for="input-first-name">Stock</label>
+                                                        <input type="number" id="input-first-name" class="form-control form-control-alternative" placeholder="123456" onChange={e => this.stock = e.target.value} required />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-last-name">Rol</label>
+                                                        <label class="form-control-label" for="input-last-name">categoria</label>
                                                         <div class="form-group">
-                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.rol = e.target.value} required>
+                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.categoria = e.target.value} required>
                                                                 <option>Seleccionar</option>
-                                                                <option>admin</option>
-                                                                <option>regular</option>
+                                                                <option>Niños</option>
+                                                                <option>Hogar</option>
+                                                                <option>Entretenimiento</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -309,7 +302,7 @@ export default class users extends Component {
                                 <div class="card-header border-0">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h3 class="mb-0">Usuarios</h3>
+                                            <h3 class="mb-0">Productos</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -318,10 +311,10 @@ export default class users extends Component {
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">Username</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Rol</th>
-                                                <th scope="col">Opciones</th>
+                                                <th scope="col">precio</th>
+                                                <th scope="col">categoria</th>
+                                                <th scope="col">stock</th>
+                                                <th scope="col">opcion</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -330,9 +323,9 @@ export default class users extends Component {
                                                     return (
                                                         <tr key={user._id}>
                                                             <td>{user.name}</td>
-                                                            <td>{user.username}</td>
-                                                            <td>{user.email}</td>
-                                                            <td>{user.role}</td>
+                                                            <td>{user.price}</td>
+                                                            <td>{user.category}</td>
+                                                            <td>{user.stock}</td>
                                                             <td>
                                                                 <button className="btn btn-sm btn-primary" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-user-edit"></i></button>
                                                                 <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
@@ -420,7 +413,7 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="email" onChange={e => this.email = e.target.value} placeholder={this.state.usuario.email}required />
+                                            <Input type="number" onChange={e => this.price = e.target.value} placeholder={this.state.usuario.price} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -430,10 +423,21 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="select" name="select" id="exampleSelect" onChange={e => this.rol = e.target.value} placeholder={this.state.usuario.role} required>
-                                                <option>seleccionar</option>
-                                                <option>admin</option>
-                                                <option>regular</option>
+                                            <Input type="number" onChange={e => this.stock = e.target.value} placeholder={this.state.usuario.stock} required />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="ni ni-email-83" />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input type="select" name="select" id="exampleSelect" onChange={e => this.categoria = e.target.value} placeholder={this.state.usuario.category} required>
+                                                <option>Seleccionar</option>
+                                                <option>Niños</option>
+                                                <option>Hogar</option>
+                                                <option>Entretenimiento</option>
                                             </Input>
                                         </InputGroup>
                                     </FormGroup>

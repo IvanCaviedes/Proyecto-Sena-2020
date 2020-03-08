@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const CONFIG = require('../config/config');
 
 module.exports = function(req,res,next){
-   /*  if(req.path == '/user/register' || req.path == '/auth/login' || req.path == '/public'){
+/*     if(req.path == '/user/register' || req.path == '/auth/login' || req.path == '/'){
         next();
     }else {
         if(req.headers.authorization){
@@ -17,6 +17,6 @@ module.exports = function(req,res,next){
                 }
             });
         }else res.status(403).send({message: 'No tienes los permisos suficientes para estar aquí...'});
-    } */
-    next();
+    }   */
+   next(); 
 }

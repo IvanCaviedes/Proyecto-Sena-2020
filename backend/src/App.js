@@ -50,17 +50,21 @@ const AuthToken = require('./middlewares/AuthToken');
 App.use(AuthToken);
 
 //Archivos estaticos
-App.use('/public', express.static(path.join(__dirname, './public')))
+App.use('/public',express.static(path.join(__dirname,'./public')))
 
-//middleware peticiones
 
-App.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+//configurando cors
+App.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin','*');
+    res.header('Access-Control-Allow-Headers','Origin,X-Request-With,Content-Type,Accept')
     next();
+
+    App.options('*',(req,res)=>{
+        res.header('Access-Control-Allow-Methods','GET,PATCH,PUT,POST,DELETE,OPCIONS');
+        res.send();
+    })
 })
+
 //Manejador de json
 
 App.use(bodyParser.json());

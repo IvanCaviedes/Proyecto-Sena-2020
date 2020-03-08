@@ -13,9 +13,7 @@ import {
     InputGroup,
     Modal
 } from "reactstrap";
-
-export default class Login extends Component {
-
+export default class loginCliente extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -246,14 +244,15 @@ export default class Login extends Component {
                 console.log(e)
             })
     }
+  
     render() {
         return (
-            <div className="bg-default">
+<div style={{backgroundColor:"#27AE60"}}>
                 {/* Navbar */}
                 <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
                     <div class="container">
                         <a class="navbar-brand" href="dashboard.html">
-                            <img class="h-40 " src="https://i.imgur.com/B8YoPhk.png" />
+                            <img src="https://i.imgur.com/Rh524kA.png" />
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -278,11 +277,11 @@ export default class Login extends Component {
                             {/* <hr class="d-lg-none" /> */}
                             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                                 <li class="nav-item d-lg-block ml-lg-2">
-                                    <Link to="/cliente" class="btn btn-icon text-white" style={{backgroundColor:"#196F3D"}}>
-                                        <span class="btn-inner--icon"> 
-                                        <i class="fas fa-user-tag mr-2 "></i>
+                                    <Link to="/" class="btn btn-default btn-icon">
+                                        <span class="btn-inner--icon">
+                                        <i class="fas fa-user mr-2 "></i>
                                         </span>
-                                        <span class="nav-link-inner--text">Clientes</span>
+                                        <span class="nav-link-inner--text">Usuarios</span>
                                     </Link>
                                     <a href="http://localhost:4000/" class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
@@ -297,7 +296,7 @@ export default class Login extends Component {
                 </nav>
                 <div class="main-content">
                     {/*  Header */}
-                    <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+                    <div class="header py-7 py-lg-8 pt-lg-9" style={{background: "linear-gradient(87deg, #196F3D 0, #27AE60 100%)"}}>
                         <div class="container">
                             <div class="header-body text-center mb-7">
                                 <div class="row justify-content-center">
@@ -310,7 +309,7 @@ export default class Login extends Component {
                         </div>
                         <div class="separator separator-bottom separator-skew zindex-100">
                             <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                <polygon class="fill-default" points="2560 0 2560 100 0 100"></polygon>
+                                <polygon style={{fill:"#27AE60"}} points="2560 0 2560 100 0 100"></polygon>
                             </svg>
                         </div>
                     </div>
