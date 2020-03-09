@@ -8,8 +8,10 @@ export default class menudash extends Component {
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-ico  <!-- User -->n"></span>
                     </button>
-                    <a class="navbar-brand pt-4 pl-5 pb-3" href="./index.html">
-                        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="..." />
+                    <a class="navbar-brand pt-4 pl-5 pb-3" href="./index.html">{/* 
+                        <img src="https://i.imgur.com/B8YoPhk.png" class="navbar-brand-img" alt="..." /> */}
+
+                        <h1>PET SHOP</h1>
                     </a>
                     <ul class="nav align-items-center d-md-none">
                         <li class="nav-item dropdown">
