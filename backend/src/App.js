@@ -45,51 +45,36 @@ const storage = multer.diskStorage({
 })
 App.use(multer({storage}).single('image'))
 
+//Archivos estaticos
+App.use('/public',express.static(path.join(__dirname,'./public')))
+
 //Middleware Login
 const AuthToken = require('./middlewares/AuthToken');
 App.use(AuthToken);
 
-//Archivos estaticos
-App.use('/public',express.static(path.join(__dirname,'./public')))
-
-
-//configurando cors
-App.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Headers','Origin,X-Request-With,Content-Type,Accept')
-    next();
-
-    App.options('*',(req,res)=>{
-        res.header('Access-Control-Allow-Methods','GET,PATCH,PUT,POST,DELETE,OPCIONS');
-        res.send();
-    })
-})
-
 //Manejador de json
 
 App.use(bodyParser.json());
-App.use(cors());
+
 App.use(bodyParser.urlencoded({
     extended: false
 }));
+
+App.use(cors());
 
 //Rutas
 const Product = require('./routes/product');
 const User = require('./routes/user');
 const Auth = require('./routes/auth');
 const correos = require('./routes/correos')
-const Diseño = require('./routes/Diseño')
+const categoria = require('./routes/categoria')
 
 App.use('/product', Product);
 App.use('/user', User);
 App.use('/auth', Auth);
 App.use('/correos', correos);
-/* App.use('/',Diseño) */
+App.use('/categoria',categoria)
 
-
-App.use('/',(req,res)=>{
-    res.render('productos')
-    })
 //manejador de errores
 /* App.use(function (req, res, next) {
     res.status(404).sendFile(path.join(__dirname + "/Public/Error/404.html"));

@@ -12,11 +12,13 @@ import {
     InputGroup,
     Modal
 } from "reactstrap";
+import { Link } from 'react-router-dom';
 export default class users extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             Tusuarios: [],
+            Tcategoria: [],
             defaultModal: false,
             datoserror: {},
             usuario: {},
@@ -26,8 +28,40 @@ export default class users extends Component {
     }
 
     componentDidMount() {
+        this.comprobar()
         this.listar()
     }
+
+    comprobar = (e) => {
+        const envio = {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/categoria/', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('Categoria no existe')
+            })
+            .then(token => {
+                if (token.message === 'NO CONTENT') {
+                    this.toggleModal('formModal3')
+                }
+                else {
+                    this.setState({ Tcategoria: token.categoria })
+                }
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
+
     eliminarusuario(id) {
         if (window.confirm('Estas seguro de eliminar este producto?')) {
             const envio = {
@@ -73,7 +107,7 @@ export default class users extends Component {
         const token12 = localStorage.getItem('token')
         const envio = {
             method: 'GET',
-            headers: new Headers({
+            headers:{
                 'Content-Type': 'application/json',
                 'Origin': 'http://localhost:4000',
                 'Accept': 'application/json',
@@ -81,10 +115,10 @@ export default class users extends Component {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-                'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
-            }),
+                'Allow': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Authorization': `Bearer ${token12}`
+            },
         };
-        console.log()
         fetch('http://localhost:4000/product/', envio)
             .then(response => {
                 if (response.ok) {
@@ -93,7 +127,35 @@ export default class users extends Component {
                 throw new Error('Usuario no creado')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.products })
+                const Tusu = token.products
+                const Nueva = []
+                for (let index = 0; index < Tusu.length; index++) {
+                   const idcategoria = Tusu[index].category
+                   const envio = {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Origin': 'http://localhost:4000',
+                        'Accept': 'application/json'
+                    }),
+                };
+                fetch('http://localhost:4000/categoria/_id/'+idcategoria, envio)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        throw new Error('Categoria no existe')
+                    })
+                    .then(token => {
+                        Tusu[index].category = token.categoria[0].category
+                        return;
+                    })
+                    .catch(e => {
+                        this.setState({ mensaje: e.message })
+                    })
+
+                }
+                 this.setState({ Tusuarios: Tusu }) 
                 return;
             })
             .catch(e => {
@@ -108,42 +170,68 @@ export default class users extends Component {
     };
 
     UserNew = (e) => {
+
         e.preventDefault();
+
+        const categoria = this.categoria;
+
         if (this.categoria === undefined) {
             this.setState({ mensaje: "Añade una categoria por favor" })
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
-            const datos = {
-                name: this.name,
-                stock: this.stock,
-                price: this.price,
-                category: this.categoria
-            }
             const envio = {
-                method: 'POST',
-                body: JSON.stringify(datos),
+                method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Origin': 'http://localhost:4000',
                     'Accept': 'application/json'
                 }),
             };
-            fetch('http://localhost:4000/product/create', envio)
+            fetch(`http://localhost:4000/categoria/category/${categoria}`, envio)
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "producto no creado" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                    this.toggleModal('notificationModal')
-                    throw new Error('producto no creado')
+                    throw new Error('producto no existe')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "producto creado" })
-                    this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
-                    this.toggleModal('notificationModal')
+                    const datos2 = {
+                        name: this.name,
+                        stock: this.stock,
+                        price: this.price,
+                        category: token.categoria[0]._id
+                    }
+                    console.log(datos2)
+                     const envio2 = {
+                        method: 'POST',
+                        body: JSON.stringify(datos2),
+                        headers: new Headers({
+                            'Content-Type': 'application/json',
+                            'Origin': 'http://localhost:4000',
+                            'Accept': 'application/json'
+                        }),
+                    };
+                    fetch('http://localhost:4000/product/create', envio2)
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json()
+                            }
+                            this.setState({ mensaje: "producto no creado" })
+                            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                            this.toggleModal('notificationModal')
+                            throw new Error('producto no creado')
+                        })
+                        .then(token => {
+                            this.setState({ mensaje: "producto creado" })
+                            this.listar()
+                            this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                            this.toggleModal('notificationModal')
+                            return;
+                        })
+                        .catch(e => {
+                            this.setState({ mensaje: e.message })
+                        }) 
                     return;
                 })
                 .catch(e => {
@@ -152,6 +240,80 @@ export default class users extends Component {
 
         }
     }
+
+    categoriaprimera = (e) => {
+        e.preventDefault();
+        const datos = {
+            category: this.categoria
+        }
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/categoria/create/', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ mensaje: "categoria no creada o ya existe" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+                throw new Error('Categoria no creada')
+            })
+            .then(token => {
+                    this.setState({ mensaje: "muy bien" })
+                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                    this.toggleModal('notificationModal1')
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+
+    }
+    categoriasegunda = (e) => {
+        e.preventDefault();
+        const datos = {
+            category: this.categoria
+        }
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/categoria/create/', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ mensaje: "categoria no creada o ya existe" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+                throw new Error('Categoria no creada')
+            })
+            .then(token => {
+                    this.setState({ mensaje: "muy bien" })
+                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                    this.toggleModal('notificationModal')
+                    this.componentDidMount()
+                    
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+
+    }
+
     actualizar2 = (e) => {
         const id_d = this.state.usuario._id;
         e.preventDefault();
@@ -241,7 +403,7 @@ export default class users extends Component {
                                 <div class="card-header bg-white border-0">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h3 class="mb-0">Agregar usuario</h3>
+                                            <h3 class="mb-0">Agregar producto</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -281,12 +443,17 @@ export default class users extends Component {
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="input-last-name">categoria</label>
+                                                        <Link onClick = {() => this.toggleModal("formModal4")}> Nueva categoria</Link>
                                                         <div class="form-group">
                                                             <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.categoria = e.target.value} required>
                                                                 <option>Seleccionar</option>
-                                                                <option>Niños</option>
-                                                                <option>Hogar</option>
-                                                                <option>Entretenimiento</option>
+                                                                {
+                                                                    this.state.Tcategoria.map(categoria => {
+                                                                        return (
+                                                                            <option>{categoria.category}</option>
+                                                                        )
+                                                                    })
+                                                                }
                                                             </select>
                                                         </div>
                                                     </div>
@@ -457,7 +624,124 @@ export default class users extends Component {
                         </Card>
                     </div>
                 </Modal>
+                <Modal
+                    className="modal-dialog-centered"
+                    size="sm"
+                    backdrop="static"
+                    isOpen={this.state.formModal3}
+                    toggle={() => this.toggleModal("formModal3")}
+                >
+                    <div className="modal-body p-0">
+                        <Card className="bg-secondary shadow border-0">
+                            <CardBody className="px-lg-5 py-lg-5">
+                                <div className="text-center text-muted mb-4">
+                                    <h2>Antes de empezar</h2>
+                                    <p>Tienes que tener una categoria para agregar el primer producto</p>
+                                </div>
+                                <Form role="form" onSubmit={this.categoriaprimera}>
+                                    <FormGroup className="mb-3">
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="ni ni-single-02" />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="Categoria" type="text" onChange={e => this.categoria = e.target.value} required />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <div className="text-center">
+                                        <Button
+                                            className="my-4"
+                                            color="primary"
+                                            type="submit"
+                                        >
+                                            Guardar Categoria
+                        </Button>
+                                    </div>
+                                </Form>
+                            </CardBody>
+                        </Card>
+                    </div>
+                </Modal>
+                <Modal
+                    className="modal-dialog-centered"
+                    size="sm"
+                    isOpen={this.state.formModal4}
+                    toggle={() => this.toggleModal("formModal4")}
+                >
+                    <div className="modal-body p-0">
+                        <Card className="bg-secondary shadow border-0">
+                            <CardBody className="px-lg-5 py-lg-5">
+                                <div className="text-center text-muted mb-4">
+                                    <h2>Agregar categoria</h2>
+                                    <p>Nueva Categoria</p>
+                                </div>
+                                <Form role="form" onSubmit={this.categoriasegunda}>
+                                    <FormGroup className="mb-3">
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="ni ni-single-02" />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="Categoria" type="text" onChange={e => this.categoria = e.target.value} required />
+                                        </InputGroup>
+                                    </FormGroup>
+                                    <div className="text-center">
+                                        <Button
+                                            className="my-4"
+                                            color="primary"
+                                            type="submit"
+                                        >
+                                            Guardar Categoria
+                        </Button>
+                                    </div>
+                                </Form>
+                            </CardBody>
+                        </Card>
+                    </div>
+                </Modal>
 
+
+                <Modal
+                    className={`modal-dialog-centered modal-${this.state.datoserror.color}`}
+                    contentClassName={`bg-${this.state.datoserror.color}`}
+                    isOpen={this.state.notificationModal1}
+                    backdrop="static"
+                    toggle={() => this.toggleModal("notificationModal1")}
+                >
+                    <div className="modal-header">
+                        <button
+                            aria-label="Close"
+                            className="close"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => this.toggleModal("notificationModal")}
+                        >
+                            <span aria-hidden={true}>×</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="py-3 text-center">
+                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <h4 className="heading mt-4">Muy bien puedes continuar</h4>
+                            <p>
+                                {this.state.mensaje}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <Link
+                            className="text-white ml-auto"
+                            color="link"
+                            data-dismiss="modal"
+                            type="button"
+                            to="/admin"
+                        >
+                            Close
+                </Link>
+                    </div>
+                </Modal>
             </div>
         )
     }
