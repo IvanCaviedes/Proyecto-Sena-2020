@@ -90,10 +90,9 @@ export default class users extends Component {
                 'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE',
-                'Authorization': `Bearer ${token12}`
+                'Authorization': `${token12}`
             }
         };
-        console.log("<<<<<<<<<<<", envio)
         fetch('http://localhost:4000/user/', envio)
             .then(response => {
                 if (response.ok) {
