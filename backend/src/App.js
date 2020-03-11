@@ -78,7 +78,7 @@ const Product = require('./routes/product');
 const User = require('./routes/user');
 const Auth = require('./routes/auth');
 const correos = require('./routes/correos')
-const Diseño = require('./routes/Diseño')
+const priductos = require('./routes/productos')
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -99,9 +99,7 @@ App.use('/noticias', (req, res) => {
 App.use('/cuidados', (req, res) => {
     res.render('cuidados')
 })
-App.use('/productos', (req, res) => {
-    res.render('productos')
-})
+App.use('/productos', priductos.control.index)
 
 //manejador de errores
 /* App.use(function (req, res, next) {

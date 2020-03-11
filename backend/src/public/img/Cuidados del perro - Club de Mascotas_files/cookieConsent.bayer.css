@@ -1,0 +1,59 @@
+.cc-window {
+    font-family: inherit;
+    font-size: unset;
+}
+
+@media screen and (max-width: 420px) and (orientation: portrait), screen and (max-width: 736px) and (orientation: landscape) {
+    body .cc-window.cc-floating {
+        max-width: 25em!important;
+    }
+    body .cc-bottom {
+        bottom: 1em!important;
+    }
+    body .cc-top {
+        top: 1em!important;
+    }
+    body .cc-window.cc-right {
+        right: 1em!important;
+        left:initial;
+    }
+    body .cc-window.cc-left {
+        left: 1em!important;
+        right:initial;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    body .cc-window.cc-floating {
+        max-width:100%!important;
+    }
+    body .cc-bottom {
+        bottom: 0!important;
+    }
+    body .cc-top {
+        top: 0!important;
+    }
+    body .cc-window.cc-right {
+        right:0!important;
+        left:0;
+    }
+    body .cc-window.cc-left {
+        left: 0!important;
+        right:0;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    body .cc-window.cc-floating {
+        max-width: none;
+    }
+}
+
+@media screen  and (min-width: 768px) and (max-width: 1024px) {
+    body .cc-window.cc-floating span.cc-btn {
+        max-width: 20%;
+    }
+    body .cc-window.cc-floating .cc-compliance {
+        display: block;
+    }
+}

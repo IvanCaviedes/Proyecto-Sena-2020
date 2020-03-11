@@ -1,5 +1,4 @@
-
-            <!--About Sections-->
+{{!--             <!--About Sections-->
             <section id="feature" class="ab_feature roomy-100">
                 <div class="container">
                     <div class="row">
@@ -191,4 +190,52 @@
                             </div>
                         </div>
                     </div><!-- End off row -->
-                </div><!-- End off container -->
+                </div><!-- End off container --> --}}
+
+
+
+
+<section id="gallery" class="gallery margin-top-120 bg-white">
+    <!-- Portfolio container-->
+    <div class="container">
+        <div class="row">
+            <div class="main-gallery main-model roomy-80">
+                <div class="col-md-12 m-bottom-60">
+                    <div class="filters-button-group sm-text-center">
+                        <button class="button is-checked" data-filter="*">View all</button>
+                        <button class="button" data-filter=".metal">Catwalk</button>
+                        <button class="button" data-filter=".transition">Advertisement</button>
+                        <button class="button" data-filter=".alkali">Fashionista</button>
+                        <button class="button" data-filter=".ar">Model Photo</button>
+                    </div>
+                </div>
+
+                <div style="clear: both;"></div>
+
+                <div class="grid models text-center">
+                    {{#each datos}}
+                    {{#each this}}
+                    {{#if name}}
+                    <div class="grid-item model-item transition metal ium">
+                        <img alt="" src="../public/img/descarga (1).jpeg">
+                        <h6>{{name}}</h6>
+                        <h6>{{stock}}</h6>
+                        <h3>{{price}}$</h3>
+                        
+                    </div><!-- End off grid item -->
+                    {{/if}}
+                    {{/each}}
+                    {{/each}}
+                </div>
+
+                <div style="clear: both;"></div>
+
+            </div>
+        </div>
+    </div><!-- Portfolio container end -->
+</section><!-- End off portfolio section -->
+
+
+
+
+{{datos}}
