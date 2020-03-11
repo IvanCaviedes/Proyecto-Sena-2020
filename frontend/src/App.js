@@ -11,6 +11,7 @@ import Recuperar from './components/CambioContra'
 import Cliente from './components/loginCliente'
 import Mascotas from './components/Dashboard/mascotas/mascotas'
 import Proveedor from './components/Dashboard/proveedor/proveedor'
+import Prueba from './prueba'
 
 import PrivateRoute from './auth'
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/cliente" exact component={Cliente} />
         <Route path="/Recuperar" exact component={Recuperar} />
+        <Route path="/prueba" exact component={Prueba} />
         <PrivateRoute path="/admin" exact component={Admin} />
         <PrivateRoute path="/users" exact component={Users} />
         <PrivateRoute path="/productos" exact component={Productos} />

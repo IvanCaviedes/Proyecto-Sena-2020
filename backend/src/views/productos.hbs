@@ -202,11 +202,11 @@
             <div class="main-gallery main-model roomy-80">
                 <div class="col-md-12 m-bottom-60">
                     <div class="filters-button-group sm-text-center">
-                        <button class="button is-checked" data-filter="*">View all</button>
-                        <button class="button" data-filter=".metal">Catwalk</button>
-                        <button class="button" data-filter=".transition">Advertisement</button>
-                        <button class="button" data-filter=".alkali">Fashionista</button>
-                        <button class="button" data-filter=".ar">Model Photo</button>
+                        <button class="button is-checked" data-filter="*">Ver todos</button>
+                        <button class="button" data-filter=".Alimentos">Alimentos</button>
+                        <button class="button" data-filter=".Juguetes">Juguetes</button>
+                        <button class="button" data-filter=".Medicamentos">Medicamentos</button>
+                        <button class="button" data-filter=".Accesorios">Accesorios</button>
                     </div>
                 </div>
 
@@ -216,12 +216,14 @@
                     {{#each datos}}
                     {{#each this}}
                     {{#if name}}
-                    <div class="grid-item model-item transition metal ium">
-                        <img alt="" src="../public/img/descarga (1).jpeg">
-                        <h6>{{name}}</h6>
-                        <h6>{{stock}}</h6>
-                        <h3>{{price}}$</h3>
-                        
+                    <div class="grid-item model-item card {{category}}" style="margin-bottom: 40px;">
+                        <img alt="" src={{imageUrl}} class="card-img-top" style="height: 130px; margin-bottom: 10px;">
+                        <div class="card-body">
+                            <h2 class="card-title">{{name}}</h2>
+                            <h3>{{price}}$</h3>
+                            <p class="card-text">En stock quedan {{stock}}</p>
+                            <a href="http://localhost:3000/" class="btn btn-primary">Cotizar</a>
+                        </div>
                     </div><!-- End off grid item -->
                     {{/if}}
                     {{/each}}
@@ -235,7 +237,7 @@
     </div><!-- Portfolio container end -->
 </section><!-- End off portfolio section -->
 
+{{!-- 
 
 
-
-{{datos}}
+{{datos}} --}}

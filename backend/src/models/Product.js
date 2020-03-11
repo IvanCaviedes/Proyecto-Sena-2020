@@ -8,11 +8,7 @@ const ProductSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
+        required: true,
     },
     stock: {
         type: Number,
@@ -21,7 +17,22 @@ const ProductSchema = new mongoose.Schema({
     date: {
         type: Date,
         default: Date.now()
-    }
+    },
+    category: {
+        type: String,
+        required:true,
+        enum: [
+            'Alimentos',
+            'Juguetes',
+            'Medicamentos',
+            'Accesorios'
+        ]
+    },
+    imageUrl:{
+        type:String,
+        require:true,
+        unique:true
+    },
 });
 
 const Product = mongoose.model('Product',ProductSchema);

@@ -90,6 +90,7 @@ export default class users extends Component {
                 if (response.ok) {
                     return response.json()
                 }
+                this.setState({ Tusuarios:''})
                 throw new Error('Usuario no creado')
             })
             .then(token => {
@@ -114,15 +115,19 @@ export default class users extends Component {
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
-            const datos = {
-                name: this.name,
-                stock: this.stock,
-                price: this.price,
-                category: this.categoria
-            }
+            const data = new FormData();
+            const imagedata = this.file
+            data.append('image', imagedata);
+            data.append('name',this.name)
+            data.append('stock',this.stock)
+            data.append('price',this.price)
+            data.append('category',this.categoria)
+            
+            
             const envio = {
                 method: 'POST',
-                body: JSON.stringify(datos),
+                mode: 'no-cors',
+                body:data,
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Origin': 'http://localhost:4000',
@@ -134,6 +139,8 @@ export default class users extends Component {
                     if (response.ok) {
                         return response.json()
                     }
+
+                    console.log(response)
                     this.setState({ mensaje: "producto no creado" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
@@ -149,7 +156,6 @@ export default class users extends Component {
                 .catch(e => {
                     this.setState({ mensaje: e.message })
                 })
-
         }
     }
     actualizar2 = (e) => {
@@ -246,7 +252,7 @@ export default class users extends Component {
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form onSubmit={this.UserNew}>
+                                    <form onSubmit={this.UserNew} encType="multipart/form-data" >
 
                                         <div class="row align-items-center">
                                             <div class="col-8">
@@ -284,10 +290,19 @@ export default class users extends Component {
                                                         <div class="form-group">
                                                             <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.categoria = e.target.value} required>
                                                                 <option>Seleccionar</option>
-                                                                <option>Niños</option>
-                                                                <option>Hogar</option>
-                                                                <option>Entretenimiento</option>
+                                                                <option>Alimentos</option>
+                                                                <option>Juguetes</option>
+                                                                <option>Medicamentos</option>
+                                                                <option>Accesorios</option>
                                                             </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="input-last-name">Imagen Producto</label>
+                                                        <div class="form-group">
+                                                            <input type="file" name="image" onChange={e => this.file = e.target.files[0]} required />
                                                         </div>
                                                     </div>
                                                 </div>

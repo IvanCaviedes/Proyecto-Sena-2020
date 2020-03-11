@@ -12,14 +12,7 @@ const morgan = require('morgan')
 const multer = require('multer');
 //Handlebar
 const exphbs = require('express-handlebars')
-//cloudinary
-const cloudinary = require('cloudinary');
 
-cloudinary.config({
-    cloud_name: 'dblz919ee',
-    api_key: '252643212149885',
-    api_secret: 'EqbXG4_EDcleLGkbatSEaaxda_A'
-})
 //Ejecutando express
 const App = express();
 
@@ -70,6 +63,8 @@ const correos = require('./routes/correos')
 const categoria = require('./routes/categoria')
 const mascotas = require('./routes/mascotas')
 const proveedor = require('./routes/proveedor')
+const productos = require('./routes/productos')
+const prueba = require('./routes/prueba')
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -78,6 +73,8 @@ App.use('/correos', correos);
 App.use('/categoria',categoria);
 App.use('/mascotas',mascotas);
 App.use('/proveedor',proveedor)
+
+App.use('/imagenes',prueba)
 
 App.use('/index',(req,res)=>{
     res.render('index')
@@ -89,7 +86,11 @@ App.use('/noticias', (req, res) => {
 App.use('/cuidados', (req, res) => {
     res.render('cuidados')
 })
-App.use('/productos', priductos.control.index)
+App.use('/prueba', (req, res) => {
+    res.render('prueba')
+})
+
+App.use('/productos', productos.control.index)
 
 //manejador de errores
 /* App.use(function (req, res, next) {
