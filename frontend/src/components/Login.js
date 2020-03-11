@@ -284,7 +284,7 @@ export default class Login extends Component {
                                         </span>
                                         <span class="nav-link-inner--text">Clientes</span>
                                     </Link>
-                                    <a href="http://localhost:4000/" class="btn btn-neutral btn-icon">
+                                    <a href="http://localhost:4000/index" class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
                                             <i class="fas fa-home mr-2"></i>
                                         </span>

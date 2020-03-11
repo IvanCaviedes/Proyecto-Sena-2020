@@ -10,4 +10,4 @@ Router.get('/',ProductCtrl.index) // api.com/product/ Index: Listar todos los pr
       .put('/:key/:value',ProductCtrl.find,ProductCtrl.update)    // api.com/product/name/SamsungGalaxy Update: Actualizar un producto en especifico
       .delete('/:key/:value',ProductCtrl.find,ProductCtrl.remove);// api.com/product/name/SamsungGalaxy
 
-module.exports = Router;
+      module.exports = Router;

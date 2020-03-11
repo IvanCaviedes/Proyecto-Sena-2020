@@ -83,6 +83,14 @@ App.use('/index',(req,res)=>{
     res.render('index')
 })
 
+App.use('/noticias', (req, res) => {
+    res.render('noticias')
+})
+App.use('/cuidados', (req, res) => {
+    res.render('cuidados')
+})
+App.use('/productos', priductos.control.index)
+
 //manejador de errores
 /* App.use(function (req, res, next) {
     res.status(404).sendFile(path.join(__dirname + "/Public/Error/404.html"));
