@@ -70,6 +70,8 @@ const correos = require('./routes/correos')
 const categoria = require('./routes/categoria')
 const mascotas = require('./routes/mascotas')
 const proveedor = require('./routes/proveedor')
+const productos = require('./routes/productos')
+const pedido = require('./routes/pedido') 
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -77,7 +79,8 @@ App.use('/auth', Auth);
 App.use('/correos', correos);
 App.use('/categoria',categoria);
 App.use('/mascotas',mascotas);
-App.use('/proveedor',proveedor)
+App.use('/proveedor',proveedor);
+App.use('/pedido',pedido)
 
 App.use('/index',(req,res)=>{
     res.render('index')
@@ -89,7 +92,7 @@ App.use('/noticias', (req, res) => {
 App.use('/cuidados', (req, res) => {
     res.render('cuidados')
 })
-App.use('/productos', priductos.control.index)
+App.use('/productos', productos.control.index)
 
 //manejador de errores
 /* App.use(function (req, res, next) {

@@ -20,28 +20,28 @@ function show(req,res){
 //Crea un Proveedor
 function create(req,res){
     mensaje = "mascota creada correctamente"
-    new Mascotas(req.body).save().then(Mascotas => res.status(201).send({mensaje,Mascotas})).catch(error => res.status(500).send({error}));
+    new Proveedor(req.body).save().then(Proveedor => res.status(201).send({mensaje,Proveedor})).catch(error => res.status(500).send({error}));
 }
 //Actualiza un Proveedor
 function update(req,res){
     if(req.body.error) return res.status(500).send({error});
     if(!req.body.Proveedores) return res.status(404).send({message: 'NOT FOUND'});
-    let Mascotas = req.body.Proveedores[0];
-    Mascotas = Object.assign(Mascotas,req.body);
-    Mascotas.save().then(Mascotas => res.status(200).send({message: "UPDATED", Mascotas})).catch(error => res.status(500).send({error}));
+    let Proveedor = req.body.Proveedores[0];
+    Proveedor = Object.assign(Proveedor,req.body);
+    Proveedor.save().then(Proveedor => res.status(200).send({message: "UPDATED", Proveedor})).catch(error => res.status(500).send({error}));
 }
 //Elimina un Proveedor
 function remove(req,res){
     if(req.body.error) return res.status(500).send({error});
     if(!req.body.Proveedores) return res.status(404).send({message: 'NOT FOUND'});
-    req.body.Proveedores[0].remove().then(Mascotas => res.status(200).send({message: 'REMOVED', Mascotas})).catch(error => res.status(500).send({error}));
+    req.body.Proveedores[0].remove().then(Proveedor => res.status(200).send({message: 'REMOVED', Proveedor})).catch(error => res.status(500).send({error}));
 }
 
 // Busca un Proveedor en especifico
 function find(req,res,next){
     let query = {};
     query[req.params.key] = req.params.value;
-    Mascotas.find(query).then(Proveedores => {
+    Proveedor.find(query).then(Proveedores => {
         if(!Proveedores.length) return next();
         req.body.Proveedores = Proveedores;
         return next();

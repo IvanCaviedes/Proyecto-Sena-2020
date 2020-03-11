@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Footer from '../Footer'
 import {
     Button,
@@ -29,7 +30,7 @@ export default class users extends Component {
         this.listar()
     }
     eliminarusuario(id) {
-        if (window.confirm('¿Estas seguro de eliminar este proveedor?')) {
+        if (window.confirm('¿Estas seguro de eliminar esta mascota?')) {
             const envio = {
                 method: 'DELETE',
                 headers: new Headers({
@@ -38,8 +39,8 @@ export default class users extends Component {
                     'Accept': 'application/json'
                 }),
             };
-            fetch(`http://localhost:4000/mascotas/_id/${id}`, envio)
-                .then(alert('proveedor eliminado'), this.listar())
+            fetch(`http://localhost:4000/proveedor/_id/${id}`, envio)
+                .then(alert('Mascota eliminada'), this.listar())
                 .catch(e => console.log(e))
         }
     }
@@ -57,10 +58,10 @@ export default class users extends Component {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('proveedor no existe')
+                throw new Error('mascota no existe')
             })
             .then(token => {
-                this.setState({ usuario: token.products[0] })
+                this.setState({ usuario: token.Proveedor[0] })
                 this.toggleModal('formModal2')
                 return;
             })
@@ -90,10 +91,10 @@ export default class users extends Component {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('Proveedor no creado')
+                throw new Error('Mascota no creada')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.Proveedor})
+                this.setState({ Tusuarios: token.Proveedores})
                 return;
             })
             .catch(e => {
@@ -110,7 +111,7 @@ export default class users extends Component {
     UserNew = (e) => {
         e.preventDefault();
         if (this.name === undefined) {
-           this.setState({ mensaje: "Añade una especie por favor" })
+            this.setState({ mensaje: "Añade una especie por favor" })
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
@@ -118,7 +119,6 @@ export default class users extends Component {
                 name: this.name,
                 telefono: this.telefono,
                 correo: this.correo
-                
             }
             const envio = {
                 method: 'POST',
@@ -134,13 +134,13 @@ export default class users extends Component {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "proveedor no creado" })
+                    this.setState({ mensaje: "mascota no creada" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
-                    throw new Error('proveedor no creado')
+                    throw new Error('mascota no creada')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "proveedor creado" })
+                    this.setState({ mensaje: "mascota creada" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -155,7 +155,7 @@ export default class users extends Component {
     actualizar2 = (e) => {
         const id_d = this.state.usuario._id;
         e.preventDefault();
-        if (this.categoria === undefined) {
+        if (this.name === undefined) {
             this.setState({ mensaje: "Añade una categoria por favor" })
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
@@ -163,8 +163,7 @@ export default class users extends Component {
             const datos = {
                 name: this.name,
                 telefono: this.telefono,
-                correo: this.correo
-               
+                correo: this.correo               
             }
             const envio = {
                 method: 'PUT',
@@ -181,13 +180,13 @@ export default class users extends Component {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "proveedor no actualizado" })
+                    this.setState({ mensaje: "mascota no actualizada" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
-                    throw new Error('proveedor no creado')
+                    throw new Error('mascota no creada')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "proveedor actualizado" })
+                    this.setState({ mensaje: "mascota actualizada" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -206,8 +205,9 @@ export default class users extends Component {
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
                             <div class="col-lg-8 col-md-10">
-                                <h5 class="display-3 text-white">Estas En la seccion de proveedor</h5>
+                                <h5 class="display-3 text-white">Estas En la seccion de proveedores</h5>
                                 <p class="text-white mt-0 mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum itaque tempore suscipit ipsa rem, dolorem atque corporis soluta facere ullam similique quidem eius quibusdam nobis, recusandae veniam. Totam, tempore ipsam!</p>
+                                <Link class="nav-link" to="/admin"><i class="ni ni-tv-2 text-primary"></i> atras</ Link>
                             </div>
                         </div>
                     </div>
@@ -241,7 +241,7 @@ export default class users extends Component {
                                 <div class="card-header bg-white border-0">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h3 class="mb-0">Agregar </h3>Proveedor
+                                            <h3 class="mb-0">Agregar </h3>proveedor
                                         </div>
                                     </div>
                                 </div>
@@ -260,14 +260,14 @@ export default class users extends Component {
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-username">Nombre del proveedor</label>
+                                                        <label class="form-control-label" for="input-username">Nombre proveedor</label>
                                                         <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre" onChange={e => this.name = e.target.value} required />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-email">telefono</label>
-                                                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="582638937" onChange={e => this.telefono = e.target.value} required />
+                                                        <label class="form-control-label" for="input-email">telefono proveedor</label>
+                                                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="12345" onChange={e => this.telefono = e.target.value} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -275,8 +275,8 @@ export default class users extends Component {
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-email">Correo Electronico</label>
-                                                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="tucorreo@correo.com" onChange={e => this.correo = e.target.value} required />
+                                                        <label class="form-control-label" for="input-first-name">correo</label>
+                                                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="correo@ejemplo.com" onChange={e => this.correo = e.target.value} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -290,7 +290,7 @@ export default class users extends Component {
                                 <div class="card-header border-0">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h3 class="mb-0">Productos</h3>
+                                            <h3 class="mb-0">Proveedores</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -310,9 +310,8 @@ export default class users extends Component {
                                                     return (
                                                         <tr key={user._id}>
                                                             <td>{user.name}</td>
-                                                            <td>{user.nombrecliente}</td>
-                                                            <td>{user.raza}</td>
-                                                            <td>{user.especie}</td>
+                                                            <td>{user.telefono}</td>
+                                                            <td>{user.correo}</td>
                                                             <td>
                                                                 <button className="btn btn-sm btn-primary" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-user-edit"></i></button>
                                                                 <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
@@ -384,13 +383,23 @@ export default class users extends Component {
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>
                                     <FormGroup className="mb-3">
-                                        <InputGroup className="input-group-alternative">
+                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="ni ni-single-02" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input type="text" onChange={e => this.name = e.target.value} placeholder={this.state.usuario.name} required />
+                                        </InputGroup> 
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                    <i className="ni ni-email-83" />
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input type="number" onChange={e => this.telefono = e.target.value} placeholder={this.state.usuario.telefono} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -400,17 +409,7 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.price = e.target.value} placeholder={this.state.usuario.price} required />
-                                        </InputGroup>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <InputGroup className="input-group-alternative">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="ni ni-email-83" />
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.stock = e.target.value} placeholder={this.state.usuario.stock} required />
+                                            <Input type="number" onChange={e => this.correo = e.target.value} placeholder={this.state.usuario.correo} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
