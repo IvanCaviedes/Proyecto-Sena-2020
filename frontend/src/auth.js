@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom';
 const isauth = () => {
     if (localStorage.getItem('token') !== null) {
+        console.log(localStorage.getItem('datos'))
         return true
     }
     return false
