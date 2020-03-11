@@ -21,11 +21,12 @@ export default class users extends Component {
             datoserror: {},
             usuario: {},
             mensaje: '',
-            borrar:''
+            borrar: ''
         }
     }
 
     componentDidMount() {
+
         this.listar()
     }
     eliminarusuario(id) {
@@ -81,18 +82,18 @@ export default class users extends Component {
         const token12 = localStorage.getItem('token')
         const envio = {
             method: 'GET',
-            headers: new Headers({
+            headers: {
                 'Content-Type': 'application/json',
                 'Origin': 'http://localhost:4000',
                 'Accept': 'application/json',
-                'Authorization':`Bearer ${token12}`,
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers':'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                "Access-Control-Allow-Origin": '*',
+                'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-                'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
-            }),
+                'Allow': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Authorization': `Bearer ${token12}`
+            }
         };
-        console.log()
+        console.log("<<<<<<<<<<<", envio)
         fetch('http://localhost:4000/user/', envio)
             .then(response => {
                 if (response.ok) {
@@ -174,7 +175,7 @@ export default class users extends Component {
                 name: this.name,
                 role: this.rol
             }
-           const envio = {
+            const envio = {
                 method: 'PUT',
                 body: JSON.stringify(datos),
                 headers: new Headers({
@@ -203,7 +204,7 @@ export default class users extends Component {
                 })
                 .catch(e => {
                     console.log(e)
-                }) 
+                })
         }
     }
     render() {
@@ -420,7 +421,7 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="email" onChange={e => this.email = e.target.value} placeholder={this.state.usuario.email}required />
+                                            <Input type="email" onChange={e => this.email = e.target.value} placeholder={this.state.usuario.email} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>

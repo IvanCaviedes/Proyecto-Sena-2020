@@ -45,51 +45,41 @@ const storage = multer.diskStorage({
 })
 App.use(multer({ storage }).single('image'))
 
+//Archivos estaticos
+App.use('/public',express.static(path.join(__dirname,'./public')))
+
 //Middleware Login
 const AuthToken = require('./middlewares/AuthToken');
 App.use(AuthToken);
 
-//Archivos estaticos
-App.use('/public',express.static(path.join(__dirname,'./public')))
-
-
-//configurando cors
-App.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Headers','Origin,X-Request-With,Content-Type,Accept')
-    next();
-
-    App.options('*',(req,res)=>{
-        res.header('Access-Control-Allow-Methods','GET,PATCH,PUT,POST,DELETE,OPCIONS');
-        res.send();
-    })
-})
-
 //Manejador de json
 
 App.use(bodyParser.json());
-App.use(cors());
+
 App.use(bodyParser.urlencoded({
     extended: false
 }));
+
+App.use(cors());
 
 //Rutas
 const Product = require('./routes/product');
 const User = require('./routes/user');
 const Auth = require('./routes/auth');
 const correos = require('./routes/correos')
-const priductos = require('./routes/productos')
+const categoria = require('./routes/categoria')
+const mascotas = require('./routes/mascotas')
+const proveedor = require('./routes/proveedor')
 
 App.use('/product', Product);
 App.use('/user', User);
 App.use('/auth', Auth);
 App.use('/correos', correos);
+App.use('/categoria',categoria);
+App.use('/mascotas',mascotas);
+App.use('/proveedor',proveedor)
 
-
-
-
-
-App.use('/index', (req, res) => {
+App.use('/index',(req,res)=>{
     res.render('index')
 })
 

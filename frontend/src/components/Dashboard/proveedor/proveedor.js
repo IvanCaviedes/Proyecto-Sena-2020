@@ -29,7 +29,7 @@ export default class users extends Component {
         this.listar()
     }
     eliminarusuario(id) {
-        if (window.confirm('Estas seguro de eliminar este producto?')) {
+        if (window.confirm('¿Estas seguro de eliminar este proveedor?')) {
             const envio = {
                 method: 'DELETE',
                 headers: new Headers({
@@ -38,8 +38,8 @@ export default class users extends Component {
                     'Accept': 'application/json'
                 }),
             };
-            fetch(`http://localhost:4000/product/_id/${id}`, envio)
-                .then(alert('producto eliminado'), this.listar())
+            fetch(`http://localhost:4000/mascotas/_id/${id}`, envio)
+                .then(alert('proveedor eliminado'), this.listar())
                 .catch(e => console.log(e))
         }
     }
@@ -52,12 +52,12 @@ export default class users extends Component {
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/product/_id/${id}`, envio)
+        fetch(`http://localhost:4000/proveedor/_id/${id}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('producto no existe')
+                throw new Error('proveedor no existe')
             })
             .then(token => {
                 this.setState({ usuario: token.products[0] })
@@ -85,15 +85,15 @@ export default class users extends Component {
             }),
         };
         console.log()
-        fetch('http://localhost:4000/product/', envio)
+        fetch('http://localhost:4000/proveedor/', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('Usuario no creado')
+                throw new Error('Proveedor no creado')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.products })
+                this.setState({ Tusuarios: token.Proveedor})
                 return;
             })
             .catch(e => {
@@ -109,16 +109,16 @@ export default class users extends Component {
 
     UserNew = (e) => {
         e.preventDefault();
-        if (this.categoria === undefined) {
-            this.setState({ mensaje: "Añade una categoria por favor" })
+        if (this.name === undefined) {
+           this.setState({ mensaje: "Añade una especie por favor" })
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
             const datos = {
                 name: this.name,
-                stock: this.stock,
-                price: this.price,
-                category: this.categoria
+                telefono: this.telefono,
+                correo: this.correo
+                
             }
             const envio = {
                 method: 'POST',
@@ -129,18 +129,18 @@ export default class users extends Component {
                     'Accept': 'application/json'
                 }),
             };
-            fetch('http://localhost:4000/product/create', envio)
+            fetch('http://localhost:4000/proveedor/register', envio)
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "producto no creado" })
+                    this.setState({ mensaje: "proveedor no creado" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
-                    throw new Error('producto no creado')
+                    throw new Error('proveedor no creado')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "producto creado" })
+                    this.setState({ mensaje: "proveedor creado" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -162,9 +162,9 @@ export default class users extends Component {
         } else {
             const datos = {
                 name: this.name,
-                stock: this.stock,
-                price: this.price,
-                category: this.categoria
+                telefono: this.telefono,
+                correo: this.correo
+               
             }
             const envio = {
                 method: 'PUT',
@@ -176,18 +176,18 @@ export default class users extends Component {
                 }),
             };
             console.log(envio)
-            fetch(`http://localhost:4000/product/_id/${id_d}`, envio)
+            fetch(`http://localhost:4000/proveedor/_id/${id_d}`, envio)
                 .then(response => {
                     if (response.ok) {
                         return response.json()
                     }
-                    this.setState({ mensaje: "producto no actualizado" })
+                    this.setState({ mensaje: "proveedor no actualizado" })
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
                     this.toggleModal('notificationModal')
-                    throw new Error('producto no creado')
+                    throw new Error('proveedor no creado')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "producto actualizado" })
+                    this.setState({ mensaje: "proveedor actualizado" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -206,7 +206,7 @@ export default class users extends Component {
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
                             <div class="col-lg-8 col-md-10">
-                                <h5 class="display-3 text-white">Estas En la seccion de Productos</h5>
+                                <h5 class="display-3 text-white">Estas En la seccion de proveedor</h5>
                                 <p class="text-white mt-0 mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum itaque tempore suscipit ipsa rem, dolorem atque corporis soluta facere ullam similique quidem eius quibusdam nobis, recusandae veniam. Totam, tempore ipsam!</p>
                             </div>
                         </div>
@@ -241,7 +241,7 @@ export default class users extends Component {
                                 <div class="card-header bg-white border-0">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h3 class="mb-0">Agregar usuario</h3>
+                                            <h3 class="mb-0">Agregar </h3>Proveedor
                                         </div>
                                     </div>
                                 </div>
@@ -250,7 +250,7 @@ export default class users extends Component {
 
                                         <div class="row align-items-center">
                                             <div class="col-8">
-                                                <h6 class="heading-small text-muted mb-4">Informacion del producto</h6>
+                                                <h6 class="heading-small text-muted mb-4">Informacion del proveedor</h6>
                                             </div>
                                             <div class="col-4 text-right">
                                                 <button type="submit" class="btn btn-sm btn-primary">Agregar</button>
@@ -260,35 +260,23 @@ export default class users extends Component {
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-username">Nombre Producto</label>
+                                                        <label class="form-control-label" for="input-username">Nombre del proveedor</label>
                                                         <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre" onChange={e => this.name = e.target.value} required />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-email">precio</label>
-                                                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="5000" onChange={e => this.price = e.target.value} required />
+                                                        <label class="form-control-label" for="input-email">telefono</label>
+                                                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="582638937" onChange={e => this.telefono = e.target.value} required />
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="input-first-name">Stock</label>
-                                                        <input type="number" id="input-first-name" class="form-control form-control-alternative" placeholder="123456" onChange={e => this.stock = e.target.value} required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-last-name">categoria</label>
-                                                        <div class="form-group">
-                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.categoria = e.target.value} required>
-                                                                <option>Seleccionar</option>
-                                                                <option>Niños</option>
-                                                                <option>Hogar</option>
-                                                                <option>Entretenimiento</option>
-                                                            </select>
-                                                        </div>
+                                                        <label class="form-control-label" for="input-email">Correo Electronico</label>
+                                                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="tucorreo@correo.com" onChange={e => this.correo = e.target.value} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -311,9 +299,8 @@ export default class users extends Component {
                                         <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">Nombre</th>
-                                                <th scope="col">precio</th>
-                                                <th scope="col">categoria</th>
-                                                <th scope="col">stock</th>
+                                                <th scope="col">telefono</th>
+                                                <th scope="col">correo</th>
                                                 <th scope="col">opcion</th>
                                             </tr>
                                         </thead>
@@ -323,9 +310,9 @@ export default class users extends Component {
                                                     return (
                                                         <tr key={user._id}>
                                                             <td>{user.name}</td>
-                                                            <td>{user.price}</td>
-                                                            <td>{user.category}</td>
-                                                            <td>{user.stock}</td>
+                                                            <td>{user.nombrecliente}</td>
+                                                            <td>{user.raza}</td>
+                                                            <td>{user.especie}</td>
                                                             <td>
                                                                 <button className="btn btn-sm btn-primary" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-user-edit"></i></button>
                                                                 <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
