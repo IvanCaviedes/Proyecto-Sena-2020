@@ -68,35 +68,21 @@ const User = require('./routes/user');
 const Auth = require('./routes/auth');
 const correos = require('./routes/correos')
 const categoria = require('./routes/categoria')
+const mascotas = require('./routes/mascotas')
+const proveedor = require('./routes/proveedor')
 
 App.use('/product', Product);
 App.use('/user', User);
 App.use('/auth', Auth);
 App.use('/correos', correos);
-<<<<<<< HEAD
-App.use('/categoria',categoria)
+App.use('/categoria',categoria);
+App.use('/mascotas',mascotas);
+App.use('/proveedor',proveedor)
 
-=======
-
-
-
-
-
-App.use('/index', (req, res) => {
+App.use('/index',(req,res)=>{
     res.render('index')
 })
 
-App.use('/noticias', (req, res) => {
-    res.render('noticias')
-})
-App.use('/cuidados', (req, res) => {
-    res.render('cuidados')
-})
-App.use('/productos', (req, res) => {
-    res.render('productos')
-})
-
->>>>>>> 51e55e33f392fa2890dc8488be42830d9b01d086
 //manejador de errores
 /* App.use(function (req, res, next) {
     res.status(404).sendFile(path.join(__dirname + "/Public/Error/404.html"));
