@@ -57,6 +57,7 @@ despues de esto se instalara el proyecto y se ejecutara
 A cada uno de los instructores del Sena que nos ayudaron a elaborar este proyecto
 
 * **Carolina Forero**
+* **Alejandro Munevar**
 
 y a Profesores externos 
 * **kamilo munevar**
