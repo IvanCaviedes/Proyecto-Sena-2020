@@ -10,54 +10,45 @@ export default class menudash extends Component {
                     </button>
                     <a class="navbar-brand pt-4 pl-5 pb-3" href="./index.html">{/* 
                         <img src="https://i.imgur.com/B8YoPhk.png" class="navbar-brand-img" alt="..." /> */}
-
                         <h1>PET SHOP</h1>
                     </a>
                     <ul class="nav align-items-center d-md-none">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="ni ni-bell-55"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown text-rigth">
+                            <a class="nav-link pr-5" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <div class="media align-items-center">
                                     <span class="avatar avatar-sm rounded-circle">
                                         <img alt="Image placeholder" src="./assets/img/theme/team-1-800x800.jpg" />
                                     </span>
+                                    <div class="media-body ml-2  d-lg-block">
+                                        <span class="mb-0 text-sm font-weight-bold">Ivan</span>
+                                    </div>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                                 <div class=" dropdown-header noti-title">
                                     <h6 class="text-overflow m-0">Welcome!</h6>
                                 </div>
-                                <a href="./examples/profile.html" class="dropdown-item">
+                                <Link to="/admin" class="dropdown-item">
                                     <i class="ni ni-single-02"></i>
-                                    <span>My profile</span>
-                                </a>
-                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <span>Reportes</span>
+                                </Link>
+                                <Link to="/users" class="dropdown-item">
                                     <i class="ni ni-settings-gear-65"></i>
-                                    <span>Settings</span>
-                                </a>
-                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <span>Usuarios</span>
+                                </Link>
+                                <Link to="/productos" class="dropdown-item">
                                     <i class="ni ni-calendar-grid-58"></i>
-                                    <span>Activity</span>
-                                </a>
-                                <a href="./examples/profile.html" class="dropdown-item">
+                                    <span>Productos</span>
+                                </Link>
+                                <Link to="/proveedor" class="dropdown-item">
                                     <i class="ni ni-support-16"></i>
-                                    <span>Support</span>
-                                </a>
+                                    <span>Proveedores</span>
+                                </Link>
                                 <div class="dropdown-divider"></div>
-                                <a href="#!" class="dropdown-item">
+                                <Link href="#!" class="dropdown-item">
                                     <i class="ni ni-user-run"></i>
                                     <span>Logout</span>
-                                </a>
+                                </Link>
                             </div>
                         </li>
                     </ul>
@@ -106,7 +97,7 @@ export default class menudash extends Component {
                             <li class="nav-item">
                                 <Link class="nav-link " to="/Proveedor"><i class="fas fa-route text-orange"></i>Domicilios</Link>
                             </li>
-                            
+
                         </ul>
                         <hr class="my-3" />
                         <h6 class="navbar-heading text-muted">Documentation</h6>

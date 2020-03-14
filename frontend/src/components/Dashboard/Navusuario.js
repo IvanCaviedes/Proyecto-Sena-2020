@@ -103,7 +103,7 @@ export default class nav extends Component {
           <div class="container-fluid">
             <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block">Bienvenido!</a>
             <ul class="navbar-nav align-items-center d-none d-md-flex">
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown text-rigth">
                 <a class="nav-link pr-5" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="media align-items-center">
                     <span class="avatar avatar-sm rounded-circle">

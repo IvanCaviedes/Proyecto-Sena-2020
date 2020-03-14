@@ -220,7 +220,7 @@ export default class users extends Component {
                 </div>
                 <div class="container-fluid mt--9">
                     <div class="row">
-                        <div class="col-xl-4 order-xl-2 mb-9 mb-xl-0">
+                        <div class="col-xl-4 order-xl-2 mb-0 mb-xl-0">
                             <div class="card card-profile shadow">
                                 <div class="card-body mt-4 pt-md-4">
                                     <div class="text-center">
@@ -247,7 +247,7 @@ export default class users extends Component {
                                 <div class="card-header bg-white border-0">
                                     <div class="row align-items-center">
                                         <div class="col-8">
-                                            <h3 class="mb-0">Agregar </h3>proveedor
+                                            <h3 class="mb-0">Agregar proveedor </h3>
                                         </div>
                                     </div>
                                 </div>
