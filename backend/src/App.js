@@ -42,8 +42,7 @@ App.use(multer({ storage }).single('image'))
 App.use('/public',express.static(path.join(__dirname,'./public')))
 
 //Middleware Login
-const AuthToken = require('./middlewares/AuthToken');
-App.use(AuthToken);
+const validar = require('./middlewares/autentication')
 
 //Manejador de json
 
@@ -65,6 +64,7 @@ const mascotas = require('./routes/mascotas')
 const proveedor = require('./routes/proveedor')
 const productos = require('./routes/productos')
 const pedido = require('./routes/pedido') 
+const prueba = require('./routes/prueba')
 
 App.use('/product', Product);
 App.use('/user', User);

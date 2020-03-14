@@ -6,8 +6,8 @@ function index(req,res){
     Proveedor.find({})
         .then(Proveedores => {
             if(Proveedores.length) return res.status(200).send({Proveedores});
-            return res.status(204).send({message: 'NO CONTENT'});
-        }).catch(error => res.status(500).send({error}));
+            return res.send({message: 'NO CONTENT'});
+        }).catch(error => res.send({error}));
 }
 //Muesta uno en especifico
 function show(req,res){

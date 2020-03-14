@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Footer from '../Footer'
+import { Link } from 'react-router-dom'
 import {
     Button,
     Card,
@@ -17,6 +18,7 @@ export default class users extends Component {
         super()
         this.state = {
             Tusuarios: [],
+            Tproveedores: [],
             defaultModal: false,
             datoserror: {},
             usuario: {},
@@ -27,7 +29,43 @@ export default class users extends Component {
 
     componentDidMount() {
         this.listar()
+        this.mirarproveedor();
     }
+
+
+    mirarproveedor = () => {
+        const envio = {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch(`
+    http://localhost:4000/proveedor`, envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('Ocurrio un error')
+            })
+            .then(token => {
+                if (token.message === 'NO CONTENT') {
+                    this.setState({ mensaje: "Primero tienes que añadir un proveedor" })
+                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                    this.toggleModal('notificationModalnocerrar')
+                } else {
+                    this.setState({ Tproveedores: token.Proveedores })
+                }
+
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
+
     eliminarusuario(id) {
         if (window.confirm('Estas seguro de eliminar este producto?')) {
             const envio = {
@@ -69,6 +107,81 @@ export default class users extends Component {
             })
     }
 
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
+    };
+
+    UserNew = (e) => {
+        e.preventDefault();
+        if (this.categoria === undefined) {
+            this.setState({ mensaje: "Añade una categoria por favor" })
+            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.toggleModal('notificationModal')
+        } else {
+            if (window.navigator.onLine) {
+                const envio = {
+                    method: 'GET',
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Origin': 'http://localhost:4000',
+                        'Accept': 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                        'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
+                    }),
+                };
+                fetch(`http://localhost:4000/proveedor/name/${this.proveedor}`, envio)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        throw new Error('Proveedor no existe')
+                    })
+                    .then(token => {
+                        const data = new FormData();
+                        const imagedata = this.file
+                        data.append('image', imagedata);
+                        data.append('name', this.name)
+                        data.append('stock', this.stock)
+                        data.append('price', this.price)
+                        data.append('category', this.categoria)
+                        data.append('proveedor', token.Proveedores[0]._id)
+
+                        const envio = {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            body: data,
+                            headers: new Headers({
+                                'Content-Type': 'application/json',
+                                'Origin': 'http://localhost:4000',
+                                'Accept': 'application/json'
+                            }),
+                        };
+                        fetch('http://localhost:4000/product/create', envio)
+                            .then(
+                                this.setState({ mensaje: "Añadido correctamente" }),
+                                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } }),
+                                this.toggleModal('notificationModal')
+                            )
+                        return;
+                    })
+                    .catch(e => {
+                        this.setState({ mensaje: e.message })
+                    })
+            }
+            else {
+                this.setState({ mensaje: "Tienes que tener internet" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+            }
+            /* this.componentDidMount() */
+        }
+    }
+
+
     listar = (e) => {
         const token12 = localStorage.getItem('token')
         const envio = {
@@ -84,13 +197,12 @@ export default class users extends Component {
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }),
         };
-        console.log()
         fetch('http://localhost:4000/product/', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
                 }
-                this.setState({ Tusuarios:''})
+                this.setState({ Tusuarios: '' })
                 throw new Error('Usuario no creado')
             })
             .then(token => {
@@ -102,62 +214,6 @@ export default class users extends Component {
             })
     }
 
-    toggleModal = state => {
-        this.setState({
-            [state]: !this.state[state]
-        });
-    };
-
-    UserNew = (e) => {
-        e.preventDefault();
-        if (this.categoria === undefined) {
-            this.setState({ mensaje: "Añade una categoria por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-            this.toggleModal('notificationModal')
-        } else {
-            const data = new FormData();
-            const imagedata = this.file
-            data.append('image', imagedata);
-            data.append('name',this.name)
-            data.append('stock',this.stock)
-            data.append('price',this.price)
-            data.append('category',this.categoria)
-            
-            
-            const envio = {
-                method: 'POST',
-                mode: 'no-cors',
-                body:data,
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:4000',
-                    'Accept': 'application/json'
-                }),
-            };
-            fetch('http://localhost:4000/product/create', envio)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-
-                    console.log(response)
-                    this.setState({ mensaje: "producto no creado" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                    this.toggleModal('notificationModal')
-                    throw new Error('producto no creado')
-                })
-                .then(token => {
-                    this.setState({ mensaje: "producto creado" })
-                    this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
-                    this.toggleModal('notificationModal')
-                    return;
-                })
-                .catch(e => {
-                    this.setState({ mensaje: e.message })
-                })
-        }
-    }
     actualizar2 = (e) => {
         const id_d = this.state.usuario._id;
         e.preventDefault();
@@ -181,7 +237,6 @@ export default class users extends Component {
                     'Accept': 'application/json'
                 }),
             };
-            console.log(envio)
             fetch(`http://localhost:4000/product/_id/${id_d}`, envio)
                 .then(response => {
                     if (response.ok) {
@@ -300,12 +355,29 @@ export default class users extends Component {
                                                 </div>
                                                 <div class="col-lg-12">
                                                     <div class="form-group">
+                                                        <label class="form-control-label" for="input-last-name">Proveedor</label>
+                                                        <Link to="/proveedor" className="text-right">Agregar Proveedor</Link>
+                                                        <div class="form-group">
+                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.proveedor = e.target.value} required>
+                                                                <option>Seleccionar</option>
+                                                                {this.state.Tproveedores.map(pro => {
+                                                                    return (
+                                                                        <option key={pro.name}>{pro.name}</option>
+                                                                    )
+                                                                })}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
                                                         <label class="form-control-label" for="input-last-name">Imagen Producto</label>
                                                         <div class="form-group">
                                                             <input type="file" name="image" onChange={e => this.file = e.target.files[0]} required />
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </form>
@@ -369,7 +441,7 @@ export default class users extends Component {
                             className="close"
                             data-dismiss="modal"
                             type="button"
-                            onClick={() => this.toggleModal("notificationModal")}
+                            onClick={() => { this.toggleModal("notificationModal") }}
                         >
                             <span aria-hidden={true}>×</span>
                         </button>
@@ -473,6 +545,45 @@ export default class users extends Component {
                     </div>
                 </Modal>
 
+                <Modal
+                    className={`modal-dialog-centered modal-${this.state.datoserror.color}`}
+                    contentClassName={`bg-${this.state.datoserror.color}`}
+                    isOpen={this.state.notificationModalnocerrar}
+                    backdrop='static'
+                    toggle={() => this.toggleModal("notificationModalnocerrar")}
+                >
+                    <div className="modal-header">
+                        <button
+                            aria-label="Close"
+                            className="close"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => { this.toggleModal("notificationModalnocerrar") }}
+                        >
+                            <span aria-hidden={true}>×</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="py-3 text-center">
+                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <h4 className="heading mt-4">Alerta</h4>
+                            <p>
+                                {this.state.mensaje}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <Link
+                            className="text-white ml-auto"
+                            color="link"
+                            data-dismiss="modal"
+                            type="button"
+                            to="/proveedor"
+                        >
+                            Close
+                </Link>
+                    </div>
+                </Modal>
             </div>
         )
     }

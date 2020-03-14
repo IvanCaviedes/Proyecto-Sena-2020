@@ -1,22 +1,34 @@
 const express = require('express');
-
-const {ramdomNumber} = require('../libs/libs')
-const path = require('path')
-const fs = require('fs-extra')
-
 const Router = express.Router();
+const User = require('../models/User');
+const moment =require('moment')
 
-Router.post('/',async(req,res)=>{
-/*     const imgutl = ramdomNumber();
-    const ext = path.extname(req.file.originalname).toLowerCase();
-    const imagetemppath = req.file.path;
-    const targetpath = path.resolve(`src/public/uploads/${imgutl}${ext}`) 
+Router.get('/', (req, res) => {
+    User.find()
+        .then(users => {
+            /* if (users.length) {
+                for (let index = 0; index < users.length; index++) {
 
-     if (ext === '.png'||ext === '.jpg'||ext === '.jpeg'||ext === '.gif' ) {
-        await fs.rename(imagetemppath, targetpath)
-    }  */
-    console.log(req.file)
-    res.send({mensaje:'buena'})
-}) 
+                    const dia = moment()
+                    const contultar = moment(users[index].sign_up_date)
 
-      module.exports = Router;
+                    const diferencia = dia.diff(contultar,'days')
+
+                    console.log(moment(dateFrom).subtract(1, 'months').format('YYYY-MM-DD'))
+                    if (diferencia >2) {
+                        console.log('esta es la id del mayor '+ users[index]._id)
+                    }                
+                }
+                return res.status(200).send({ mensaje:'Ventas Actualizadas' });
+            } else {
+                return res.send({ message: 'NO CONTENT' });
+            } */
+            const dateFrom = 2014-11-30 
+            const h = moment().subtract(1, 'months').endOf('month')
+            res.send({datos:h})
+
+        })
+        .catch(e=>res.status(500).send({e}))
+})
+
+module.exports = Router;

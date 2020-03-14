@@ -94,7 +94,13 @@ export default class users extends Component {
                 throw new Error('Mascota no creada')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.Proveedores})
+                if(token.message === 'NO CONTENT'){
+
+                }
+                else{
+                    this.setState({ Tusuarios: token.Proveedores})
+                }
+
                 return;
             })
             .catch(e => {

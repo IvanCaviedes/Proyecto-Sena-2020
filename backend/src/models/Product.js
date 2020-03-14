@@ -33,6 +33,10 @@ const ProductSchema = new mongoose.Schema({
         require:true,
         unique:true
     },
+    proveedor:{
+        type:String,
+        required:true
+    }
 });
 
 const Product = mongoose.model('Product',ProductSchema);

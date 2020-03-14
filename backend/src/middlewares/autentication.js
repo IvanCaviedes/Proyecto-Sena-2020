@@ -5,15 +5,18 @@ module.exports = function (req, res, next) {
     if (!token) {
         return res.send('acceso denegado')
     }
-    try{
-        const verificado = jwt.verify(token,CONFIG.SECRET_TOKEN)
-        if(verificado.role === 'admin'){
-            req.user = verificado;
-            next();
-        }
-        else{
-            res.send('no eres el usuario')
-        }
+    try {
+        const verificado = jwt.verify(token, CONFIG.SECRET_TOKEN)
+        if(req.method == 'GET'){
+            if (verificado.role === 'admin') {
+                req.user = verificado;
+                console.log('entro')
+                next();
+            }
+            else {
+                res.send('no eres el usuario')
+            }
+        }        
     }
     catch{
         res.send('token invalido')

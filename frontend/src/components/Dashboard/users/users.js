@@ -115,6 +115,74 @@ export default class users extends Component {
         });
     };
 
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
+    };
+
+
+    consultas = (e) => {
+        e.preventDefault();
+        let opcion;
+        if (this.opcionbusqueda === undefined) {
+            this.setState({ mensaje: "Añade el tipo de dato de la busqueda por favor" })
+            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.toggleModal('notificationModal')
+        }
+        else {
+            switch (this.opcionbusqueda) {
+                case 'Nombre':
+                    opcion = 'name'
+                    break;
+                case 'Correo':
+                    opcion = 'email'
+                    break;
+                case 'Nombre':
+                    opcion = 'name'
+                    break;
+                case 'Username':
+                    opcion = 'username'
+                    break;
+                case 'Rol':
+                    opcion = 'role'
+                    break;
+                default:
+                    opcion = ''
+                    break;
+            }
+        }
+        const envio = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json',
+                "Access-Control-Allow-Origin": '*',
+                'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
+            }
+        };
+        fetch(`http://localhost:4000/user/${opcion}/${this.cajatexto}`, envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('Usuario no creado')
+            })
+            .then(token => {
+                this.setState({ Tusuarios: token.users })
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
+    mostartodo = (e) => {
+        e.preventDefault();
+        this.listar();
+    }
     UserNew = (e) => {
         e.preventDefault();
         if (this.rol === undefined) {
@@ -122,43 +190,51 @@ export default class users extends Component {
             this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
             this.toggleModal('notificationModal')
         } else {
-            const datos = {
-                password: this.username,
-                email: this.email,
-                username: this.username,
-                name: this.name,
-                role: this.rol
+            if (window.navigator.onLine) {
+                const token12 = localStorage.getItem('token')
+                const datos = {
+                    password: this.username,
+                    email: this.email,
+                    username: this.username,
+                    name: this.name,
+                    role: this.rol
+                }
+                const envio = {
+                    method: 'POST',
+                    body: JSON.stringify(datos),
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Origin': 'http://localhost:4000',
+                        'Accept': 'application/json',
+                        'Authorization': `${token12}`
+                    }),
+                };
+                fetch('http://localhost:4000/user/register', envio)
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json()
+                        }
+                        this.setState({ mensaje: "Usuario no creado" })
+                        this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                        this.toggleModal('notificationModal')
+                        throw new Error('Usuario no creado')
+                    })
+                    .then(token => {
+                        this.setState({ mensaje: "Usuario creado" })
+                        this.listar()
+                        this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                        this.toggleModal('notificationModal')
+                        return;
+                    })
+                    .catch(e => {
+                        this.setState({ mensaje: e.message })
+                    })
             }
-            const envio = {
-                method: 'POST',
-                body: JSON.stringify(datos),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:4000',
-                    'Accept': 'application/json'
-                }),
-            };
-            fetch('http://localhost:4000/user/register', envio)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    this.setState({ mensaje: "Usuario no creado" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                    this.toggleModal('notificationModal')
-                    throw new Error('Usuario no creado')
-                })
-                .then(token => {
-                    this.setState({ mensaje: "Usuario creado" })
-                    this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
-                    this.toggleModal('notificationModal')
-                    return;
-                })
-                .catch(e => {
-                    this.setState({ mensaje: e.message })
-                })
-
+            else {
+                this.setState({ mensaje: "Debes tener internet para hacer esta lavor" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+            }
         }
     }
     actualizar2 = (e) => {
@@ -293,7 +369,7 @@ export default class users extends Component {
                                                             <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.rol = e.target.value} required>
                                                                 <option>Seleccionar</option>
                                                                 <option>admin</option>
-                                                                <option>regular</option>
+                                                                <option>empleado</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -304,11 +380,85 @@ export default class users extends Component {
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-xl-12 order-xl-2">
+                            <div class="card bg-secondary shadow">
+                                <div class="card-header bg-white border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <h3 class="mb-0">Consultas</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <form onSubmit={this.consultas}>
+
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <h6 class="heading-small text-muted mb-4">Dato a Consultar</h6>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <button type="submit" class="btn btn-sm btn-default btn-lg btn-block">Consultar</button>
+                                            </div>
+                                        </div>
+                                        <div class="pl-lg-4 mt-4">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="input-last-name">Digita el tipo de dato</label>
+                                                        <div class="form-group">
+                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.opcionbusqueda = e.target.value} required>
+                                                                <option>Seleccionar</option>
+                                                                <option>Nombre</option>
+                                                                <option>Correo</option>
+                                                                <option>Username</option>
+                                                                <option>Rol</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="input-last-name">Escribe el dato</label>
+                                                        <div class="input-group input-group-merge input-group-alternative mb-0">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-search text-blue"></i></span>
+                                                            </div>
+                                                            <input class="form-control" placeholder="Search" type="text" onChange={e => this.cajatexto = e.target.value} required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 order-xl-2 mx-auto">
+                            <div class="card bg-secondary shadow">
+                                <div class="card-header bg-white border-0">
+                                    <form onSubmit={this.mostartodo}>
+                                        <div class="row align-items-center">
+                                            <div class="col-5">
+                                                <h3 class="mb-0">Mostrar Todos</h3>
+                                            </div>
+                                            <div class="col-7">
+                                                <button type="submit" className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="col-xl-12 order-xl-2">
                             <div class="card shadow">
                                 <div class="card-header border-0">
                                     <div class="row align-items-center">
-                                        <div class="col">
+                                        <div class="col-3">
                                             <h3 class="mb-0">Usuarios</h3>
                                         </div>
                                     </div>

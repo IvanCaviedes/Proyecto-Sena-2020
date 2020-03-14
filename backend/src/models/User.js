@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment')
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -35,7 +36,7 @@ const UserSchema = new mongoose.Schema({
     },
     sign_up_date: {
         type: Date,
-        default: Date.now()
+        default: moment()
     },
     last_login_date: {
         type: Date,
