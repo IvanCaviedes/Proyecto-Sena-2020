@@ -142,7 +142,7 @@ export default class users extends Component {
                     throw new Error('Pedido no creado')
                 })
                 .then(token => {
-                    this.setState({ mensaje: "PEdido creado" })
+                    this.setState({ mensaje: "Pedido creado" })
                     this.listar()
                     this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
                     this.toggleModal('notificationModal')
@@ -288,7 +288,7 @@ export default class users extends Component {
                                                         <div class="form-group">
                                                             <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.productos = e.target.value} required>
                                                                 <option>selecionar</option>
-                                                               <option>Gato</option>
+                                                                <option>Gato</option>
                                                                 <option>Perro</option>
                                                                 <option>Caballo</option>
                                                                 <option>Huron</option> 
