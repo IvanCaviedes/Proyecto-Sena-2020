@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Login from './components/Login'
 import Admin from './components/Dashboard/admin'
 import Users from './components/Dashboard/users'
+import Maps from './components/Dashboard/maps'
 import Productos from './components/Dashboard/productos'
 import Profile from './components/Dashboard/profile'
 import Logout from './components/logout'
@@ -27,9 +28,11 @@ function App() {
         <PrivateRoute path="/productos" exact component={Productos} />
         <PrivateRoute path="/mascotas" exact component={Mascotas} />
         <PrivateRoute path="/proveedor" exact component={Proveedor} />
+        <PrivateRoute path="/maps" exact component={Maps} />
         <PrivateRoute path="/Pedido" exact component={Pedido} />
         <PrivateRoute path="/profile" exact component={Profile} />
         <PrivateRoute path="/logout" exact component={Logout} />
+
       </Switch>
     </Router>
   );
