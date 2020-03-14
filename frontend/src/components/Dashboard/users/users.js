@@ -290,8 +290,8 @@ export default class users extends Component {
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
                             <div class="col-lg-8 col-md-10">
-                                <h5 class="display-3 text-white">Estas En la seccion de usuarios</h5>
-                                <p class="text-white mt-0 mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum itaque tempore suscipit ipsa rem, dolorem atque corporis soluta facere ullam similique quidem eius quibusdam nobis, recusandae veniam. Totam, tempore ipsam!</p>
+                                <h5 class="display-3 text-white">Estas en la sección de usuarios</h5>
+                                <p class="text-white mt-0 mb-5">Podras crear, actualizar, editar o eliminar usuarios ¡¡TEN CUIDADO!!</p>
                             </div>
                         </div>
                     </div>
@@ -533,7 +533,7 @@ export default class users extends Component {
                             type="button"
                             onClick={() => this.toggleModal("notificationModal")}
                         >
-                            Close
+                            cerrar 
                 </Button>
                     </div>
                 </Modal>
