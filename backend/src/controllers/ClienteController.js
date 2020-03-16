@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/Cliente');
 var nodemailer = require('nodemailer');
 
 function index(req,res){
@@ -42,7 +42,7 @@ function create(req,res){
                                             from: 'ivancaviedes99@outlook.com',
                                             to: user.email,
                                             subject: 'Cuenta Creada exitosamente',
-                                            text: `Ya puedes ingresar al sistemas de informacion este es tu usuario y tu contraseña "${user.username}"`
+                                            text: `Tu codigo de confirmacion "${user._id}"`
                                         };
                                         transporter.sendMail(mailOptions, function (error, info) {
                                             if (error) {

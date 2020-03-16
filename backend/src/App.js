@@ -64,7 +64,7 @@ const mascotas = require('./routes/mascotas')
 const proveedor = require('./routes/proveedor')
 const productos = require('./routes/productos')
 const pedido = require('./routes/pedido') 
-const prueba = require('./routes/prueba')
+const cliente = require('./routes/cliente')
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -74,8 +74,9 @@ App.use('/categoria',categoria);
 App.use('/mascotas',mascotas);
 App.use('/proveedor',proveedor);
 App.use('/pedido',pedido)
+App.use('/cliente',cliente)
 
-App.use('/imagenes',prueba)
+/* App.use('/imagenes',prueba) */
 
 App.use('/index',(req,res)=>{
     res.render('index')

@@ -335,7 +335,7 @@ export default class users extends Component {
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label class="form-control-label" for="input-first-name">Stock</label>
                                                         <input type="number" id="input-first-name" class="form-control form-control-alternative" placeholder="123456" onChange={e => this.stock = e.target.value} required />
                                                     </div>

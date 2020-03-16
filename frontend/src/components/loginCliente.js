@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import {
     Button,
@@ -13,7 +13,9 @@ import {
     InputGroup,
     Modal
 } from "reactstrap";
-export default class loginCliente extends Component {
+
+export default class Login extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -44,7 +46,7 @@ export default class loginCliente extends Component {
 
     }
 
-    comprobar = (e)=>{
+    comprobar = (e) => {
         const envio = {
             method: 'GET',
             headers: new Headers({
@@ -61,7 +63,7 @@ export default class loginCliente extends Component {
                 throw new Error('Usuario no existe')
             })
             .then(token => {
-                if(token.message === 'NO CONTENT'){
+                if (token.message === 'NO CONTENT') {
                     this.toggleModal('formModal3')
                 }
                 return;
@@ -71,14 +73,14 @@ export default class loginCliente extends Component {
             })
     }
 
-    primero = (e) =>{
+    primero = (e) => {
         e.preventDefault();
         const datos = {
-            password:this.password,
-            email:this.email,
-            username:this.username,
-            name:this.name,
-            role:'admin'
+            password: this.password,
+            email: this.email,
+            username: this.username,
+            name: this.name,
+            role: 'admin'
         }
         const envio = {
             method: 'POST',
@@ -90,22 +92,22 @@ export default class loginCliente extends Component {
             }),
         };
         fetch('http://localhost:4000/user/register', envio)
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            this.setState({ mensaje: "Usuario no creado" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-            this.toggleModal('notificationModal')
-            throw new Error('Usuario no creado')
-        })
-        .then(token => {
-            this.props.history.push('/admin');
-            return;
-        })
-        .catch(e => {
-            this.setState({ mensaje: e.message })
-        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ mensaje: "Usuario no creado" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+                throw new Error('Usuario no creado')
+            })
+            .then(token => {
+                this.props.history.push('/admin');
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
 
     }
 
@@ -142,7 +144,7 @@ export default class loginCliente extends Component {
                 } else {
                     localStorage.setItem('token', token.token);
                     localStorage.setItem('datos', JSON.stringify(token.payload))
-                    this.props.history.push('/admin');
+                    this.props.history.push('/adminCliente');
                 }
                 return;
             })
@@ -216,7 +218,7 @@ export default class loginCliente extends Component {
         const datos = {
             username: this.username,
             email: this.email,
-            name:this.name
+            name: this.name
         }
         const envio = {
             method: 'POST',
@@ -244,15 +246,14 @@ export default class loginCliente extends Component {
                 console.log(e)
             })
     }
-  
     render() {
         return (
-<div style={{backgroundColor:"#27AE60"}}>
+            <div style={{backgroundColor:'#0D311C'}}>
                 {/* Navbar */}
                 <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
                     <div class="container">
                         <a class="navbar-brand" href="dashboard.html">
-                            <img src="https://i.imgur.com/Rh524kA.png" />
+                            <img class="h-40 " src="https://i.imgur.com/B8YoPhk.png" />
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -277,13 +278,13 @@ export default class loginCliente extends Component {
                             {/* <hr class="d-lg-none" /> */}
                             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                                 <li class="nav-item d-lg-block ml-lg-2">
-                                    <Link to="/" class="btn btn-default btn-icon">
+                                    <Link to="/" class="btn btn-icon text-white" style={{ backgroundColor: "#0D3D21" }}>
                                         <span class="btn-inner--icon">
-                                        <i class="fas fa-user mr-2 "></i>
+                                            <i class="fas fa-user-tag mr-2 "></i>
                                         </span>
                                         <span class="nav-link-inner--text">Usuarios</span>
                                     </Link>
-                                    <a href="http://localhost:4000/" class="btn btn-neutral btn-icon">
+                                    <a href="http://localhost:4000/index" class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
                                             <i class="fas fa-home mr-2"></i>
                                         </span>
@@ -296,7 +297,7 @@ export default class loginCliente extends Component {
                 </nav>
                 <div class="main-content">
                     {/*  Header */}
-                    <div class="header py-7 py-lg-8 pt-lg-9" style={{background: "linear-gradient(87deg, #196F3D 0, #27AE60 100%)"}}>
+                    <div class="header py-7 py-lg-8 pt-lg-9" style={{background:'linear-gradient(87deg, #306647 0, #418C60 100%)'}}>
                         <div class="container">
                             <div class="header-body text-center mb-7">
                                 <div class="row justify-content-center">
@@ -309,7 +310,7 @@ export default class loginCliente extends Component {
                         </div>
                         <div class="separator separator-bottom separator-skew zindex-100">
                             <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                <polygon style={{fill:"#27AE60"}} points="2560 0 2560 100 0 100"></polygon>
+                                <polygon style={{fill:'#0D311C'}} points="2560 0 2560 100 0 100"></polygon>
                             </svg>
                         </div>
                     </div>
@@ -323,8 +324,8 @@ export default class loginCliente extends Component {
                                             <small>Or sign in with credentials</small>
                                         </div>
                                         <form role="form" onSubmit={this.iniciosesion}>
-                                            <div class="form-group mb-3">
-                                                <div class="input-group input-group-merge input-group-alternative">
+                                        <div class="form-group mb-3">
+                                        <div class="input-group input-group-merge input-group-alternative">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                                     </div>
@@ -332,7 +333,7 @@ export default class loginCliente extends Component {
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="input-group input-group-merge input-group-alternative">
+                                            <div class="input-group input-group-merge input-group-alternative">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                                     </div>
@@ -347,10 +348,28 @@ export default class loginCliente extends Component {
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-6">
-                                        <a href="#" class="text-light" onClick={() => this.toggleModal("formModal")}><small>Forgot password?</small></a>
+                                        <a href="#" class="text-light" onClick={() => {
+                                            if (window.navigator.onLine) {
+                                                this.toggleModal("formModal");
+                                            }
+                                            else {
+                                                this.setState({ mensaje: "Debes tener internet" })
+                                                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                                                this.toggleModal('notificationModal')
+                                            }
+                                        }}><small>Forgot password?</small></a>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <a href="#" class="text-light" onClick={() => this.toggleModal("formModal2")}><small>Create new account</small></a>
+                                        <a href="#" class="text-light" onClick={() => {
+                                            if (window.navigator.onLine) {
+                                                this.toggleModal("formModal2")
+                                            }
+                                            else {
+                                                this.setState({ mensaje: "Debes tener internet" })
+                                                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                                                this.toggleModal('notificationModal')
+                                            }
+                                        }}><small>Create new account</small></a>
                                     </div>
                                 </div>
                             </div>
@@ -485,7 +504,7 @@ export default class loginCliente extends Component {
                                                     <i className="ni ni-single-02" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="Nombre Completo" type="text" onChange={e => this.name = e.target.value} required/>
+                                            <Input placeholder="Nombre Completo" type="text" onChange={e => this.name = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -505,7 +524,7 @@ export default class loginCliente extends Component {
                                                     <i class="fas fa-phone"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="Username" type="text" onChange={e => this.username = e.target.value} required/>
+                                            <Input placeholder="Username" type="text" onChange={e => this.username = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <div className="text-center">
@@ -545,7 +564,7 @@ export default class loginCliente extends Component {
                                                     <i className="ni ni-single-02" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="username" type="text" onChange={e => this.username = e.target.value} required/>
+                                            <Input placeholder="username" type="text" onChange={e => this.username = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -565,7 +584,7 @@ export default class loginCliente extends Component {
                                                     <i class="fas fa-phone"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="password" type="text" onChange={e => this.password = e.target.value} required/>
+                                            <Input placeholder="password" type="text" onChange={e => this.password = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -575,7 +594,7 @@ export default class loginCliente extends Component {
                                                     <i class="fas fa-phone"></i>
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input placeholder="nombre completo" type="text" onChange={e => this.name = e.target.value} required/>
+                                            <Input placeholder="nombre completo" type="text" onChange={e => this.name = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <div className="text-center">
@@ -592,6 +611,46 @@ export default class loginCliente extends Component {
                         </Card>
                     </div>
                 </Modal>
+
+                <Modal
+                    className={`modal-dialog-centered modal-${this.state.datoserror.color}`}
+                    contentClassName={`bg-${this.state.datoserror.color}`}
+                    isOpen={this.state.notificationModal}
+                    toggle={() => this.toggleModal("notificationModal")}
+                >
+                    <div className="modal-header">
+                        <button
+                            aria-label="Close"
+                            className="close"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => this.toggleModal("notificationModal")}
+                        >
+                            <span aria-hidden={true}>×</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="py-3 text-center">
+                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <h4 className="heading mt-4">Alerta</h4>
+                            <p>
+                                {this.state.mensaje}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <Button
+                            className="text-white ml-auto"
+                            color="link"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => this.toggleModal("notificationModal")}
+                        >
+                            Close
+                </Button>
+                    </div>
+                </Modal>
+
 
             </div>
         )

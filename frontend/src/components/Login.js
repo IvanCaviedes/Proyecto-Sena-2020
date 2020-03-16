@@ -278,7 +278,7 @@ export default class Login extends Component {
                             {/* <hr class="d-lg-none" /> */}
                             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
                                 <li class="nav-item d-lg-block ml-lg-2">
-                                    <Link to="/cliente" class="btn btn-icon text-white" style={{ backgroundColor: "#196F3D" }}>
+                                    <Link to="/cliente" class="btn btn-icon text-white bg-default">
                                         <span class="btn-inner--icon">
                                             <i class="fas fa-user-tag mr-2 "></i>
                                         </span>
