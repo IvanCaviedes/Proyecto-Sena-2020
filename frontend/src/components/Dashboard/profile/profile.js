@@ -81,7 +81,7 @@ export default class profile extends Component {
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-12">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="input-first-name">Nombres</label>
                                                         <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Pepe" />
