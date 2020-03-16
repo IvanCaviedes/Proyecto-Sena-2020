@@ -28,9 +28,9 @@ function show(req, res) {
 }
 //Crea un producto
 async function create(req, res) {
-    const { name, stock, price, category,proveedor } = req.body
+    const { name, stock, price, category, proveedor } = req.body
     const result = await cloudinary.v2.uploader.upload(req.file.path);
-    mensaje = "usuario creado correctamente"
+    mensaje = "producto creado correctamente"
     new Product({ name: name, stock: stock, price: price, category: category, imageUrl: result.url,proveedor:proveedor }).save()
         .then(product => { return res.send({ mensaje: 'registrado' }) })
         .catch(error => res.send({ error: 'no registrado' }));

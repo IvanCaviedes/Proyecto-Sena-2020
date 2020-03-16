@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Footer from '../Footer'
 import {
     Button,
@@ -114,6 +113,64 @@ export default class users extends Component {
         });
     };
 
+
+    consultas = (e) => {
+        e.preventDefault();
+        let opcion;
+        if (this.opcionbusqueda === undefined) {
+            this.setState({ mensaje: "Añade el tipo de dato de la busqueda por favor" })
+            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.toggleModal('notificationModal')
+        }
+        else {
+            switch (this.opcionbusqueda) {
+                case 'Nombre':
+                    opcion = 'name'
+                    break;
+                case 'Telefono':
+                    opcion = 'telefono'
+                    break;
+                case 'Correo':
+                    opcion = 'correo'
+                    break;
+                default:
+                    opcion = ''
+                    break;
+            }
+        }
+        const envio = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json',
+                "Access-Control-Allow-Origin": '*',
+                'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
+            }
+        };
+        fetch(`http://localhost:4000/proveedor/${opcion}/${this.cajatexto}`, envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                throw new Error('Proveedor no encontrado')
+            })
+            .then(token => {
+                this.setState({ Tusuarios: token.Proveedores })
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
+    mostartodo = (e) => {
+        e.preventDefault();
+        this.listar();
+    }
+
+
     UserNew = (e) => {
         e.preventDefault();
         if (this.name === undefined) {
@@ -212,8 +269,6 @@ export default class users extends Component {
                         <div class="row">
                             <div class="col-lg-8 col-md-10">
                                 <h5 class="display-3 text-white">Estas En la seccion de proveedores</h5>
-                                <p class="text-white mt-0 mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Harum itaque tempore suscipit ipsa rem, dolorem atque corporis soluta facere ullam similique quidem eius quibusdam nobis, recusandae veniam. Totam, tempore ipsam!</p>
-                                <Link class="nav-link" to="/admin"><i class="ni ni-tv-2 text-primary"></i> atras</ Link>
                             </div>
                         </div>
                     </div>
@@ -224,20 +279,9 @@ export default class users extends Component {
                             <div class="card card-profile shadow">
                                 <div class="card-body mt-4 pt-md-4">
                                     <div class="text-center">
-                                        <h3>
-                                            Lorem, ipsum dolor sit amet
-                                        </h3>
-                                        <div class="h5 font-weight-300">
-                                            <i class="ni location_pin mr-2"></i>Lorem ipsum dolor
-                    </div>
-                                        <div class="h5 mt-4">
-                                            <i class="ni business_briefcase-24 mr-2"></i>Lorem ipsum dolor
-                    </div>
                                         <div>
-                                            <i class="ni education_hat mr-2"></i>Lorem ipsum dolor
+                                            <i class="ni education_hat mr-2"></i>En este modulo podras crear, actualizar, editar o eliminar proveedores. Asi como ver los proveedores ya creados o buscar uno en especifico.
                     </div>
-                                        <hr class="my-4" />
-                                        <p>Lorem ipsum dolor</p>
                                     </div>
                                 </div>
                             </div>
@@ -291,6 +335,78 @@ export default class users extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-12 order-xl-2">
+                            <div class="card bg-secondary shadow">
+                                <div class="card-header bg-white border-0">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <h3 class="mb-0">Consultas</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <form onSubmit={this.consultas}>
+
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                                <h6 class="heading-small text-muted mb-4">Dato a Consultar</h6>
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <button type="submit" class="btn btn-sm btn-default btn-lg btn-block">Consultar</button>
+                                            </div>
+                                        </div>
+                                        <div class="pl-lg-4 mt-4">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="input-last-name">Digita el tipo de dato</label>
+                                                        <div class="form-group">
+                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.opcionbusqueda = e.target.value} required>
+                                                                <option>Seleccionar</option>
+                                                                <option>Nombre</option>
+                                                                <option>Telefono</option>
+                                                                <option>Correo</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label" for="input-last-name">Escribe el dato</label>
+                                                        <div class="input-group input-group-merge input-group-alternative mb-0">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fas fa-search text-blue"></i></span>
+                                                            </div>
+                                                            <input class="form-control" placeholder="Search" type="text" onChange={e => this.cajatexto = e.target.value} required />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 order-xl-2 mx-auto">
+                            <div class="card bg-secondary shadow">
+                                <div class="card-header bg-white border-0">
+                                    <form onSubmit={this.mostartodo}>
+                                        <div class="row align-items-center">
+                                            <div class="col-5">
+                                                <h3 class="mb-0">Mostrar Todos</h3>
+                                            </div>
+                                            <div class="col-7">
+                                                <button type="submit" className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="col-xl-12 order-xl-2">
                             <div class="card shadow">
                                 <div class="card-header border-0">

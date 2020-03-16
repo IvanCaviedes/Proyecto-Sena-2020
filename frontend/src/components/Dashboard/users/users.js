@@ -289,9 +289,8 @@ export default class users extends Component {
                     <span class="mask bg-gradient-default opacity-8"></span>
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
-                            <div class="col-lg-8 col-md-10">
+                            <div class="col-lg-12 col-md-10">
                                 <h5 class="display-3 text-white">Estas en la sección de usuarios</h5>
-                                <p class="text-white mt-0 mb-5">Podras crear, actualizar, editar o eliminar usuarios ¡¡TEN CUIDADO!!</p>
                             </div>
                         </div>
                     </div>
@@ -303,19 +302,11 @@ export default class users extends Component {
                                 <div class="card-body mt-4 pt-md-4">
                                     <div class="text-center">
                                         <h3>
-                                            Lorem, ipsum dolor sit amet
+                                            ¡¡TEN CUIDADO!!
                                         </h3>
-                                        <div class="h5 font-weight-300">
-                                            <i class="ni location_pin mr-2"></i>Lorem ipsum dolor
-                    </div>
                                         <div class="h5 mt-4">
-                                            <i class="ni business_briefcase-24 mr-2"></i>Lorem ipsum dolor
+                                            <i class="ni business_briefcase-24 mr-2"></i>En este modulo podras crear, actualizar, editar o eliminar usuarios. Asi como ver los usuarios ya creados o buscar uno en especifico.
                     </div>
-                                        <div>
-                                            <i class="ni education_hat mr-2"></i>Lorem ipsum dolor
-                    </div>
-                                        <hr class="my-4" />
-                                        <p>Lorem ipsum dolor</p>
                                     </div>
                                 </div>
                             </div>
@@ -533,7 +524,7 @@ export default class users extends Component {
                             type="button"
                             onClick={() => this.toggleModal("notificationModal")}
                         >
-                            cerrar 
+                            cerrar
                 </Button>
                     </div>
                 </Modal>
