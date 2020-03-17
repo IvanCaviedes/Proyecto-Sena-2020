@@ -253,11 +253,7 @@ export default class Login extends Component {
                 <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
                     <div class="container">
                         <a class="navbar-brand" href="dashboard.html">
-<<<<<<< HEAD
-                            <img style={{height: "90px"}} src="https://i.imgur.com/B8YoPhk.png" />
-=======
                             <img style={{height:'90px'}} src="https://i.imgur.com/B8YoPhk.png" />
->>>>>>> 1f3b25dc08e27ef4ecdcd22cde602b63ae3e75af
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>

@@ -66,6 +66,7 @@ const productos = require('./routes/productos')
 const pedido = require('./routes/pedido') 
 const cliente = require('./routes/cliente')
 const Cotizacion = require('./routes/Cotizacion')
+const noticias = require('./routes/noticias')
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -84,9 +85,7 @@ App.use('/index',(req,res)=>{
     res.render('index')
 })
 
-App.use('/noticias', (req, res) => {
-    res.render('noticias')
-})
+App.use('/noticias', noticias.control.index)
 App.use('/cuidados', (req, res) => {
     res.render('cuidados')
 })
