@@ -93,11 +93,11 @@ export default class users extends Component {
                 throw new Error('Cñiente no creado')
             })
             .then(token => {
-                if(token.message === 'NO CONTENT'){
+                if (token.message === 'NO CONTENT') {
 
                 }
-                else{
-                    this.setState({ Tusuarios: token.Cliente})
+                else {
+                    this.setState({ Tusuarios: token.users })
                 }
 
                 return;
@@ -117,28 +117,20 @@ export default class users extends Component {
     consultas = (e) => {
         e.preventDefault();
         let opcion;
-        if (this.opcionbusqueda === undefined) {
-            this.setState({ mensaje: "Añade el tipo de dato de la busqueda por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-            this.toggleModal('notificationModal')
-        }
-        else {
-            switch (this.opcionbusqueda) {
-                case 'Nombre':
-                    opcion = 'name'
-                    break;
-                case 'Nombre de usuario':
-                    opcion = 'username'
-                    break;
-                case 'Correo':
-                    opcion = 'email'
-                    break;
-                case 'Contraseña':
-                    opcion = 'password'
-                default:
-                    opcion = ''
-                    break;
-            }
+
+        switch (this.opcionbusqueda) {
+            case 'Nombre':
+                opcion = 'name'
+                break;
+            case 'Nombre de usuario':
+                opcion = 'username'
+                break;
+            case 'Correo':
+                opcion = 'email'
+                break;
+            default:
+                opcion = ''
+                break;
         }
         const envio = {
             method: 'GET',
@@ -160,7 +152,7 @@ export default class users extends Component {
                 throw new Error('Cliente no encontrado')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.Clientes })
+                this.setState({ Tusuarios: token.users })
                 return;
             })
             .catch(e => {
@@ -175,47 +167,41 @@ export default class users extends Component {
 
     UserNew = (e) => {
         e.preventDefault();
-        if (this.name === undefined) {
-            this.setState({ mensaje: "Añade un nombre por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-            this.toggleModal('notificationModal')
-        } else {
-            const datos = {
-                name: this.name,
-                username: this.username,
-                correo: this.correo
-            }
-            const envio = {
-                method: 'POST',
-                body: JSON.stringify(datos),
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:4000',
-                    'Accept': 'application/json'
-                }),
-            };
-            fetch('http://localhost:4000/proveedor/register', envio)
-                .then(response => {
-                    if (response.ok) {
-                        return response.json()
-                    }
-                    this.setState({ mensaje: "mascota no creada" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                    this.toggleModal('notificationModal')
-                    throw new Error('mascota no creada')
-                })
-                .then(token => {
-                    this.setState({ mensaje: "mascota creada" })
-                    this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
-                    this.toggleModal('notificationModal')
-                    return;
-                })
-                .catch(e => {
-                    this.setState({ mensaje: e.message })
-                })
-
+        const datos = {
+            name: this.name,
+            username: this.username,
+            email: this.correo,
+            password: this.username
         }
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/cliente/register', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ mensaje: "cliente no creada" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+                throw new Error('mascota no creada')
+            })
+            .then(token => {
+                this.setState({ mensaje: "cliente creado" })
+                this.listar()
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                this.toggleModal('notificationModal')
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
     }
     actualizar2 = (e) => {
         const id_d = this.state.usuario._id;
@@ -229,7 +215,7 @@ export default class users extends Component {
                 name: this.name,
                 telefono: this.telefono,
                 correo: this.correo,
-                password: this.password             
+                password: this.password
             }
             const envio = {
                 method: 'PUT',
@@ -324,18 +310,12 @@ export default class users extends Component {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="input-first-name">correo</label>
                                                         <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="correo@ejemplo.com" onChange={e => this.correo = e.target.value} required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-email">Contraseña</label>
-                                                        <input type="text" id="input-password" class="form-control form-control-alternative" placeholder="12345" onChange={e => this.password = e.target.value} required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -442,7 +422,7 @@ export default class users extends Component {
                                                         <tr key={user._id}>
                                                             <td>{user.name}</td>
                                                             <td>{user.username}</td>
-                                                            <td>{user.correo}</td>
+                                                            <td>{user.email}</td>
                                                             <td>
                                                                 <button className="btn btn-sm btn-primary" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-user-edit"></i></button>
                                                                 <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
@@ -514,14 +494,14 @@ export default class users extends Component {
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>
                                     <FormGroup className="mb-3">
-                                         <InputGroup className="input-group-alternative">
+                                        <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
                                                     <i className="ni ni-single-02" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input type="text" onChange={e => this.name = e.target.value} placeholder={this.state.usuario.name} required />
-                                        </InputGroup> 
+                                        </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup className="input-group-alternative">
