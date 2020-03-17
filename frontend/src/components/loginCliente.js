@@ -42,35 +42,6 @@ export default class Login extends Component {
             this.setState({ datoserror: { icon: 'fat-remove', color: 'primary' } })
             this.toggleModal('notificationModal')
         }
-        this.comprobar()
-
-    }
-
-    comprobar = (e) => {
-        const envio = {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
-                'Accept': 'application/json'
-            }),
-        };
-        fetch('http://localhost:4000/user/', envio)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
-                }
-                throw new Error('Usuario no existe')
-            })
-            .then(token => {
-                if (token.message === 'NO CONTENT') {
-                    this.toggleModal('formModal3')
-                }
-                return;
-            })
-            .catch(e => {
-                this.setState({ mensaje: e.message })
-            })
     }
 
     primero = (e) => {
@@ -79,8 +50,7 @@ export default class Login extends Component {
             password: this.password,
             email: this.email,
             username: this.username,
-            name: this.name,
-            role: 'admin'
+            name: this.name
         }
         const envio = {
             method: 'POST',
@@ -91,7 +61,7 @@ export default class Login extends Component {
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/user/register', envio)
+        fetch('http://localhost:4000/cliente/register', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -102,7 +72,7 @@ export default class Login extends Component {
                 throw new Error('Usuario no creado')
             })
             .then(token => {
-                this.props.history.push('/admin');
+                this.props.history.push('/adminCliente');
                 return;
             })
             .catch(e => {
@@ -196,7 +166,7 @@ export default class Login extends Component {
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/correos/recuperar', envio)
+        fetch('http://localhost:4000/correos/recuperarC', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -455,7 +425,7 @@ export default class Login extends Component {
                     <div className="modal-body p-0">
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
-                                <div className="text-center text-muted mb-4">
+                            <div className="text-center text-muted mb-4">
                                     <h2>Olvidaste tu contraseña?</h2>
                                     <p>ingresa tu nombre de usuario y enviaremos tu contraseña al correo electronico</p>
                                 </div>
@@ -494,11 +464,10 @@ export default class Login extends Component {
                     <div className="modal-body p-0">
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
-                                <div className="text-center text-muted mb-4">
-                                    <h2>Deseas solicitar cuenta ?</h2>
-                                    <p>Danos tus datos y despues de un tiempo obtendras respuesta al correo</p>
+                            <div className="text-center text-muted mb-4">
+                                    <h2>Registrar cliente?</h2>
                                 </div>
-                                <Form role="form" onSubmit={this.registrar}>
+                                <Form role="form" onSubmit={this.primero}>
                                     <FormGroup className="mb-3">
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
@@ -529,13 +498,23 @@ export default class Login extends Component {
                                             <Input placeholder="Username" type="text" onChange={e => this.username = e.target.value} required />
                                         </InputGroup>
                                     </FormGroup>
+                                    <FormGroup>
+                                        <InputGroup className="input-group-alternative">
+                                            <InputGroupAddon addonType="prepend">
+                                                <InputGroupText>
+                                                <i class="fas fa-key"></i>
+                                                </InputGroupText>
+                                            </InputGroupAddon>
+                                            <Input placeholder="password" type="text" onChange={e => this.password = e.target.value} required />
+                                        </InputGroup>
+                                    </FormGroup>
                                     <div className="text-center">
                                         <Button
                                             className="my-4"
                                             color="primary"
                                             type="submit"
                                         >
-                                            Enviar Peticion
+                                            Registrar
                         </Button>
                                     </div>
                                 </Form>

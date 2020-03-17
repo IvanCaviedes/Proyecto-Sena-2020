@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const User2 = require('../models/Cliente');
 var nodemailer = require('nodemailer');
 
 function prueba(req,res,next){
@@ -11,6 +12,44 @@ function prueba(req,res,next){
             host: "smtp-mail.outlook.com", // hostname
             secureConnection: false, // TLS requires secureConnection to be false
             port: 587, // port for secure SMTP
+            tls: {
+                ciphers: 'SSLv3'
+            },
+            auth: {
+                user: 'ivancaviedes99@outlook.com',
+                pass: '99120900389ivan'
+            }
+        });
+
+        var mailOptions = {
+            from: 'ivancaviedes99@outlook.com',
+            to: user.email,
+            subject: 'Recuperacion de cuenta PetShop',
+            text: `Este es tu codigo para restablecer tu contraseña  ${password}  por favor ingresa a la pagina para hacer el cambio de contraseña http://localhost:3000/recuperar`
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+                res.status(500).send(req.body)
+            } else {
+                console.log('Email enviado')
+                res.send({mensaje:'Correo enviado'})
+            }
+        });
+
+    })
+}
+function prueba2(req,res,next){
+    const {username} = req.body
+    User2.findOne({username})
+    .then(user =>{
+        const password = user.password
+
+        var transporter = nodemailer.createTransport({
+            host: "smtp-mail.outlook.com",
+            secureConnection: false, 
+            port: 587,
             tls: {
                 ciphers: 'SSLv3'
             },
@@ -76,5 +115,6 @@ function nuevo (req,res,next){
 
 module.exports = {
     prueba,
-    nuevo
+    nuevo,
+    prueba2
 }

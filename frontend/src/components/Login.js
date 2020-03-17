@@ -253,11 +253,7 @@ export default class Login extends Component {
                 <nav id="navbar-main" class="navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light">
                     <div class="container">
                         <a class="navbar-brand" href="dashboard.html">
-<<<<<<< HEAD
-                            <img style={{height: "90px"}} src="https://i.imgur.com/B8YoPhk.png" />
-=======
                             <img style={{height:'90px'}} src="https://i.imgur.com/B8YoPhk.png" />
->>>>>>> 1f3b25dc08e27ef4ecdcd22cde602b63ae3e75af
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -332,9 +328,9 @@ export default class Login extends Component {
                                         <div class="form-group mb-3">
                                         <div class="input-group input-group-merge input-group-alternative">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                                        <span class="input-group-text"><i class="fas fa-users"></i></span>
                                                     </div>
-                                                    <input class="form-control" placeholder="Correo" type="text" onChange={e => this.username = e.target.value} required />
+                                                    <input class="form-control" placeholder="Username" type="text" onChange={e => this.username = e.target.value} required />
                                                 </div>
                                             </div>
                                             <div class="form-group">
