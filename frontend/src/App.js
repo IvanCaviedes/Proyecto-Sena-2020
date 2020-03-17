@@ -14,7 +14,7 @@ import Cliente from './components/loginCliente'
 import Mascotas from './components/Dashboard/mascotas/mascotas'
 import Proveedor from './components/Dashboard/Proveedor'
 import Pedido from './components/Dashboard/pedido'
-import Clientecrud from './components/Dashboard/cliente/clientecrud'
+import Clientecrud from './components/Dashboard/cliente2'
 
 import PrivateRoute from './auth'
 
