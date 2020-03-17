@@ -263,7 +263,7 @@ export default class users extends Component {
     render() {
         return (
             <div>
-                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(http://localhost:4000/public/img/notocar/producto.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
+                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(https://www.olt.com.co/imagenes/proveedores.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
                     <span class="mask bg-gradient-default opacity-8"></span>
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
