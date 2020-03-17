@@ -14,6 +14,7 @@ import Cliente from './components/loginCliente'
 import Mascotas from './components/Dashboard/mascotas/mascotas'
 import Proveedor from './components/Dashboard/Proveedor'
 import Pedido from './components/Dashboard/pedido'
+import Clientecrud from './components/Dashboard/cliente/clientecrud'
 
 import PrivateRoute from './auth'
 
@@ -34,6 +35,8 @@ function App() {
         <PrivateRoute path="/Pedido" exact component={Pedido} />
         <PrivateRoute path="/profile" exact component={Profile} />
         <PrivateRoute path="/logout" exact component={Logout} />
+        <PrivateRoute path="/clientecrud" exact component={Clientecrud} />
+
 
       </Switch>
     </Router>
