@@ -101,7 +101,7 @@ export default class nav extends Component {
       <div >
         <nav class="navbar navbar-top navbar-expand-md bg-gradient-primary" id="navbar-main">
           <div class="container-fluid">
-            <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block">Bienvenido!</a>
+            <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block">¡Bienvenido!</a>
             <ul class="navbar-nav align-items-center d-none d-md-flex">
               <li class="nav-item dropdown text-rigth">
                 <a class="nav-link pr-5" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -116,16 +116,16 @@ export default class nav extends Component {
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                   <div class=" dropdown-header noti-title">
-                    <h6 class="text-overflow m-0">Welcome!</h6>
+                    <h6 class="text-overflow m-0">¡Bienvenido!</h6>
                   </div>
                   <Link to="/profile" class="dropdown-item">
                     <i class="ni ni-single-02"></i>
-                    <span>My profile</span>
+                    <span>Mi perfil</span>
                   </Link>
                   <div class="dropdown-divider"></div>
                   <Link to="/logout" class="dropdown-item">
                     <i class="ni ni-user-run"></i>
-                    <span>Logout</span>
+                    <span>Salir</span>
                   </Link>
                 </div>
               </li>
@@ -144,7 +144,7 @@ export default class nav extends Component {
               <CardBody className="px-lg-5 py-lg-5">
                 <div className="text-center text-muted mb-4">
                   <h2>Cambia tu contraseña</h2>
-                  <p>Digita tu nueva contraseña! campo obligatorio</p>
+                  <p>¡Digita tu nueva contraseña! campo obligatorio</p>
                 </div>
                 <Form role="form" onSubmit={this.actualizar2}>
                   <FormGroup>

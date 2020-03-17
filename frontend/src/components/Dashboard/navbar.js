@@ -92,7 +92,7 @@ export default class menudash extends Component {
                                 <Link class="nav-link " to="/Proveedor"><i class="fas fa-luggage-cart text-yellow"></i>Proveedores</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="nav-link " to="/Proveedor"><i class="fas fa-user-tag text-purple"></i>Clientes</Link>
+                                <Link class="nav-link " to="/cliente"><i class="fas fa-user-tag text-purple"></i>Clientes</Link>
                             </li>
                             <li class="nav-item">
                                 <Link class="nav-link " to="/maps"><i class="fas fa-route text-orange"></i>Domicilios</Link>
