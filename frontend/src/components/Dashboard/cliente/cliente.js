@@ -20,8 +20,16 @@ export default class cliente extends Component {
             productoramdom: {},
             mensaje: '',
             Tusuarios: [],
-            tablaabregar:[]
+            tablaabregar: [],
+            variable: 0
         }
+        this.Nombres = new Array();
+        this.Stock = new Array();
+        this.Categoria = new Array();
+        this.Cantidad = new Array();
+        this.id = new Array();
+        this.productos = [];
+        this.objeto = {};
     }
 
     componentDidMount() {
@@ -174,15 +182,83 @@ export default class cliente extends Component {
         this.listarproductos();
     }
 
-    agregaralatablaprincipal = (e)=>{
+
+
+    agregaralatablaprincipal = (e) => {
         e.preventDefault()
-        const data = {
-            id:this.id,
-            stock:this.stock,
-            categoria:this.categoria,
-            cantidad:this.cantidad
+        if (this.state.tablaabregar.length>5) {
+            console.log('no puedes agregar mas productos')
         }
-        console.log(data)
+        else{
+            this.Nombres[this.state.variable] = this.state.productoramdom.name;
+            this.Stock[this.state.variable] = this.state.productoramdom.stock;
+            this.Categoria[this.state.variable] = this.state.productoramdom.category;
+            this.Cantidad[this.state.variable] = this.cantidad;
+            this.id[this.state.variable] = this.state.productoramdom._id;
+    
+            for (var i = 0; i < this.Nombres.length; i++) {
+                this.productos.push({
+                    "nombre": this.Nombres[i],
+                    "stock": this.Stock[i],
+                    "categoria": this.Categoria[i],
+                    "cantidad": this.Cantidad[i],
+                    "id": this.id[i]
+                });
+            }
+            this.objeto.productos = this.productos;
+            this.setState({ tablaabregar: this.productos })
+        }
+    }
+
+    cotizarventa = (e) => {
+        e.preventDefault()
+
+        if (this.state.tablaabregar.length === 0) {
+            console.log('error no puede estar vacio')
+        }
+        else{
+          const datos = {
+            productos: JSON.stringify(this.state.tablaabregar),
+            Idcliente: JSON.parse(localStorage.getItem('datos')).id
+        }
+
+        console.log(datos)
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/cotizacion/create', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ mensaje: "mascota no creada" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+                throw new Error('mascota no creada')
+            })
+            .then(token => {
+                console.log('todo salio correctamente')
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            }) 
+        }
+    }
+
+    eliminarPorid = (id) => {
+        this.state.tablaabregar.forEach((currentValue, index, arr)=> {
+            if (this.state.tablaabregar[index].id == id) {
+                this.state.tablaabregar.splice(index, index);
+            }
+        }
+        )
     }
     render() {
         return (
@@ -206,21 +282,17 @@ export default class cliente extends Component {
                                 <div class="card-body">
                                     <form action="" onSubmit={this.agregaralatablaprincipal}>
                                         <h1 class="card-title text-center">{this.state.productoramdom.name}</h1>
-                                        <h5 class="card-title">ID</h5>
-                                        <div class="form-group">
-                                            <input value={this.state.productoramdom._id} type="text" id="disabledTextInput" class="form-control" onChange={e => this.id = e.target.value}/>
-                                        </div>
-                                        <h5 class="card-title">Stock</h5>
-                                        <div class="form-group">
-                                            <input value={this.state.productoramdom.stock} type="text" id="disabledTextInput" class="form-control" onChange={e => this.stock = e.target.value}/>
-                                        </div>
-                                        <h5 class="card-title">Categoria</h5>
-                                        <div class="form-group">
-                                            <input value={this.state.productoramdom.category} type="text" id="disabledTextInput" class="form-control " onChange={e => this.categoria = e.target.value}/>
-                                        </div>
+                                        <h3 class="card-title">Stock</h3>
+                                        <p class="card-title">
+                                            {this.state.productoramdom.stock}
+                                        </p>
+                                        <h3 class="card-title">Categoria</h3>
+                                        <p class="card-title">
+                                            {this.state.productoramdom.category}
+                                        </p>
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">Cantidad <span className="text-danger">*</span></label>
-                                            <input type="number" min="0" max="3"  id="input-first-name" class="form-control form-control-alternative" placeholder="Digite un valor" onChange={e => this.cantidad = e.target.value} required />
+                                            <input type="number" min="0" max="3" id="input-first-name" class="form-control form-control-alternative" placeholder="Digite un valor" onChange={e => this.cantidad = e.target.value} required />
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-lg btn-block">Agregar</button>
                                     </form>
@@ -314,22 +386,21 @@ export default class cliente extends Component {
                                                         <th scope="col">Mostrar</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
-                                                    {
-                                                        this.state.Tusuarios.map(user => {
-                                                            return (
-                                                                <tr key={user._id}>
-                                                                    <td>{user.name}</td>
-                                                                    <td>{user.stock}</td>
-                                                                    <td>{user.price}</td>
-                                                                    <td>{user.category}</td>
-                                                                    <td>
-                                                                        <button className="btn btn-sm btn-default" onClick={() => this.Mostarselecionado(user._id)}><i class="fas fa-eye"></i></button>
-                                                                    </td>
-                                                                </tr>
-                                                            )
-                                                        })
-                                                    }
+                                                <tbody>                                                {
+                                                    this.state.Tusuarios.map(user => {
+                                                        return (
+                                                            <tr key={user._id}>
+                                                                <td>{user.name}</td>
+                                                                <td>{user.stock}</td>
+                                                                <td>{user.price}</td>
+                                                                <td>{user.category}</td>
+                                                                <td>
+                                                                    <button className="btn btn-sm btn-default" onClick={() => this.Mostarselecionado(user._id)}><i class="fas fa-eye"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
                                                 </tbody>
                                             </table>
                                         </div>
@@ -360,22 +431,18 @@ export default class cliente extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {/*                                             {
-                                                this.state.Tusuarios.map(user => {
-                                                    return (
-                                                        <tr key={user._id}>
-                                                            <td>{user.name}</td>
-                                                            <td>{user.username}</td>
-                                                            <td>{user.email}</td>
-                                                            <td>{user.role}</td>
-                                                            <td>
-                                                                <button className="btn btn-sm btn-primary" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-user-edit"></i></button>
-                                                                <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
-                                                            </td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            } */}
+                                        {
+                                            this.state.tablaabregar.map(user => {
+                                                return (
+                                                    <tr key={user._id}>
+                                                        <td>{user.nombre}</td>
+                                                        <td>{user.stock}</td>
+                                                        <td>{user.categoria}</td>
+                                                        <td>{user.cantidad}</td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -384,13 +451,13 @@ export default class cliente extends Component {
                     <div class="col-xl-6 order-xl-2 mx-auto">
                         <div class="card bg-secondary shadow">
                             <div class="card-header bg-white border-0">
-                                <form onSubmit={this.mostartodo}>
+                                <form onSubmit={this.cotizarventa}>
                                     <div class="row align-items-center">
                                         <div class="col-5">
                                             <h3 class="mb-0">Generar cotizacion</h3>
                                         </div>
                                         <div class="col-7">
-                                            <button type="submit" className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
+                                            <button type="submit" className="btn btn-default btn-lg btn-block">Cotizar</button>
                                         </div>
                                     </div>
                                 </form>

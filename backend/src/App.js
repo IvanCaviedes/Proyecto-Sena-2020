@@ -65,6 +65,7 @@ const proveedor = require('./routes/proveedor')
 const productos = require('./routes/productos')
 const pedido = require('./routes/pedido') 
 const cliente = require('./routes/cliente')
+const Cotizacion = require('./routes/Cotizacion')
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -75,6 +76,7 @@ App.use('/mascotas',mascotas);
 App.use('/proveedor',proveedor);
 App.use('/pedido',pedido)
 App.use('/cliente',cliente)
+App.use('/cotizacion',Cotizacion)
 
 /* App.use('/imagenes',prueba) */
 
