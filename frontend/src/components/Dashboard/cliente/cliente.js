@@ -20,6 +20,7 @@ export default class cliente extends Component {
             productoramdom: {},
             mensaje: '',
             Tusuarios: [],
+            datoserror: {},
             tablaabregar: [],
             variable: 0
         }
@@ -36,6 +37,11 @@ export default class cliente extends Component {
         this.productorandom()
         this.listarproductos()
     }
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
+    };
     productorandom = () => {
         const envio = {
             method: 'GET',
@@ -57,10 +63,14 @@ export default class cliente extends Component {
                 throw new Error('Usuario no creado')
             })
             .then(token => {
-                console.log()
                 let totales = token.products.length
-                var aleatorio = Math.round(Math.random() * totales);
-                this.setState({ productoramdom: token.products[aleatorio] })
+                if (totales === 1) {
+                    this.setState({ productoramdom: token.products[0] })
+                }
+                else{
+                    var aleatorio = Math.floor(Math.random() * totales) + 1;
+                    this.setState({ productoramdom: token.products[aleatorio] })
+                }
                 return;
             })
             .catch(e => {
@@ -186,16 +196,16 @@ export default class cliente extends Component {
 
     agregaralatablaprincipal = (e) => {
         e.preventDefault()
-        if (this.state.tablaabregar.length>5) {
+        if (this.state.tablaabregar.length > 5) {
             console.log('no puedes agregar mas productos')
         }
-        else{
+        else {
             this.Nombres[this.state.variable] = this.state.productoramdom.name;
             this.Stock[this.state.variable] = this.state.productoramdom.stock;
             this.Categoria[this.state.variable] = this.state.productoramdom.category;
             this.Cantidad[this.state.variable] = this.cantidad;
             this.id[this.state.variable] = this.state.productoramdom._id;
-    
+
             for (var i = 0; i < this.Nombres.length; i++) {
                 this.productos.push({
                     "nombre": this.Nombres[i],
@@ -212,48 +222,83 @@ export default class cliente extends Component {
 
     cotizarventa = (e) => {
         e.preventDefault()
-
+        const idcliente = JSON.parse(localStorage.getItem('datos')).id
         if (this.state.tablaabregar.length === 0) {
             console.log('error no puede estar vacio')
         }
-        else{
-          const datos = {
-            productos: JSON.stringify(this.state.tablaabregar),
-            Idcliente: JSON.parse(localStorage.getItem('datos')).id
-        }
+        else {
 
-        console.log(datos)
-        const envio = {
-            method: 'POST',
-            body: JSON.stringify(datos),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
-                'Accept': 'application/json'
-            }),
-        };
-        fetch('http://localhost:4000/cotizacion/create', envio)
-            .then(response => {
-                if (response.ok) {
-                    return response.json()
+            const envio = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Origin': 'http://localhost:4000',
+                    'Accept': 'application/json',
+                    "Access-Control-Allow-Origin": '*',
+                    'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                    'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
                 }
-                this.setState({ mensaje: "mascota no creada" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
-                this.toggleModal('notificationModal')
-                throw new Error('mascota no creada')
-            })
-            .then(token => {
-                console.log('todo salio correctamente')
-                return;
-            })
-            .catch(e => {
-                this.setState({ mensaje: e.message })
-            }) 
+            };
+            fetch(`http://localhost:4000/cotizacion/Idcliente/${idcliente}`, envio)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json()
+                    }
+                    throw new Error('Producto no encontrado')
+                })
+                .then(token => {
+                    if (token.message) {
+                        const datos = {
+                            productos: JSON.stringify(this.state.tablaabregar),
+                            Idcliente: JSON.parse(localStorage.getItem('datos')).id
+                        }
+                        console.log(datos)
+                        const envio = {
+                            method: 'POST',
+                            body: JSON.stringify(datos),
+                            headers: new Headers({
+                                'Content-Type': 'application/json',
+                                'Origin': 'http://localhost:4000',
+                                'Accept': 'application/json'
+                            }),
+                        };
+                        fetch('http://localhost:4000/cotizacion/create', envio)
+                            .then(response => {
+                                if (response.ok) {
+                                    return response.json()
+                                }
+                                this.setState({ mensaje: "cotizacion no creada" })
+                                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                                this.toggleModal('notificationModal')
+                                throw new Error('mascota no creada')
+                            })
+                            .then(token => {
+                                this.setState({ mensaje: "cotizacion creada correctamente" })
+                                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                                this.toggleModal('notificationModal')
+                                return;
+                            })
+                            .catch(e => {
+                                this.setState({ mensaje: e.message })
+                            })
+                    }
+                    else {
+                        this.setState({ mensaje: "No puedes crear mas de una cotizacion" })
+                        this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                        this.toggleModal('notificationModal')
+                    }
+
+
+                })
+                .catch(e => {
+                    console.log(e)
+                })
         }
     }
 
     eliminarPorid = (id) => {
-        this.state.tablaabregar.forEach((currentValue, index, arr)=> {
+        this.state.tablaabregar.forEach((currentValue, index, arr) => {
             if (this.state.tablaabregar[index].id == id) {
                 this.state.tablaabregar.splice(index, index);
             }
@@ -424,10 +469,8 @@ export default class cliente extends Component {
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Nombre</th>
-                                            <th scope="col">Stock</th>
                                             <th scope="col">Categoria</th>
                                             <th scope="col">Cantidad</th>
-                                            <th scope="col">Opciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -436,7 +479,6 @@ export default class cliente extends Component {
                                                 return (
                                                     <tr key={user._id}>
                                                         <td>{user.nombre}</td>
-                                                        <td>{user.stock}</td>
                                                         <td>{user.categoria}</td>
                                                         <td>{user.cantidad}</td>
                                                     </tr>
@@ -466,6 +508,44 @@ export default class cliente extends Component {
                     </div>
                     <Footer />
                 </div>
+                <Modal
+                    className={`modal-dialog-centered modal-${this.state.datoserror.color}`}
+                    contentClassName={`bg-${this.state.datoserror.color}`}
+                    isOpen={this.state.notificationModal}
+                    toggle={() => this.toggleModal("notificationModal")}
+                >
+                    <div className="modal-header">
+                        <button
+                            aria-label="Close"
+                            className="close"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => { this.toggleModal("notificationModal") }}
+                        >
+                            <span aria-hidden={true}>×</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="py-3 text-center">
+                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <h4 className="heading mt-4">Alerta</h4>
+                            <p>
+                                {this.state.mensaje}
+                            </p>
+                        </div>
+                    </div>
+                    <div className="modal-footer">
+                        <Button
+                            className="text-white ml-auto"
+                            color="link"
+                            data-dismiss="modal"
+                            type="button"
+                            onClick={() => this.toggleModal("notificationModal")}
+                        >
+                            Close
+                </Button>
+                    </div>
+                </Modal>
             </div>
         )
     }

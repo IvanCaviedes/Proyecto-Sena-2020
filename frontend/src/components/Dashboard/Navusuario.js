@@ -135,6 +135,7 @@ export default class nav extends Component {
         <Modal
           className="modal-dialog-centered"
           size="sm"
+          keyboard={false}
           isOpen={this.state.formModal2}
           toggle={() => this.toggleModal("formModal2")}
           backdrop="static"

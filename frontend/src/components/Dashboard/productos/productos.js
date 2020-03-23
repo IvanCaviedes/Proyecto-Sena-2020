@@ -163,13 +163,12 @@ export default class users extends Component {
                             .then(
                                 this.setState({ mensaje: "Añadido correctamente" }),
                                 this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } }),
-                                this.toggleModal('notificationModal'),
-                                this.listar()
+                                this.toggleModal('notificationModal')
                             )
-                        return;
+                            .catch(console.log('no se logro'))
                     })
                     .catch(e => {
-                        this.setState({ mensaje: e.message })
+                        this.setState({ mensaje: 'no registrado' })
                     })
             }
             else {
