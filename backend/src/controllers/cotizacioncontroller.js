@@ -12,7 +12,7 @@ function index(req,res){
 //Muesta uno en especifico
 function show(req,res){
     if(req.body.error) return res.status(500).send({error});
-    if(!req.body.Proveedores) return res.status(404).send({message: 'NOT FOUND'});
+    if(!req.body.Proveedores) return res.send({message: 'NOT FOUND'});
     let Proveedores = req.body.Proveedores;
     return res.status(200).send({Proveedores});
     
