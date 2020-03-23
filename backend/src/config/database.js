@@ -6,7 +6,7 @@ module.exports = {
     connection: null,
     connect: function(){
         if(this.connection) return this.connection;
-        return mongoose.connect(CONFIG.DB,{
+        return mongoose.connect(process.env.DB,{
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true

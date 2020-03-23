@@ -187,15 +187,15 @@ export default class users extends Component {
                 if (response.ok) {
                     return response.json()
                 }
-                this.setState({ mensaje: "cliente no creada" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.setState({ mensaje: "Cliente no creado" })
+                this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                 this.toggleModal('notificationModal')
                 throw new Error('mascota no creada')
             })
             .then(token => {
-                this.setState({ mensaje: "cliente creado" })
+                this.setState({ mensaje: "Cliente creado" })
                 this.listar()
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                this.setState({ datoserror: { icon: 'check', color: 'success' } })
                 this.toggleModal('notificationModal')
                 return;
             })
@@ -207,8 +207,8 @@ export default class users extends Component {
         const id_d = this.state.usuario._id;
         e.preventDefault();
         if (this.name === undefined) {
-            this.setState({ mensaje: "Añade una categoria por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ mensaje: "Añade un nombre por favor" })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         } else {
             const datos = {
@@ -233,14 +233,14 @@ export default class users extends Component {
                         return response.json()
                     }
                     this.setState({ mensaje: "Cliente no actualizado" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                    this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                     this.toggleModal('notificationModal')
                     throw new Error('Cliente no creado')
                 })
                 .then(token => {
                     this.setState({ mensaje: "Cliente actualizado" })
                     this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                    this.setState({ datoserror: { icon: 'check', color: 'success' } })
                     this.toggleModal('notificationModal')
                     return;
                 })
@@ -458,7 +458,7 @@ export default class users extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="py-3 text-center">
-                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <i className={`fas fa-${this.state.datoserror.icon} ni-5x`} />
                             <h4 className="heading mt-4">Alerta</h4>
                             <p>
                                 {this.state.mensaje}
@@ -489,7 +489,7 @@ export default class users extends Component {
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
                                 <div className="text-center text-muted mb-4">
-                                    <h2>Actualizar usuario </h2>
+                                    <h2>Actualizar Clienete </h2>
                                     <p>Vas a actualizar los datos de <h4>{this.state.usuario.name}</h4></p>
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>

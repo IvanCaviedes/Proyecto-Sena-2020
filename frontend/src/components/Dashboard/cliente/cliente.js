@@ -424,9 +424,9 @@ export default class cliente extends Component {
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Nombre</th>
-                                            <th scope="col">Username</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Rol</th>
+                                            <th scope="col">Stock</th>
+                                            <th scope="col">Categoria</th>
+                                            <th scope="col">Cantidad</th>
                                             <th scope="col">Opciones</th>
                                         </tr>
                                     </thead>

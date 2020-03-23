@@ -228,7 +228,7 @@ export default class users extends Component {
         e.preventDefault();
         if (this.rol === undefined) {
             this.setState({ mensaje: "Añade un rol por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         } else {
             if (window.navigator.onLine) {
@@ -262,14 +262,14 @@ export default class users extends Component {
                             return response.json()
                         }
                         this.setState({ mensaje: "Usuario no creado" })
-                        this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                        this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                         this.toggleModal('notificationModal')
                         throw new Error('Usuario no creado')
                     })
                     .then(token => {
                         this.setState({ mensaje: "Usuario creado" })
                         this.listar()
-                        this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                        this.setState({ datoserror: { icon: 'check', color: 'success' } })
                         this.toggleModal('notificationModal')
                         this.CuasntosAdmin()
                         return;
@@ -281,7 +281,7 @@ export default class users extends Component {
             }
             else {
                 this.setState({ mensaje: "Debes tener internet para hacer esta lavor" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                 this.toggleModal('notificationModal')
             }
         }
@@ -291,7 +291,7 @@ export default class users extends Component {
         e.preventDefault();
         if (this.rol === undefined) {
             this.setState({ mensaje: "Añade un rol por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         } else {
             const datos = {
@@ -314,14 +314,14 @@ export default class users extends Component {
                         return response.json()
                     }
                     this.setState({ mensaje: "Usuario no actualizado" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                    this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                     this.toggleModal('notificationModal')
                     throw new Error('Usuario no creado')
                 })
                 .then(token => {
                     this.setState({ mensaje: "Usuario actualizado" })
                     this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                    this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
                     this.toggleModal('notificationModal')
                     return;
                 })
@@ -558,7 +558,7 @@ export default class users extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="py-3 text-center">
-                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <i className={`fas fa-${this.state.datoserror.icon} ni-5x`} />
                             <h4 className="heading mt-4">Alerta</h4>
                             <p>
                                 {this.state.mensaje}

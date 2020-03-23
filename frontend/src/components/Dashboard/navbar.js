@@ -26,7 +26,7 @@ export default class menudash extends Component {
                             </a>
                             <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
                                 <div class=" dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome!</h6>
+                                    <h6 class="text-overflow m-0">¡Bienvenido!</h6>
                                 </div>
                                 <Link to="/admin" class="dropdown-item">
                                     <i class="ni ni-single-02"></i>
@@ -47,7 +47,7 @@ export default class menudash extends Component {
                                 <div class="dropdown-divider"></div>
                                 <Link href="#!" class="dropdown-item">
                                     <i class="ni ni-user-run"></i>
-                                    <span>Logout</span>
+                                    <span>Salir</span>
                                 </Link>
                             </div>
                         </li>
@@ -93,9 +93,6 @@ export default class menudash extends Component {
                             </li>
                             <li class="nav-item">
                                 <Link class="nav-link " to="/clientecrud"><i class="fas fa-user-tag text-purple"></i>Clientes</Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link class="nav-link " to="/maps"><i class="fas fa-route text-orange"></i>Domicilios</Link>
                             </li>
 
                         </ul>
