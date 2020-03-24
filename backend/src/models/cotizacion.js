@@ -13,6 +13,11 @@ const CotizacionShema = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         required: true
+    },
+    estado:{
+        type:String,
+        default:'pendiente',
+        required:true
     }
 });
 

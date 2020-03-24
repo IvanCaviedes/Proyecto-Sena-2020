@@ -16,7 +16,6 @@ import Proveedor from './components/Dashboard/Proveedor'
 import Pedido from './components/Dashboard/pedido'
 import Clientecrud from './components/Dashboard/cliente2'
 import cotizaciones from './components/Dashboard/cotizaciones'
-
 import PrivateRoute from './auth'
 
 function App() {
