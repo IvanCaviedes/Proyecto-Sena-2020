@@ -29,9 +29,19 @@ export default class cotizaciones extends Component {
     }
     componentDidMount() {
         this.listar();
-
+        this.cotizacionesvencidas();
     }
-
+    cotizacionesvencidas() {
+        const envio = {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
+    }
     toggleModal = state => {
         this.setState({
             [state]: !this.state[state]
@@ -134,7 +144,7 @@ export default class cotizaciones extends Component {
     render() {
         return (
             <div>
-                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(http://localhost:4000/public/img/notocar/user.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
+                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(https://www.bbva.com/wp-content/uploads/2016/10/basedecotizacion-1024x416.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
                     <span class="mask bg-gradient-default opacity-8"></span>
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
@@ -157,77 +167,6 @@ export default class cotizaciones extends Component {
                                             <i class="ni business_briefcase-24 mr-2"></i>En este modulo podras crear, actualizar, editar o eliminar usuarios. Asi como ver los usuarios ya creados o buscar uno en especifico.
                 </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12 order-xl-2">
-                            <div class="card bg-secondary shadow">
-                                <div class="card-header bg-white border-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h3 class="mb-0">Consultas</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <form onSubmit={this.consultas}>
-
-                                        <div class="row align-items-center">
-                                            <div class="col-6">
-                                                <h6 class="heading-small text-muted mb-4">Dato a Consultar</h6>
-                                            </div>
-                                            <div class="col-6 text-right">
-                                                <button type="submit" class="btn btn-sm btn-default btn-lg btn-block">Consultar</button>
-                                            </div>
-                                        </div>
-                                        <div class="pl-lg-4 mt-4">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-last-name">Digita el tipo de dato</label>
-                                                        <div class="form-group">
-                                                            <select class="form-control form-control-alternative" id="exampleFormControlSelect1" onChange={e => this.opcionbusqueda = e.target.value} required>
-                                                                <option>Seleccionar</option>
-                                                                <option>Nombre</option>
-                                                                <option>Correo</option>
-                                                                <option>Username</option>
-                                                                <option>Rol</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-last-name">Escribe el dato</label>
-                                                        <div class="input-group input-group-merge input-group-alternative mb-0">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fas fa-search text-blue"></i></span>
-                                                            </div>
-                                                            <input class="form-control" placeholder="Search" type="text" onChange={e => this.cajatexto = e.target.value} required />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-xl-6 order-xl-2 mx-auto">
-                            <div class="card bg-secondary shadow">
-                                <div class="card-header bg-white border-0">
-                                    <form onSubmit={this.mostartodo}>
-                                        <div class="row align-items-center">
-                                            <div class="col-5">
-                                                <h3 class="mb-0">Mostrar Todos</h3>
-                                            </div>
-                                            <div class="col-7">
-                                                <button type="submit" className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

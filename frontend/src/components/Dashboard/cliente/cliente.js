@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 import {
     Button,
     Card,
@@ -14,8 +16,8 @@ import {
 import Footer from '../Footer'
 export default class cliente extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             productoramdom: {},
             mensaje: '',
@@ -67,7 +69,7 @@ export default class cliente extends Component {
                 if (totales === 1) {
                     this.setState({ productoramdom: token.products[0] })
                 }
-                else{
+                else {
                     var aleatorio = Math.floor(Math.random() * totales);
                     this.setState({ productoramdom: token.products[aleatorio] })
                 }
@@ -224,7 +226,9 @@ export default class cliente extends Component {
         e.preventDefault()
         const idcliente = JSON.parse(localStorage.getItem('datos')).id
         if (this.state.tablaabregar.length === 0) {
-            console.log('error no puede estar vacio')
+            this.setState({ mensaje: "debes agregar por lo menos un producto" })
+            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.toggleModal('notificationModal')
         }
         else {
 
@@ -274,8 +278,13 @@ export default class cliente extends Component {
                                 throw new Error('cotizacion no creada')
                             })
                             .then(token => {
+<<<<<<< HEAD
+                                this.setState({ mensaje: "Puedes observar tu venta aqui!" })
+                                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+=======
                                 this.setState({ mensaje: "cotizacion creada correctamente" })
                                 this.setState({ datoserror: { icon: 'check', color: 'success' } })
+>>>>>>> 5896b536a3f9d94897ecfa10a9d0082235b69d07
                                 this.toggleModal('notificationModal')
                                 return;
                             })
@@ -305,10 +314,12 @@ export default class cliente extends Component {
         }
         )
     }
+
+
     render() {
         return (
             <div>
-                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(http://localhost:4000/public/img/notocar/user.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
+                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(https://www.bbva.com/wp-content/uploads/2016/10/basedecotizacion-1024x416.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
                     <span class="mask opacity-7" style={{ background: '#000' }}></span>
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">

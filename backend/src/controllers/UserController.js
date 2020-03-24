@@ -44,6 +44,9 @@ function create(req,res){
                                             subject: 'Cuenta Creada exitosamente',
                                             text: `Ya puedes ingresar al sistemas de informacion este es tu usuario y tu contraseña "${user.username}"`
                                         };
+
+
+
                                         transporter.sendMail(mailOptions, function (error, info) {
                                             if (error) {
                                                 console.log(error);

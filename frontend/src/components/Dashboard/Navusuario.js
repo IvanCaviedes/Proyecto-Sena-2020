@@ -28,41 +28,19 @@ export default class nav extends Component {
     });
   };
   componentDidMount() {
-    const datos = localStorage.getItem('datos')
-    this.setState({ datos: datos })
+    this.cotizacionesvencidas();
+  }
 
-
-    const data = {
-      username: JSON.parse(localStorage.getItem('datos')).username,
-      password: JSON.parse(localStorage.getItem('datos')).username
-    }
-
+  cotizacionesvencidas(){
     const envio = {
-      method: 'POST',
-      body: JSON.stringify(data),
+      method: 'GET',
       headers: new Headers({
-        'Content-Type': 'application/json',
-        'Origin': 'http://localhost:4000',
-        'Accept': 'application/json'
+          'Content-Type': 'application/json',
+          'Origin': 'http://localhost:4000',
+          'Accept': 'application/json'
       }),
-    };
-    fetch('http://localhost:4000/auth/login', envio)
-      .then(response => {
-        if (response.ok) {
-          return response.json()
-        }
-        throw new Error('Usuario no existe')
-      })
-      .then(token => {
-        if (token.message === 'PASSWORD INCORRECTA') {
-        } else {
-          this.toggleModal('formModal2')
-        }
-        return;
-      })
-      .catch(e => {
-        this.setState({ mensaje: e.message })
-      })
+  };
+  fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
   }
   actualizar2 = (e) => {
     e.preventDefault();
@@ -107,7 +85,7 @@ export default class nav extends Component {
                 <a class="nav-link pr-5" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="media align-items-center">
                     <span class="avatar avatar-sm rounded-circle">
-                      <img alt="Avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsuVJQKyHvQqWoBdSh4uhwIxSfAWX-RdncA1jR5hglydSbOAAS" />
+                      <img className="bg-primary" alt="Avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png" />
                     </span>
                     <div class="media-body ml-2 d-none d-lg-block">
                       <span class="mb-0 text-sm  font-weight-bold text-white">{JSON.parse(localStorage.getItem('datos')).name ? JSON.parse(localStorage.getItem('datos')).name : 'sin usuario'}</span>
@@ -118,10 +96,10 @@ export default class nav extends Component {
                   <div class=" dropdown-header noti-title">
                     <h6 class="text-overflow m-0">¡Bienvenido!</h6>
                   </div>
-                  <Link to="/profile" class="dropdown-item">
+                  {/* <Link to="/profile" class="dropdown-item">
                     <i class="ni ni-single-02"></i>
                     <span>Mi perfil</span>
-                  </Link>
+                  </Link> */}
                   <div class="dropdown-divider"></div>
                   <Link to="/logout" class="dropdown-item">
                     <i class="ni ni-user-run"></i>

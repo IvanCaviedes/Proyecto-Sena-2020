@@ -28,6 +28,23 @@ export default class nav extends Component {
     });
   };
   componentDidMount() {
+   this.cambiocontra();
+   this.cotizacionesvencidas();
+  }
+
+cotizacionesvencidas(){
+  const envio = {
+    method: 'GET',
+    headers: new Headers({
+        'Content-Type': 'application/json',
+        'Origin': 'http://localhost:4000',
+        'Accept': 'application/json'
+    }),
+};
+fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
+}
+
+  cambiocontra (){
     const datos = localStorage.getItem('datos')
     this.setState({ datos: datos })
 
@@ -107,7 +124,7 @@ export default class nav extends Component {
                 <a class="nav-link pr-5" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="media align-items-center">
                     <span class="avatar avatar-sm rounded-circle">
-                      <img alt="Avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSsuVJQKyHvQqWoBdSh4uhwIxSfAWX-RdncA1jR5hglydSbOAAS" />
+                      <img alt="Avatar" src="https://emprenderconexito.org/wp-content/uploads/2020/01/angry_client.png" />
                     </span>
                     <div class="media-body ml-2 d-none d-lg-block">
                       <span class="mb-0 text-sm  font-weight-bold text-white">{JSON.parse(localStorage.getItem('datos')).name ? JSON.parse(localStorage.getItem('datos')).name : 'sin usuario'}</span>
@@ -118,10 +135,10 @@ export default class nav extends Component {
                   <div class=" dropdown-header noti-title">
                     <h6 class="text-overflow m-0">¡Bienvenido!</h6>
                   </div>
-                  <Link to="/profile" class="dropdown-item">
+                  {/* <Link to="/profile" class="dropdown-item">
                     <i class="ni ni-single-02"></i>
                     <span>Mi perfil</span>
-                  </Link>
+                  </Link> */}
                   <div class="dropdown-divider"></div>
                   <Link to="/logout" class="dropdown-item">
                     <i class="ni ni-user-run"></i>
