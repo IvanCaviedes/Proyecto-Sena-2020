@@ -68,7 +68,7 @@ export default class cliente extends Component {
                     this.setState({ productoramdom: token.products[0] })
                 }
                 else{
-                    var aleatorio = Math.floor(Math.random() * totales) + 1;
+                    var aleatorio = Math.floor(Math.random() * totales);
                     this.setState({ productoramdom: token.products[aleatorio] })
                 }
                 return;
