@@ -1,38 +1,34 @@
 import React, { Component } from 'react'
-
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 export default class prueba extends Component {
-    carga = (e) => {
-        e.preventDefault();
-        const data = new FormData();
-        const imagedata = this.file
-        const name = this.name
-        data.append('image', imagedata);
-        data.append('name','hola')
+  constructor(props) {
+    super(props);
+  }
 
-        fetch("http://localhost:4000/imagenes", {
-          mode: 'no-cors',
-      method: "POST",
-      body: data
-    }).then(function (res) {
-      if (res.ok) {
-        alert("Perfect! ");
-      } else if (res.status == 401) {
-        alert("Oops! ");
-      }
-    }, function (e) {
-      alert("Error submitting form!");
-    });
-    }
-    render() {
-        return (
-            <div>
-                <h1>estas en prueba</h1>
-
-                <form encType="multipart/form-data" onSubmit={this.carga}>
-                    <input type="file" name="image" onChange={e => this.file = e.target.files[0]}/>
-                    <button type="submit">enviar</button>
-                </form>
-            </div>
+  printDocument() {
+    const input = document.getElementById('divToPrint');
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        pdf.addImage(imgData, 'JPEG', 0, 0);
+        pdf.save("download.pdf");
+      })
+    ;
+  }
+  render() {
+    return (
+      <div>
+      <div className="mb5">
+        <button onClick={this.printDocument}>Print</button>
+      </div>
+      <div id="divToPrint" className="mt4" style={{backgroundColor: '#f5f5f5',width: '210mm',minHeight: '297mm',marginLeft: 'auto',marginRight: 'auto'}}>
+        <div>Note: Here the dimensions of div are same as A4</div>
+        <div>You Can add any component here</div>
+        <h1>hola mi pai</h1>
+      </div>
+      </div>
         )
-    }
+  }
 }

@@ -16,6 +16,7 @@ import Proveedor from './components/Dashboard/Proveedor'
 import Pedido from './components/Dashboard/pedido'
 import Clientecrud from './components/Dashboard/cliente2'
 import cotizaciones from './components/Dashboard/cotizaciones'
+import Prueba from './prueba'
 import PrivateRoute from './auth'
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <PrivateRoute path="/logout" exact component={Logout} />
         <PrivateRoute path="/clientecrud" exact component={Clientecrud} />
         <PrivateRoute path="/cotizaciones" exact component={cotizaciones} />
+        <PrivateRoute path="/prueba" exact component={Prueba} />
 
 
       </Switch>

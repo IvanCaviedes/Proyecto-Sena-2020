@@ -96,7 +96,7 @@ export default class Login extends Component {
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/auth/login', envio)
+        fetch('http://localhost:4000/auth/loginCliente', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()

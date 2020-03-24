@@ -4,10 +4,42 @@ export default class nosea extends Component {
   constructor(){
     super();
     this.state = {
-      tusuarios:0
+      tusuarios:0,
+      tproductos:0
     }
   }
   componentDidMount(){
+    this.productos();
+    this.usuaios();
+  }
+
+  productos = () =>{
+    const envio = {
+      method: 'GET',
+      headers: new Headers({
+          'Content-Type': 'application/json',
+          'Origin': 'http://localhost:4000',
+          'Accept': 'application/json'
+      }),
+  };
+  fetch('http://localhost:4000/product/', envio)
+      .then(response => {
+          if (response.ok) {
+              return response.json()
+          }
+          throw new Error('Usuario no existe')
+      })
+      .then(token => {
+        this.setState({tproductos:token.products.length})
+          return;
+      })
+      .catch(e => {
+          this.setState({ mensaje: e.message })
+      })
+  }
+
+
+  usuaios = () =>{
     const envio = {
       method: 'GET',
       headers: new Headers({
@@ -61,7 +93,7 @@ export default class nosea extends Component {
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Productos Totales</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                      <span class="h2 font-weight-bold mb-0">{this.state.tproductos}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">

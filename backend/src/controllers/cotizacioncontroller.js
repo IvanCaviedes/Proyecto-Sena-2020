@@ -1,6 +1,9 @@
 //Base de Datos Collection proveedores
 const Proveedor = require('../models/cotizacion');
 const Produ = require('../models/Product')
+const Cliente = require('../models/Cliente')
+var nodemailer = require('nodemailer');
+const moment =require('moment')
 
 //Busca todos los proveedores
 function index(req, res) {
@@ -21,7 +24,45 @@ function show(req, res) {
 //Crea un Proveedor
 function create(req, res) {
     mensaje = "mascota creada correctamente"
-    new Proveedor(req.body).save().then(Proveedor => res.status(201).send({ mensaje, Proveedor })).catch(error => res.status(500).send({ error }));
+    new Proveedor(req.body).save()
+    .then(Proveedor => {
+        res.send({ mensaje, Proveedor })
+        console.log(Proveedor.Idcliente)
+        Cliente.find({_id:Proveedor.Idcliente})
+        .then(us=>{
+            var correo = us[0].email
+            var transporter = nodemailer.createTransport({
+                host: "smtp-mail.outlook.com", // hostname
+                secureConnection: false, // TLS requires secureConnection to be false
+                port: 587, // port for secure SMTP
+                tls: {
+                    ciphers: 'SSLv3'
+                },
+                auth: {
+                    user: 'ivancaviedes99@outlook.com',
+                    pass: '99120900389ivan'
+                }
+            });
+            var mailOptions = {
+                from: 'ivancaviedes99@outlook.com',
+                to: correo,
+                subject: 'Cuenta Creada exitosamente',
+               html:'<h1>Cotizacion exitosa</h1><img src="https://cdn.discordapp.com/attachments/580223884276793345/691831204575707136/Mascotas.jpg" alt="" />'
+            };
+
+
+
+            transporter.sendMail(mailOptions, function (error, info) {
+                if (error) {
+                    console.log(error);
+                    res.status(500).send(req.body)
+                } else {
+                    console.log('Email enviado')
+                    res.send({mensaje:'Correo enviado'})
+                }
+            });
+        })
+    }).catch(error => res.status(500).send({ error }));
 }
 //Actualiza un Proveedor
 function update(req, res) {
@@ -93,6 +134,25 @@ function aceptada(req, res) {
         res.send({mensaje:e})
     }
 
+};
+
+function comprovarDias (req,res){
+    Proveedor.find({estado: 'pendiente'})
+    .then(users => {
+        for (let index = 0; index < users.length; index++) {
+            var base = users[index].date
+            var consultar = moment(base).format()
+            const diferencia = moment().diff(consultar,'days')
+            console.log(diferencia)
+            if (diferencia > 2) {
+                var myquery = { _id: users[index]._id };
+                Proveedor.deleteOne(myquery)
+                .catch(e=>res.send({e}))
+            }
+        }
+        return res.send({ mensaje: 'Ventas Actualizadas' });
+    })
+    .catch(e=>res.send({e}))
 }
 
 module.exports = {
@@ -102,5 +162,6 @@ module.exports = {
     update,
     remove,
     find,
-    aceptada
+    aceptada,
+    comprovarDias
 }
