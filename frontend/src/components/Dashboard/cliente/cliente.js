@@ -60,7 +60,7 @@ export default class cliente extends Component {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('Usuario no creado')
+                throw new Error('Cliente no creado')
             })
             .then(token => {
                 let totales = token.products.length
@@ -96,7 +96,7 @@ export default class cliente extends Component {
                 if (response.ok) {
                     return response.json()
                 }
-                throw new Error('Usuario no creado')
+                throw new Error('Cliente no creado')
             })
             .then(token => {
                 this.setState({ productoramdom: token.products[0] })
@@ -126,7 +126,7 @@ export default class cliente extends Component {
                     return response.json()
                 }
                 this.setState({ Tusuarios: '' })
-                throw new Error('Usuario no creado')
+                throw new Error('Cliente no creado')
             })
             .then(token => {
                 this.setState({ Tusuarios: token.products })
@@ -141,7 +141,7 @@ export default class cliente extends Component {
         let opcion;
         if (this.opcionbusqueda === undefined) {
             this.setState({ mensaje: "Añade el tipo de dato de la busqueda por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         }
         else {
@@ -269,13 +269,13 @@ export default class cliente extends Component {
                                     return response.json()
                                 }
                                 this.setState({ mensaje: "cotizacion no creada" })
-                                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                                this.setState({ datoserror: { icon: "times", color: 'danger' } })
                                 this.toggleModal('notificationModal')
-                                throw new Error('mascota no creada')
+                                throw new Error('cotizacion no creada')
                             })
                             .then(token => {
                                 this.setState({ mensaje: "cotizacion creada correctamente" })
-                                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                                this.setState({ datoserror: { icon: 'check', color: 'success' } })
                                 this.toggleModal('notificationModal')
                                 return;
                             })
@@ -285,7 +285,7 @@ export default class cliente extends Component {
                     }
                     else {
                         this.setState({ mensaje: "No puedes crear mas de una cotizacion" })
-                        this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                        this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                         this.toggleModal('notificationModal')
                     }
 
@@ -527,7 +527,7 @@ export default class cliente extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="py-3 text-center">
-                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <i className={`fas fa-${this.state.datoserror.icon} ni-5x`} />
                             <h4 className="heading mt-4">Alerta</h4>
                             <p>
                                 {this.state.mensaje}

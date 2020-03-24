@@ -489,7 +489,7 @@ export default class users extends Component {
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
                                 <div className="text-center text-muted mb-4">
-                                    <h2>Actualizar Clienete </h2>
+                                    <h2>Actualizar usuario </h2>
                                     <p>Vas a actualizar los datos de <h4>{this.state.usuario.name}</h4></p>
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>

@@ -79,14 +79,14 @@ export default class cotizaciones extends Component {
                     return response.json()
                 }
                 this.setState({ mensaje: "Usuario no creado" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                 this.toggleModal('notificationModal')
                 throw new Error('Usuario no creado')
             })
             .then(token => {
                 this.setState({ mensaje: "Cotizacion exitosa" })
                 this.listar()
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                this.setState({ datoserror: { icon: 'check', color: 'success' } })
                 this.toggleModal('notificationModal')
                 this.listar()
                 return;
@@ -299,7 +299,7 @@ export default class cotizaciones extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="py-3 text-center">
-                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <i className={`fas fa-${this.state.datoserror.icon} ni-5x`} />
                             <h4 className="heading mt-4">Alerta</h4>
                             <p>
                                 {this.state.mensaje}
