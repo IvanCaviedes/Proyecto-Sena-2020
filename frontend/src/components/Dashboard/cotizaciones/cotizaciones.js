@@ -18,6 +18,7 @@ export default class cotizaciones extends Component {
         super()
         this.state = {
             Tusuarios: [],
+            Tproductos: [],
             defaultModal: false,
             datoserror: {},
             usuario: {},
@@ -28,13 +29,72 @@ export default class cotizaciones extends Component {
     }
     componentDidMount() {
         this.listar();
+
     }
 
+    toggleModal = state => {
+        this.setState({
+            [state]: !this.state[state]
+        });
+    };
 
-    esamonda(productos){
-        console.log(JSON.parse(productos))
+    esamonda(productos) {
+        const total = JSON.parse(productos)
+        this.setState({ Tproductos: total })
+        this.toggleModal('formModal2')
     }
 
+    Eliminarcotizacion(id) {
+        if (window.confirm('Estas seguro de eliminar esta cotizacion?')) {
+            const envio = {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Origin': 'http://localhost:4000',
+                    'Accept': 'application/json'
+                }),
+            };
+            fetch(`http://localhost:4000/cotizacion/_id/${id}`, envio)
+                .then(alert('cotizacion eliminada'), this.listar())
+                .catch(e => console.log(e))
+        }
+    }
+
+    Aceptarcotizacion(id) {
+        const datos = {
+            idcotizacion: id
+        }
+        const envio = {
+            method: 'POST',
+            body: JSON.stringify(datos),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json'
+            }),
+        };
+        fetch('http://localhost:4000/cotizacion/aceptada', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ mensaje: "Usuario no creado" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
+                throw new Error('Usuario no creado')
+            })
+            .then(token => {
+                this.setState({ mensaje: "Cotizacion exitosa" })
+                this.listar()
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                this.toggleModal('notificationModal')
+                this.listar()
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
     listar = (e) => {
         const token12 = localStorage.getItem('token')
         const envio = {
@@ -59,7 +119,12 @@ export default class cotizaciones extends Component {
                 throw new Error('Usuario no creado')
             })
             .then(token => {
-                this.setState({ Tusuarios: token.Proveedores })
+                if (token.message) {
+
+                }
+                else {
+                    this.setState({ Tusuarios: token.Proveedores })
+                }
                 return;
             })
             .catch(e => {
@@ -184,6 +249,7 @@ export default class cotizaciones extends Component {
                                                 <th scope="col">Id Cliente</th>
                                                 <th scope="col">Fecha</th>
                                                 <th scope="col">Cantidad de productos</th>
+                                                <th scope="col">Estado</th>
                                                 <th scope="col">Opciones</th>
                                             </tr>
                                         </thead>
@@ -195,11 +261,12 @@ export default class cotizaciones extends Component {
                                                             <td>{user.Idcliente}</td>
                                                             <td>{moment(user.date).format('MMMM Do YYYY')}</td>
                                                             <td>#{JSON.parse(user.productos).length}
-                                                            <button className="btn btn-sm btn-success ml-3" onClick={() => this.esamonda(user.productos)} ><i class="fas fa-eye"></i> Ver</button>
+                                                                <button className="btn btn-sm btn-success ml-3" onClick={() => this.esamonda(user.productos)} ><i class="fas fa-eye"></i> Ver</button>
                                                             </td>
+                                                            <td>{user.estado}</td>
                                                             <td>
-                                                                <button className="btn btn-sm btn-success" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-check-circle"></i></button>
-                                                                <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-times"></i></button>
+                                                                <button className="btn btn-sm btn-success" onClick={() => this.Aceptarcotizacion(user._id)} ><i class="fas fa-check-circle"></i></button>
+                                                                <button className="btn btn-sm btn-danger" onClick={() => this.Eliminarcotizacion(user._id)}><i class="fas fa-times"></i></button>
                                                             </td>
                                                         </tr>
                                                     )
@@ -255,64 +322,44 @@ export default class cotizaciones extends Component {
 
                 <Modal
                     className="modal-dialog-centered"
-                    size="sm"
+                    size="xl"
                     isOpen={this.state.formModal2}
                     toggle={() => this.toggleModal("formModal2")}
                 >
                     <div className="modal-body p-0">
                         <Card className="bg-secondary shadow border-0">
-                            <CardBody className="px-lg-5 py-lg-5">
+                            <CardBody className="px-lg-12 py-lg-5">
                                 <div className="text-center text-muted mb-4">
-                                    <h2>Actualizar usuario </h2>
-                                    <p>Vas a actualizar los datos de <h4>{this.state.usuario.name}</h4></p>
+                                    <h2>Todos los Productos</h2>
                                 </div>
-                                <Form role="form" onSubmit={this.actualizar2}>
-                                    <FormGroup className="mb-3">
-                                        <InputGroup className="input-group-alternative">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="ni ni-single-02" />
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={this.state.usuario.name} required />
-                                        </InputGroup>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <InputGroup className="input-group-alternative">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="ni ni-email-83" />
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input type="email" onChange={e => this.email = e.target.value} placeholder={this.state.usuario.email} required />
-                                        </InputGroup>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <InputGroup className="input-group-alternative">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="ni ni-email-83" />
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input type="select" name="select" id="exampleSelect" onChange={e => this.rol = e.target.value} placeholder={this.state.usuario.role} required>
-                                                <option>seleccionar</option>
-                                                <option>admin</option>
-                                                <option>regular</option>
-                                            </Input>
-                                        </InputGroup>
-                                    </FormGroup>
-
-
-                                    <div className="text-center">
-                                        <Button
-                                            className="my-4"
-                                            color="primary"
-                                            type="submit"
-                                        >
-                                            Actualizar
-                    </Button>
-                                    </div>
-                                </Form>
+                                <div class="table-responsive">
+                                    <table class="table align-items-center table-flush">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Nombre Producto</th>
+                                                <th scope="col">Categoria</th>
+                                                <th scope="col">Cantidad del productos</th>
+                                                <th scope="col">Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.Tproductos.map(producto => {
+                                                    return (
+                                                        <tr key={producto.id}>
+                                                            <td>{producto.nombre}</td>
+                                                            <td>{producto.categoria}</td>
+                                                            <td>{producto.cantidad}</td>
+                                                            <td>
+                                                                <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(producto.id)}><i class="fas fa-times"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </CardBody>
                         </Card>
                     </div>

@@ -5,6 +5,7 @@ const Router = express.Router();
 
 Router.get('/',ProductCtrl.index)
       .post('/create',ProductCtrl.create)
+      .post('/aceptada',ProductCtrl.aceptada)
       .get('/:key/:value',ProductCtrl.find,ProductCtrl.show) 
       .delete('/:key/:value',ProductCtrl.find,ProductCtrl.remove)
 

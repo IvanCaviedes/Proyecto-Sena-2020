@@ -152,7 +152,7 @@ export default class nav extends Component {
                     <InputGroup className="input-group-alternative">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i class="fas fa-phone"></i>
+                          <i class="fas fa-key"></i>
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input placeholder="Contraseña Nueva" type="text" onChange={e => this.Nueva = e.target.value} required />
