@@ -279,6 +279,9 @@ export default class users extends Component {
                             <div class="card card-profile shadow">
                                 <div class="card-body mt-4 pt-md-4">
                                     <div class="text-center">
+                                    <h3>
+                                            ¡¡TEN CUIDADO!!
+                                        </h3>
                                         <div>
                                             <i class="ni education_hat mr-2"></i>En este modulo podras crear, actualizar, editar o eliminar proveedores. Asi como ver los proveedores ya creados o buscar uno en especifico.
                     </div>

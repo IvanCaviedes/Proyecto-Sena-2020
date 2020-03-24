@@ -12,7 +12,7 @@ cloudinary.config({
 
 //Busca todos los productos
 function index(req, res) {
-    Product.find({})
+    Product.find({}).limit(5)
         .then(products => {
             if (products.length) return res.status(200).send({ products });
             return res.status(204).send({ message: 'NO CONTENT' });
