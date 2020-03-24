@@ -38,7 +38,7 @@ export default class users extends Component {
         if (window.confirm('Estas seguro de eliminar este usuario?')) {
             if (id === idlog) {
                 this.setState({ mensaje: "No te puedes eliminar a ti mismo" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                 this.toggleModal('notificationModal')
             }
             else {
@@ -131,7 +131,7 @@ export default class users extends Component {
         let opcion;
         if (this.opcionbusqueda === undefined) {
             this.setState({ mensaje: "Añade el tipo de dato de la busqueda por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         }
         else {
@@ -234,7 +234,7 @@ export default class users extends Component {
             if (window.navigator.onLine) {
                 if (this.state.admins === 'true' && this.rol ==='admin' ){
                     this.setState({ mensaje: "No pueden haber mas de 3 administradores" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                    this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
                     this.toggleModal('notificationModal')
                 }
                 else{

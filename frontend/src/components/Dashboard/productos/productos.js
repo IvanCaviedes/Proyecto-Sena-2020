@@ -116,7 +116,7 @@ export default class users extends Component {
         e.preventDefault();
         if (this.categoria === undefined) {
             this.setState({ mensaje: "Añade una categoria por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         } else {
             if (window.navigator.onLine) {
@@ -162,7 +162,7 @@ export default class users extends Component {
                         fetch('http://localhost:4000/product/create', envio)
                             .then(
                                 this.setState({ mensaje: "Añadido correctamente" }),
-                                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } }),
+                                this.setState({ datoserror: { icon: 'check', color: 'success' } }),
                                 this.toggleModal('notificationModal')
                             )
                             .catch(console.log('no se logro'))
@@ -173,7 +173,7 @@ export default class users extends Component {
             }
             else {
                 this.setState({ mensaje: "Tienes que tener internet" })
-                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                 this.toggleModal('notificationModal')
             }
             /* this.componentDidMount() */
@@ -219,7 +219,7 @@ export default class users extends Component {
         let opcion;
         if (this.opcionbusqueda === undefined) {
             this.setState({ mensaje: "Añade el tipo de dato de la busqueda por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         }
         else {
@@ -274,7 +274,7 @@ export default class users extends Component {
         e.preventDefault();
         if (this.categoria === undefined) {
             this.setState({ mensaje: "Añade una categoria por favor" })
-            this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+            this.setState({ datoserror: { icon: 'bell', color: 'warning' } })
             this.toggleModal('notificationModal')
         } else {
             const datos = {
@@ -298,14 +298,14 @@ export default class users extends Component {
                         return response.json()
                     }
                     this.setState({ mensaje: "producto no actualizado" })
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                    this.setState({ datoserror: { icon: 'times', color: 'danger' } })
                     this.toggleModal('notificationModal')
                     throw new Error('producto no creado')
                 })
                 .then(token => {
                     this.setState({ mensaje: "producto actualizado" })
                     this.listar()
-                    this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                    this.setState({ datoserror: { icon: 'check', color: 'success' } })
                     this.toggleModal('notificationModal')
                     return;
                 })
@@ -681,7 +681,7 @@ export default class users extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="py-3 text-center">
-                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <i className={`fas fa-${this.state.datoserror.icon} ni-5x`} />
                             <h4 className="heading mt-4">Alerta</h4>
                             <p>
                                 {this.state.mensaje}

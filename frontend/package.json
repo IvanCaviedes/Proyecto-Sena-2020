@@ -7,7 +7,12 @@
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
     "chart.js": "^2.9.3",
+<<<<<<< HEAD
     "html2canvas": "^1.0.0-rc.5",
+=======
+    "fs-extra": "^9.0.0",
+    "html-pdf": "^2.2.0",
+>>>>>>> 5896b536a3f9d94897ecfa10a9d0082235b69d07
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
     "leaflet": "^1.6.0",
@@ -15,6 +20,7 @@
     "pigeon-maps": "^0.15.0",
     "pigeon-marker": "^0.3.4",
     "pigeon-overlay": "^0.2.3",
+    "puppeteer": "^2.1.1",
     "react": "^16.12.0",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.12.0",
