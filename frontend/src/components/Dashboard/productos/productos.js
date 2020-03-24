@@ -317,7 +317,7 @@ export default class users extends Component {
     render() {
         return (
             <div>
-                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(http://localhost:4000/public/img/notocar/producto.png)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
+                <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style={{ minHeight: '600px', backgroundImage: 'url(https://static.websguru.com.ar/var/m_8/87/870/89334/1274919-mascotas.jpg)', backgroundSize: 'cover', backgroundPosition: 'center top' }}>
                     <span class="mask bg-gradient-default opacity-8"></span>
                     <div class="container-fluid d-flex align-items-center">
                         <div class="row">
@@ -561,7 +561,7 @@ export default class users extends Component {
                     </div>
                     <div className="modal-body">
                         <div className="py-3 text-center">
-                            <i className={`ni ni-${this.state.datoserror.icon} ni-5x`} />
+                            <i className={`fas fa-${this.state.datoserror.icon} ni-5x`} />
                             <h4 className="heading mt-4">Alerta</h4>
                             <p>
                                 {this.state.mensaje}
@@ -592,7 +592,7 @@ export default class users extends Component {
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
                                 <div className="text-center text-muted mb-4">
-                                    <h2>Actualizar usuario </h2>
+                                    <h2>Actualizar producto </h2>
                                     <p>Vas a actualizar los datos de <h4>{this.state.usuario.name}</h4></p>
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>
