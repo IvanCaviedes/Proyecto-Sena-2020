@@ -60,7 +60,7 @@ export default class users extends Component {
                 throw new Error('Cliente no existe')
             })
             .then(token => {
-                this.setState({ usuario: token.Cliente[0] })
+                this.setState({ usuario: token.users[0] })
                 this.toggleModal('formModal2')
                 return;
             })
@@ -278,55 +278,6 @@ export default class users extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-8 order-xl-1">
-                            <div class="card bg-secondary shadow">
-                                <div class="card-header bg-white border-0">
-                                    <div class="row align-items-center">
-                                        <div class="col-8">
-                                            <h3 class="mb-0">Agregar Cliente </h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <form onSubmit={this.UserNew}>
-
-                                        <div class="row align-items-center">
-                                            <div class="col-8">
-                                                <h6 class="heading-small text-muted mb-4">Informacion del Cliente</h6>
-                                            </div>
-                                            <div class="col-4 text-right">
-                                                <button type="submit" class="btn btn-sm btn-primary">Agregar</button>
-                                            </div>
-                                        </div>
-                                        <div class="pl-lg-4">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-username">Nombre Cliente</label>
-                                                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre" onChange={e => this.name = e.target.value} required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-email">telefono Cliente</label>
-                                                        <input type="text" id="input-email" class="form-control form-control-alternative" placeholder="12345" onChange={e => this.username = e.target.value} required />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label" for="input-first-name">correo</label>
-                                                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="correo@ejemplo.com" onChange={e => this.correo = e.target.value} required />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-xl-12 order-xl-2">
                             <div class="card bg-secondary shadow">
                                 <div class="card-header bg-white border-0">
@@ -427,8 +378,7 @@ export default class users extends Component {
                                                             <td>{user.username}</td>
                                                             <td>{user.email}</td>
                                                             <td>
-                                                                <button className="btn btn-sm btn-primary" onClick={() => this.ActualizarUsuario(user._id)} ><i class="fas fa-user-edit"></i></button>
-                                                                <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
+                                                                 <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(user._id)}><i class="fas fa-user-minus"></i></button>
                                                             </td>
                                                         </tr>
                                                     )
@@ -492,7 +442,7 @@ export default class users extends Component {
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
                                 <div className="text-center text-muted mb-4">
-                                    <h2>Actualizar usuario </h2>
+                                    <h2>Actualizar Cliente </h2>
                                     <p>Vas a actualizar los datos de <h4>{this.state.usuario.name}</h4></p>
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>
@@ -500,45 +450,30 @@ export default class users extends Component {
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-single-02" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={this.state.usuario.name} required />
+                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={`Nombre: ${this.state.usuario.name}`} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-email-83" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.telefono = e.target.value} placeholder={this.state.usuario.telefono} required />
+                                            <Input type="number" onChange={e => this.telefono = e.target.value} placeholder={`Telefono: ${this.state.usuario.telefono}`} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-email-83" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.correo = e.target.value} placeholder={this.state.usuario.correo} required />
-                                        </InputGroup>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <InputGroup className="input-group-alternative">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="ni ni-email-83" />
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input type="select" name="select" id="exampleSelect" onChange={e => this.categoria = e.target.value} placeholder={this.state.usuario.category} required>
-                                                <option>Seleccionar</option>
-                                                <option>Niños</option>
-                                                <option>Hogar</option>
-                                                <option>Entretenimiento</option>
-                                            </Input>
+                                            <Input type="email" onChange={e => this.correo = e.target.value} placeholder={`Correo: ${this.state.usuario.correo}`} required />
                                         </InputGroup>
                                     </FormGroup>
 

@@ -53,14 +53,15 @@ export default class users extends Component {
             }),
         };
         fetch(`http://localhost:4000/proveedor/_id/${id}`, envio)
-            .then(response => {
+            .then(response => {console.log('largo como el ego de ivan')
                 if (response.ok) {
                     return response.json()
                 }
                 throw new Error('proveedor no existe')
             })
             .then(token => {
-                this.setState({ usuario: token.Proveedor[0] })
+                
+                this.setState({ usuario: token.Proveedores[0] })
                 this.toggleModal('formModal2')
                 return;
             })
@@ -503,7 +504,7 @@ export default class users extends Component {
                         <Card className="bg-secondary shadow border-0">
                             <CardBody className="px-lg-5 py-lg-5">
                                 <div className="text-center text-muted mb-4">
-                                    <h2>Actualizar usuario </h2>
+                                    <h2>Actualizar Proveedor </h2>
                                     <p>Vas a actualizar los datos de <h4>{this.state.usuario.name}</h4></p>
                                 </div>
                                 <Form role="form" onSubmit={this.actualizar2}>
@@ -514,7 +515,7 @@ export default class users extends Component {
                                                     <i className="ni ni-single-02" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={this.state.usuario.name} required />
+                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={`Nombre: ${this.state.usuario.name}`} required />
                                         </InputGroup> 
                                     </FormGroup>
                                     <FormGroup>
@@ -524,7 +525,7 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.telefono = e.target.value} placeholder={this.state.usuario.telefono} required />
+                                            <Input type="number" onChange={e => this.telefono = e.target.value} placeholder={`Telefono:S ${this.state.usuario.telefono}`} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
@@ -534,22 +535,7 @@ export default class users extends Component {
                                                     <i className="ni ni-email-83" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.correo = e.target.value} placeholder={this.state.usuario.correo} required />
-                                        </InputGroup>
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <InputGroup className="input-group-alternative">
-                                            <InputGroupAddon addonType="prepend">
-                                                <InputGroupText>
-                                                    <i className="ni ni-email-83" />
-                                                </InputGroupText>
-                                            </InputGroupAddon>
-                                            <Input type="select" name="select" id="exampleSelect" onChange={e => this.categoria = e.target.value} placeholder={this.state.usuario.category} required>
-                                                <option>Seleccionar</option>
-                                                <option>Niños</option>
-                                                <option>Hogar</option>
-                                                <option>Entretenimiento</option>
-                                            </Input>
+                                            <Input type="email" onChange={e => this.correo = e.target.value} placeholder={`Correo: ${this.state.usuario.correo}`} required />
                                         </InputGroup>
                                     </FormGroup>
 

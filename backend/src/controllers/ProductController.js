@@ -18,6 +18,14 @@ function index(req, res) {
             return res.status(204).send({ message: 'NO CONTENT' });
         }).catch(error => res.status(500).send({ error }));
 }
+//cinco
+function cinco(req, res) {
+    Product.find({}).limit(5)
+        .then(products => {
+            if (products.length) return res.status(200).send({ products });
+            return res.status(204).send({ message: 'NO CONTENT' });
+        }).catch(error => res.status(500).send({ error }));
+}
 //Muesta uno en especifico
 function show(req, res) {
     if (req.body.error) return res.status(500).send({ error });
@@ -70,6 +78,7 @@ function prueba(req, res, next) {
 
 module.exports = {
     index,
+    cinco,
     show,
     create,
     update,
