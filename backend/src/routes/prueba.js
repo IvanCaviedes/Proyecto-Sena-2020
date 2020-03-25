@@ -1,27 +1,26 @@
 const express = require('express');
 const Router = express.Router();
-const User = require('../models/User');
-const moment = require('moment')
+const request = require('request-promise');
+const cheerio = require('cheerio');
 
-Router.get('/', (req, res) => {
-    User.find()
-        .then(users => {
-            if (users.length) {
-                for (let index = 0; index < users.length; index++) {
-                    const dia = moment()
-                    const contultar = moment(users[index].sign_up_date)
-                    const diferencia = dia.diff(contultar, 'days')
-                    console.log(moment(dateFrom).subtract(1, 'months').format('YYYY-MM-DD'))
-                    if (diferencia > 2) {
-                        console.log('esta es la id del mayor ' + users[index]._id)
-                    }
-                }
-                return res.status(200).send({ mensaje: 'Ventas Actualizadas' });
-            } else {
-                return res.send({ message: 'NO CONTENT' });
-            }
+Router.get('/', async (req, res) => {
+    try {
+        const $ = await request({
+            uri: 'https://www.eltiempo.com/noticias/mascotas',
+            transform: body => cheerio.load(body,{ decodeEntities: false })
+        });
+        const tags = [];
+        $('.image-top').each((i, el) => {
+            const imagenes = $(el).find('.image-container a').children('img').eq(0).attr('data-original')
+            const azul = $(el).find('.category')
+            const fecha = $(el).find('.published-at')
+            const titulo = $(el).find('.title')
+            tags.push({imagenes:`https://www.eltiempo.com/${imagenes}`,ciudad:azul.text(),fecha:fecha.text(),titulo:titulo.text()})
         })
-        .catch(e => res.status(500).send({ e }))
+         res.send({datos:tags[0]})
+    } catch (e) {
+        console.log(e);
+    }
 })
 
 module.exports = Router;

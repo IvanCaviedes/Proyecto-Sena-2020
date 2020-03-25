@@ -278,13 +278,8 @@ export default class cliente extends Component {
                                 throw new Error('cotizacion no creada')
                             })
                             .then(token => {
-<<<<<<< HEAD
                                 this.setState({ mensaje: "Puedes observar tu venta aqui!" })
                                 this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
-=======
-                                this.setState({ mensaje: "cotizacion creada correctamente" })
-                                this.setState({ datoserror: { icon: 'check', color: 'success' } })
->>>>>>> 5896b536a3f9d94897ecfa10a9d0082235b69d07
                                 this.toggleModal('notificationModal')
                                 return;
                             })
