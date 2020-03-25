@@ -24,13 +24,15 @@ export default class cliente extends Component {
             Tusuarios: [],
             datoserror: {},
             tablaabregar: [],
-            variable: 0
+            variable: 0,
+            total: 0
         }
         this.Nombres = new Array();
         this.Stock = new Array();
         this.Categoria = new Array();
         this.Cantidad = new Array();
         this.id = new Array();
+        this.precio = new Array();
         this.productos = [];
         this.objeto = {};
     }
@@ -230,23 +232,35 @@ export default class cliente extends Component {
             console.log('no puedes agregar mas productos')
         }
         else {
-            this.Nombres[this.state.variable] = this.state.productoramdom.name;
-            this.Stock[this.state.variable] = this.state.productoramdom.stock;
-            this.Categoria[this.state.variable] = this.state.productoramdom.category;
-            this.Cantidad[this.state.variable] = this.cantidad;
-            this.id[this.state.variable] = this.state.productoramdom._id;
-
-            for (var i = 0; i < this.Nombres.length; i++) {
-                this.productos.push({
-                    "nombre": this.Nombres[i],
-                    "stock": this.Stock[i],
-                    "categoria": this.Categoria[i],
-                    "cantidad": this.Cantidad[i],
-                    "id": this.id[i]
-                });
+            if (this.cantidad > this.state.productoramdom.stock || this.state.productoramdom.stock === 1) {
+                this.setState({ mensaje: "No puedes añadir mas del stock o comprar el ultimo en existencia" })
+                this.setState({ datoserror: { icon: 'fat-remove', color: 'danger' } })
+                this.toggleModal('notificationModal')
             }
-            this.objeto.productos = this.productos;
-            this.setState({ tablaabregar: this.productos })
+            else {
+                this.Nombres[this.state.variable] = this.state.productoramdom.name;
+                this.Stock[this.state.variable] = this.state.productoramdom.stock;
+                this.Categoria[this.state.variable] = this.state.productoramdom.category;
+                this.Cantidad[this.state.variable] = this.cantidad;
+                this.id[this.state.variable] = this.state.productoramdom._id;
+                this.precio[this.state.variable] = this.state.productoramdom.price * this.cantidad;
+                var total = this.state.total;
+                var total2 = total + this.state.productoramdom.price * this.cantidad;
+                this.setState({ total: total2 })
+                for (var i = 0; i < this.Nombres.length; i++) {
+                    this.productos.push({
+                        "nombre": this.Nombres[i],
+                        "stock": this.Stock[i],
+                        "categoria": this.Categoria[i],
+                        "cantidad": this.Cantidad[i],
+                        "id": this.id[i],
+                        "price": this.precio[i]
+                    });
+                }
+                this.objeto.productos = this.productos;
+                this.setState({ tablaabregar: this.productos })
+            }
+
         }
     }
 
@@ -283,7 +297,8 @@ export default class cliente extends Component {
                     if (token.message) {
                         const datos = {
                             productos: JSON.stringify(this.state.tablaabregar),
-                            Idcliente: JSON.parse(localStorage.getItem('datos')).id
+                            Idcliente: JSON.parse(localStorage.getItem('datos')).id,
+                            Tventa: this.state.total
                         }
                         console.log(datos)
                         const envio = {
@@ -368,6 +383,10 @@ export default class cliente extends Component {
                                         <h3 class="card-title">Categoria</h3>
                                         <p class="card-title">
                                             {this.state.productoramdom.category}
+                                        </p>
+                                        <h3 class="card-title">Precio</h3>
+                                        <p class="card-title">
+                                            {this.state.productoramdom.price}
                                         </p>
                                         <div class="form-group">
                                             <label class="form-control-label" for="input-first-name">Cantidad <span className="text-danger">*</span></label>
@@ -496,7 +515,11 @@ export default class cliente extends Component {
                                     <div class="col-6">
                                         <h3 class="mb-0">Productos Agregados</h3>
                                     </div>
+                                    <div class="col-6">
+                                        <h3 class="mb-0">Total: {this.state.total}</h3>
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="table-responsive">
                                 <table class="table align-items-center table-flush">
@@ -505,6 +528,7 @@ export default class cliente extends Component {
                                             <th scope="col">Nombre</th>
                                             <th scope="col">Categoria</th>
                                             <th scope="col">Cantidad</th>
+                                            <th scope="col">Precio</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -515,6 +539,7 @@ export default class cliente extends Component {
                                                         <td>{user.nombre}</td>
                                                         <td>{user.categoria}</td>
                                                         <td>{user.cantidad}</td>
+                                                        <td>{user.price}</td>
                                                     </tr>
                                                 )
                                             })

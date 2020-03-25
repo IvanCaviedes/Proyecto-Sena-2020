@@ -42,7 +42,7 @@ Router.get('/', async (req, res) => {
             const titulo = $(el).find('.title')
             tags.push({imagenes:`https://www.eltiempo.com/${imagenes}`,ciudad:azul.text(),fecha:fecha.text(),titulo:titulo.text()})
         })
-         res.send({datos:tags})
+         res.send({datos:tags[0]})
     } catch (e) {
         console.log(e);
     }

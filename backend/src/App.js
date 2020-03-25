@@ -68,6 +68,8 @@ const cliente = require('./routes/cliente')
 const Cotizacion = require('./routes/Cotizacion')
 const noticias = require('./routes/noticias')
 const prueba = require('./routes/prueba')
+const ventas = require('./routes/ventas')
+
 
 App.use('/product', Product);
 App.use('/user', User);
@@ -80,21 +82,20 @@ App.use('/pedido',pedido)
 App.use('/cliente',cliente)
 App.use('/cotizacion',Cotizacion)
 App.use('/prueba',prueba)
-
+App.use('/ventas',ventas)
 /* App.use('/imagenes',prueba) */
-
 App.use('/index',(req,res)=>{
     res.render('index')
 })
-
 App.use('/noticias', noticias.control.index)
+App.use('/perroideal', noticias.control.perros)
+App.use('/ideal', noticias.control.ideal)
 App.use('/cuidados', (req, res) => {
     res.render('cuidados')
 })
 App.use('/prueba', (req, res) => {
     res.render('prueba')
 })
-
 App.use('/productos', productos.control.index)
 
 //manejador de errores

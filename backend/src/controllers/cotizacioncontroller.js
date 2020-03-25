@@ -13,6 +13,13 @@ function index(req, res) {
             return res.send({ message: 'NO CONTENT' });
         }).catch(error => res.send({ error }));
 }
+function index2(req, res) {
+    Proveedor.find({})
+        .then(Proveedores => {
+            if (Proveedores.length) return res.status(200).send({ Proveedores });
+            return res.send({ message: 'NO CONTENT' });
+        }).catch(error => res.send({ error }));
+}
 //Muesta uno en especifico
 function show(req, res) {
     if (req.body.error) return res.status(500).send({ error });
@@ -23,6 +30,7 @@ function show(req, res) {
 }
 //Crea un Proveedor
 function create(req, res) {
+    const {Tventa} = req.body;
     mensaje = "mascota creada correctamente"
     new Proveedor(req.body).save()
     .then(Proveedor => {
@@ -46,8 +54,8 @@ function create(req, res) {
             var mailOptions = {
                 from: 'ivancaviedes99@outlook.com',
                 to: correo,
-                subject: 'Cuenta Creada exitosamente',
-               html:'<h1>Cotizacion exitosa</h1><img src="https://cdn.discordapp.com/attachments/580223884276793345/691831204575707136/Mascotas.jpg" alt="" />'
+                subject: 'Cotizacion exitosa',
+               html:`<h1>Cotizacion exitosa y el precio a pagar es $${Tventa}</h1><img src="https://cdn.discordapp.com/attachments/580223884276793345/691831204575707136/Mascotas.jpg" alt="" />`
             };
 
 
@@ -157,6 +165,7 @@ function comprovarDias (req,res){
 
 module.exports = {
     index,
+    index2,
     show,
     create,
     update,

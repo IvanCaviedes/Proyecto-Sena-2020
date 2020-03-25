@@ -18,6 +18,15 @@ function index(req, res) {
             return res.status(204).send({ message: 'NO CONTENT' });
         }).catch(error => res.status(500).send({ error }));
 }
+
+//Busca todos los productos
+function FindFEnStock(req, res) {
+    Product.find({stock:1})
+        .then(products => {
+            if (products.length) return res.status(200).send({ products });
+            return res.status(204).send({ message: 'NO CONTENT' });
+        }).catch(error => res.status(500).send({ error }));
+}
 //cinco
 function cinco(req, res) {
     Product.find({}).limit(5)
@@ -72,6 +81,7 @@ function find(req, res, next) {
         next();
     })
 }
+
 function prueba(req, res, next) {
     console.log(req.body)
 }
@@ -84,5 +94,6 @@ module.exports = {
     update,
     remove,
     find,
-    prueba
+    prueba,
+    FindFEnStock
 }
