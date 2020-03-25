@@ -272,8 +272,8 @@ export default class Login extends Component {
                             <div class="header-body text-center mb-7">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                                        <h1 class="text-white">¡Bienvenido!</h1>
-                                        <p class="text-lead text-white">inicia sesion para poder hacer tus pedidos.</p>
+                                        <h1 class="text-white" style={{fontSize:'40px'}}>¡Bienvenido!</h1>
+                                        <p class="text-lead text-white">inicia sesion para poder hacer tus cotizaciones.</p>
                                     </div>
                                 </div>
                             </div>
@@ -291,9 +291,8 @@ export default class Login extends Component {
                                 <div class="card bg-secondary border-0 mb-0">
                                     <div class="card-body px-lg-5 py-lg-5">
                                     <div class="text-center text-muted mb-4">
-                                            <big>CLIENTES</big>
-                                            <br/>
-                                            <big>PET SHOP</big>
+                                            <big>CLIENTES PETSHOP</big>
+
                                         </div>
                                         <form role="form" onSubmit={this.iniciosesion}>
                                         <div class="form-group mb-3">
@@ -313,7 +312,7 @@ export default class Login extends Component {
                                                 </div>
                                             </div>
                                             <div class="text-center">
-                                                <button type="submit" class="btn btn-primary my-4">Iniciar sesión</button>
+                                                <button type="submit" style={{backgroundColor:'#418C60'}} class="btn my-4 text-white">Iniciar sesión</button>
                                             </div>
                                         </form>
                                     </div>

@@ -130,6 +130,42 @@ export default class cotizaciones extends Component {
             })
             .then(token => {
                 if (token.message) {
+                    this.setState({ Tusuarios: [] })
+                }
+                else {
+                    this.setState({ Tusuarios: token.Proveedores })
+                }
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
+    }
+    listar2 = (e) => {
+        const token12 = localStorage.getItem('token')
+        const envio = {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${token12}`,
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
+            }),
+        };
+        fetch('http://localhost:4000/cotizacion/todos', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ Tusuarios: '' })
+                throw new Error('Usuario no creado')
+            })
+            .then(token => {
+                if (token.message) {
 
                 }
                 else {
@@ -172,6 +208,22 @@ export default class cotizaciones extends Component {
                         </div>
 
 
+                        <div class="col-xl-6 order-xl-2 mx-auto">
+                            <div class="card bg-secondary shadow">
+                                <div class="card-header bg-white border-0">
+                                        <div class="row align-items-center">
+                                            <div class="col-6">
+                                            <button onClick={this.listar2}  className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button onClick={this.listar}  className="btn btn-default btn-lg btn-block">Mostrar Pendientes</button>
+                                            </div>
+                                        </div>                
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="col-xl-12 order-xl-2">
                             <div class="card shadow">
                                 <div class="card-header border-0">
@@ -188,6 +240,7 @@ export default class cotizaciones extends Component {
                                                 <th scope="col">Id Cliente</th>
                                                 <th scope="col">Fecha</th>
                                                 <th scope="col">Cantidad de productos</th>
+                                                <th scope="col">Precio Total</th>
                                                 <th scope="col">Estado</th>
                                                 <th scope="col">Opciones</th>
                                             </tr>
@@ -202,6 +255,7 @@ export default class cotizaciones extends Component {
                                                             <td>#{JSON.parse(user.productos).length}
                                                                 <button className="btn btn-sm btn-success ml-3" onClick={() => this.esamonda(user.productos)} ><i class="fas fa-eye"></i> Ver</button>
                                                             </td>
+                                                            <td>{user.Tventa}</td>
                                                             <td>{user.estado}</td>
                                                             <td>
                                                                 <button className="btn btn-sm btn-success" onClick={() => this.Aceptarcotizacion(user._id)} ><i class="fas fa-check-circle"></i></button>
@@ -277,7 +331,8 @@ export default class cotizaciones extends Component {
                                             <tr>
                                                 <th scope="col">Nombre Producto</th>
                                                 <th scope="col">Categoria</th>
-                                                <th scope="col">Cantidad del productos</th>
+                                                <th scope="col">Cantidad del producto</th>
+                                                <th scope="col">Precio Unidad</th>
                                                 <th scope="col">Opciones</th>
                                             </tr>
                                         </thead>
@@ -289,6 +344,7 @@ export default class cotizaciones extends Component {
                                                             <td>{producto.nombre}</td>
                                                             <td>{producto.categoria}</td>
                                                             <td>{producto.cantidad}</td>
+                                                            <td>{producto.price}</td>
                                                             <td>
                                                                 <button className="btn btn-sm btn-danger" onClick={() => this.eliminarusuario(producto.id)}><i class="fas fa-times"></i></button>
                                                             </td>

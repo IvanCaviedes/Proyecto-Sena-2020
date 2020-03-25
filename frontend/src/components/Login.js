@@ -301,8 +301,8 @@ export default class Login extends Component {
                             <div class="header-body text-center mb-7">
                                 <div class="row justify-content-center">
                                     <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-                                        <h1 class="text-white">¡Bienvenido!</h1>
-                                        <p class="text-lead text-white">Crea, elimina, edita la informcion de los usuarios, clientes, productos y pedidos de PET SHOP.</p>
+                                        <h1 class="text-white" style={{fontSize:'40px'}}>¡Bienvenido!</h1>
+                                        <p class="text-lead text-white">Crea, elimina, edita la informcion de los usuarios, clientes, productos y cotizaciones de PET SHOP.</p>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +330,7 @@ export default class Login extends Component {
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="fas fa-users"></i></span>
                                                     </div>
-                                                    <input class="form-control" placeholder="Username" type="text" onChange={e => this.username = e.target.value} required />
+                                                    <input class="form-control" placeholder="nombre de usuario" type="text" onChange={e => this.username = e.target.value} required />
                                                 </div>
                                             </div>
                                             <div class="form-group">

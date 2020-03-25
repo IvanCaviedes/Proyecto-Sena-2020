@@ -5,12 +5,66 @@ export default class nosea extends Component {
     super();
     this.state = {
       tusuarios:0,
-      tproductos:0
+      tproductos:0,
+      ganancias:0,
+      Cotizacionesp:0
     }
   }
   componentDidMount(){
     this.productos();
     this.usuaios();
+    this.ganancias();
+    this.cotizacionesp();
+  }
+
+  cotizacionesp = () =>{
+    const envio = {
+      method: 'GET',
+      headers: new Headers({
+          'Content-Type': 'application/json',
+          'Origin': 'http://localhost:4000',
+          'Accept': 'application/json'
+      }),
+  };
+  fetch('http://localhost:4000/cotizacion', envio)
+      .then(response => {
+          if (response.ok) {
+              return response.json()
+          }
+          throw new Error('Usuario no existe')
+      })
+      .then(token => {
+         this.setState({Cotizacionesp:token.Proveedores.length})
+          return;
+      })
+      .catch(e => {
+          this.setState({ mensaje: e.message })
+      })
+  }
+
+  ganancias = () =>{
+    const envio = {
+      method: 'GET',
+      headers: new Headers({
+          'Content-Type': 'application/json',
+          'Origin': 'http://localhost:4000',
+          'Accept': 'application/json'
+      }),
+  };
+  fetch('http://localhost:4000/ventas/', envio)
+      .then(response => {
+          if (response.ok) {
+              return response.json()
+          }
+          throw new Error('Usuario no existe')
+      })
+      .then(token => {
+        this.setState({ganancias:token.suma})
+          return;
+      })
+      .catch(e => {
+          this.setState({ mensaje: e.message })
+      })
   }
 
   productos = () =>{
@@ -109,8 +163,8 @@ export default class nosea extends Component {
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                      <span class="h2 font-weight-bold mb-0">924</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Total Ganancias</h5>
+        <span class="h2 font-weight-bold mb-0">${this.state.ganancias}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -126,8 +180,8 @@ export default class nosea extends Component {
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                      <span class="h2 font-weight-bold mb-0">49,65%</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Cotizaciones pendientes</h5>
+        <span class="h2 font-weight-bold mb-0">{this.state.Cotizacionesp}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-info text-white rounded-circle shadow">
