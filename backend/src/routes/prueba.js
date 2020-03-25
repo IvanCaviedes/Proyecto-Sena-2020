@@ -1,8 +1,33 @@
+/* const express = require('express');
+const Router = express.Router();
+const puppeteer = require ('puppeteer');
+
+
+Router.get('/', async (req, res) => {
+
+const url = await ('https://www.eltiempo.com/noticias/mascotas')
+
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.goto(url);
+
+const [el] = await page.$x('//*[@id="main-container"]/div[14]/div[2]/div[1]/section[1]/div[1]/article/h3/a');
+const text = await el.getProperty(textContent);
+const name = await text.jsonValue();
+
+browser.close();
+
+Console.log({name})
+
+return (name)
+})
+
+module.exports = Router; */
+
 const express = require('express');
 const Router = express.Router();
 const request = require('request-promise');
 const cheerio = require('cheerio');
-
 Router.get('/', async (req, res) => {
     try {
         const $ = await request({
@@ -22,5 +47,4 @@ Router.get('/', async (req, res) => {
         console.log(e);
     }
 })
-
 module.exports = Router;

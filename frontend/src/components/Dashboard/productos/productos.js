@@ -87,8 +87,9 @@ export default class users extends Component {
                 'Content-Type': 'application/json',
                 'Origin': 'http://localhost:4000',
                 'Accept': 'application/json'
-            }),
+                }),
         };
+    
         fetch(`http://localhost:4000/product/_id/${id}`, envio)
             .then(response => {
                 if (response.ok) {
@@ -603,44 +604,44 @@ export default class users extends Component {
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-single-02" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={this.state.usuario.name} required />
+                                            <Input type="text" onChange={e => this.name = e.target.value} placeholder={`Nombre: ${this.state.usuario.name}`} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-email-83" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.price = e.target.value} placeholder={this.state.usuario.price} required />
+                                            <Input type="number" onChange={e => this.price = e.target.value} placeholder={`Precio: $${this.state.usuario.price}`} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-email-83" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
-                                            <Input type="number" onChange={e => this.stock = e.target.value} placeholder={this.state.usuario.stock} required />
+                                            <Input type="number" onChange={e => this.stock = e.target.value} placeholder={`Stock: ${this.state.usuario.stock}`} required />
                                         </InputGroup>
                                     </FormGroup>
                                     <FormGroup>
                                         <InputGroup className="input-group-alternative">
                                             <InputGroupAddon addonType="prepend">
                                                 <InputGroupText>
-                                                    <i className="ni ni-email-83" />
+                                                    <i className="" />
                                                 </InputGroupText>
                                             </InputGroupAddon>
                                             <Input type="select" name="select" id="exampleSelect" onChange={e => this.categoria = e.target.value} placeholder={this.state.usuario.category} required>
                                                 <option>Seleccionar</option>
-                                                <option>Niños</option>
-                                                <option>Hogar</option>
-                                                <option>Entretenimiento</option>
+                                                <option>Alimentos</option>
+                                                <option>Juguetes</option>
+                                                <option>Medicamentos</option>
                                             </Input>
                                         </InputGroup>
                                     </FormGroup>

@@ -122,7 +122,8 @@ export default class cliente extends Component {
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }),
         };
-        fetch('http://localhost:4000/product/', envio)
+
+        fetch('http://localhost:4000/product/cinco', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -191,7 +192,34 @@ export default class cliente extends Component {
     }
     mostartodo = (e) => {
         e.preventDefault();
-        this.listarproductos();
+        const envio = {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Origin': 'http://localhost:4000',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+                'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
+            }),
+        };
+
+        fetch('http://localhost:4000/product/', envio)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                this.setState({ Tusuarios: '' })
+                throw new Error('Cliente no creado')
+            })
+            .then(token => {
+                this.setState({ Tusuarios: token.products })
+                return;
+            })
+            .catch(e => {
+                this.setState({ mensaje: e.message })
+            })
     }
 
 
@@ -278,8 +306,8 @@ export default class cliente extends Component {
                                 throw new Error('cotizacion no creada')
                             })
                             .then(token => {
-                                this.setState({ mensaje: "Puedes observar tu venta aqui!" })
-                                this.setState({ datoserror: { icon: 'fat-remove', color: 'success' } })
+                                this.setState({ mensaje: "cotizacion creada correctamente" })
+                                this.setState({ datoserror: { icon: 'check', color: 'success' } })
                                 this.toggleModal('notificationModal')
                                 return;
                             })
@@ -405,13 +433,13 @@ export default class cliente extends Component {
                                     <div class="col-xl-6 order-xl-2 mx-auto">
                                         <div class="card bg-secondary shadow">
                                             <div class="card-header bg-white border-0">
-                                                <form onSubmit={this.mostartodo}>
+                                                <form>
                                                     <div class="row align-items-center">
-                                                        <div class="col-5">
-                                                            <h3 class="mb-0">Mostar todos</h3>
+                                                        <div class="col-6">
+                                                            <button onClick={this.listarproductos} className="btn btn-default btn-lg btn-block">Mostrar pocos</button>
                                                         </div>
-                                                        <div class="col-7">
-                                                            <button type="submit" className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
+                                                        <div class="col-6">
+                                                            <button onClick={this.mostartodo} className="btn btn-default btn-lg btn-block">Mostrar Todos</button>
                                                         </div>
                                                     </div>
                                                 </form>

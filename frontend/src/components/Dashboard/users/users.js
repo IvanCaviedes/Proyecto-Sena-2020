@@ -385,7 +385,7 @@ export default class users extends Component {
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="input-username">Nombre Completo</label>
-                                                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre Completo" onChange={e => this.name = e.target.value} required />
+                                                        <input maxLength='30' pattern="[A-Za-z]{4-16}" type="text" id="input-username" class="form-control form-control-alternative" placeholder="Nombre Completo" onChange={e => this.name = e.target.value} required />
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">

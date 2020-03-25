@@ -82,19 +82,18 @@ App.use('/cotizacion',Cotizacion)
 App.use('/prueba',prueba)
 
 /* App.use('/imagenes',prueba) */
-
 App.use('/index',(req,res)=>{
     res.render('index')
 })
-
 App.use('/noticias', noticias.control.index)
+App.use('/perroideal', noticias.control.perros)
+App.use('/ideal', noticias.control.ideal)
 App.use('/cuidados', (req, res) => {
     res.render('cuidados')
 })
 App.use('/prueba', (req, res) => {
     res.render('prueba')
 })
-
 App.use('/productos', productos.control.index)
 
 //manejador de errores
