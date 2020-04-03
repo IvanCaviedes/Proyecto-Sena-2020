@@ -683,6 +683,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked{
     nav.navbar.bootsnav.navbar-fixed.navbar-transparent .logo-scrolled,
     nav.navbar.bootsnav.navbar-fixed.no-background .logo-scrolled{
         display: none;
+
     }
 
     nav.navbar.bootsnav.navbar-fixed.navbar-transparent .logo-display,
@@ -692,10 +693,14 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked{
 
     nav.navbar.bootsnav.navbar-fixed .logo-display{
         display: none;
+        margin-top: -20px;
+        width: 80%;
     }
 
     nav.navbar.bootsnav.navbar-fixed .logo-scrolled{
         display: block;
+        margin-top: -20px;
+        width: 80%;
     }
     
     /* Atribute Navigation

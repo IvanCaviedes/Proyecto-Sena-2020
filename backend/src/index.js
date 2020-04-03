@@ -10,6 +10,9 @@ App.use('/',(req,res)=>{
     res.render('index')
 })
 //conectar con base de datos
+App.use('/',(req,res)=>{
+    res.render('index')
+})
 Database.connect();
 //iniciando servidor
 App.listen(CONFIG.PORT,function(error){
