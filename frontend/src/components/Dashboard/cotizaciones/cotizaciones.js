@@ -5,12 +5,6 @@ import {
     Button,
     Card,
     CardBody,
-    FormGroup,
-    Form,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
     Modal
 } from "reactstrap";
 export default class cotizaciones extends Component {

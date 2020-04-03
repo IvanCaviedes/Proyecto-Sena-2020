@@ -1,16 +1,6 @@
 import React, { Component } from 'react'
-import html2canvas from 'html2canvas'
-import jsPDF from 'jspdf'
 import {
     Button,
-    Card,
-    CardBody,
-    FormGroup,
-    Form,
-    Input,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroup,
     Modal
 } from "reactstrap";
 import Footer from '../Footer'
