@@ -103,7 +103,7 @@ section { overflow: hidden; }*/
 
 .text-muted{}
 
-.text-primary{color: #ee997b !important;;}
+.text-primary{color: #f27649 !important;;}
 .text-finence{color:#13A0B2 !important;;}
 .text-mega{color:#ee997b !important;;}
 .text-white{color:#fff !important;;}
@@ -123,7 +123,7 @@ section { overflow: hidden; }*/
 .bg-primary{background-color: #1E8BC3;}
 .bg-finence{background-color:#13A0B2;}
 .bg-mega{background-color:#e5e5e5;}
-.bg-grey{background-color: #bdbdbdb2;}
+.bg-grey{background-color: rgb(211, 211, 211);}
 .bg-black{background-color: #212121;}
 .bg-white{background-color: #fff;}
 
