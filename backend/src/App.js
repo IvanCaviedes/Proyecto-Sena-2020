@@ -84,9 +84,7 @@ App.use('/cotizacion',Cotizacion)
 App.use('/prueba',prueba)
 App.use('/ventas',ventas)
 /* App.use('/imagenes',prueba) */
-App.use('/index',(req,res)=>{
-    res.render('index')
-})
+
 App.use('/noticias', noticias.control.index)
 App.use('/perroideal', noticias.control.perros)
 App.use('/ideal', noticias.control.ideal)

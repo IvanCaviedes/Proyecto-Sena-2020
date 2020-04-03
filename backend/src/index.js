@@ -7,6 +7,9 @@ const CONFIG = require('./config/config');
 //App
 const App = require('./App');
 //conectar con base de datos
+App.use('/',(req,res)=>{
+    res.render('index')
+})
 Database.connect();
 //iniciando servidor
 App.listen(CONFIG.PORT,function(error){
