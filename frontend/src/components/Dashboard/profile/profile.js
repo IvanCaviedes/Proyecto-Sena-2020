@@ -13,11 +13,11 @@ export default class profile extends Component {
             body: JSON.stringify(datos),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/user/_id/${id_d}`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/user/_id/${id_d}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()

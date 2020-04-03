@@ -38,11 +38,11 @@ export default class users extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/proveedor`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/proveedor`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -71,11 +71,11 @@ export default class users extends Component {
                 method: 'DELETE',
                 headers: new Headers({
                     'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:4000',
+                    'Origin': 'https://veterinariapetshop.herokuapp.com/',
                     'Accept': 'application/json'
                 }),
             };
-            fetch(`http://localhost:4000/product/_id/${id}`, envio)
+            fetch(`https://veterinariapetshop.herokuapp.com/product/_id/${id}`, envio)
                 .then(alert('producto eliminado'), this.listar())
                 .catch(e => console.log(e))
         }
@@ -85,12 +85,12 @@ export default class users extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
                 }),
         };
     
-        fetch(`http://localhost:4000/product/_id/${id}`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/product/_id/${id}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -125,7 +125,7 @@ export default class users extends Component {
                     method: 'GET',
                     headers: new Headers({
                         'Content-Type': 'application/json',
-                        'Origin': 'http://localhost:4000',
+                        'Origin': 'https://veterinariapetshop.herokuapp.com/',
                         'Accept': 'application/json',
                         'Access-Control-Allow-Origin': '*',
                         'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
@@ -133,7 +133,7 @@ export default class users extends Component {
                         'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
                     }),
                 };
-                fetch(`http://localhost:4000/proveedor/name/${this.proveedor}`, envio)
+                fetch(`https://veterinariapetshop.herokuapp.com/proveedor/name/${this.proveedor}`, envio)
                     .then(response => {
                         if (response.ok) {
                             return response.json()
@@ -156,11 +156,11 @@ export default class users extends Component {
                             body: data,
                             headers: new Headers({
                                 'Content-Type': 'application/json',
-                                'Origin': 'http://localhost:4000',
+                                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                                 'Accept': 'application/json'
                             }),
                         };
-                        fetch('http://localhost:4000/product/create', envio)
+                        fetch('https://veterinariapetshop.herokuapp.com/product/create', envio)
                             .then(
                                 this.setState({ mensaje: "Añadido correctamente" }),
                                 this.setState({ datoserror: { icon: 'check', color: 'success' } }),
@@ -188,7 +188,7 @@ export default class users extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token12}`,
                 'Access-Control-Allow-Origin': '*',
@@ -197,7 +197,7 @@ export default class users extends Component {
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }),
         };
-        fetch('http://localhost:4000/product/', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/product/', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -243,7 +243,7 @@ export default class users extends Component {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json',
                 "Access-Control-Allow-Origin": '*',
                 'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
@@ -251,7 +251,7 @@ export default class users extends Component {
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }
         };
-        fetch(`http://localhost:4000/product/${opcion}/${this.cajatexto}`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/product/${opcion}/${this.cajatexto}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -289,11 +289,11 @@ export default class users extends Component {
                 body: JSON.stringify(datos),
                 headers: new Headers({
                     'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:4000',
+                    'Origin': 'https://veterinariapetshop.herokuapp.com/',
                     'Accept': 'application/json'
                 }),
             };
-            fetch(`http://localhost:4000/product/_id/${id_d}`, envio)
+            fetch(`https://veterinariapetshop.herokuapp.com/product/_id/${id_d}`, envio)
                 .then(response => {
                     if (response.ok) {
                         return response.json()

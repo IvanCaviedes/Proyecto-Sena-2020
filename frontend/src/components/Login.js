@@ -51,11 +51,11 @@ export default class Login extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com',
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/user/', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/user/', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -87,11 +87,11 @@ export default class Login extends Component {
             body: JSON.stringify(datos),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com',
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/user/register', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/user/register', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -122,11 +122,11 @@ export default class Login extends Component {
             body: JSON.stringify(data),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com',
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/auth/login', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/auth/login', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -159,12 +159,12 @@ export default class Login extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com',
                 'Accept': 'application/json'
             }),
         };
 
-        fetch(`http://localhost:4000/user/username/${this.username}`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/user/username/${this.username}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -192,11 +192,11 @@ export default class Login extends Component {
             body: JSON.stringify(datos),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com',
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/correos/recuperar', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/correos/recuperar', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -225,11 +225,11 @@ export default class Login extends Component {
             body: JSON.stringify(datos),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com',
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/correos/registrar', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/correos/registrar', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -283,7 +283,7 @@ export default class Login extends Component {
                                         </span>
                                         <span class="nav-link-inner--text">Clientes</span>
                                     </Link>
-                                    <a href="http://localhost:4000/index" class="btn btn-neutral btn-icon">
+                                    <a href="https://veterinariapetshop.herokuapp.com/" class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
                                             <i class="fas fa-home mr-2"></i>
                                         </span>

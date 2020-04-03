@@ -38,11 +38,11 @@ export default class CambioContra extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/user/email/${this.email}`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/user/email/${this.email}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -77,11 +77,11 @@ export default class CambioContra extends Component {
             body: JSON.stringify(datos),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/user/_id/${this.state.datosU._id}`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/user/_id/${this.state.datosU._id}`, envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()

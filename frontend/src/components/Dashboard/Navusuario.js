@@ -29,6 +29,42 @@ export default class nav extends Component {
   };
   componentDidMount() {
     this.cotizacionesvencidas();
+    this.cambiocontra();
+  }
+  cambiocontra() {
+    const datos = localStorage.getItem('datos')
+    this.setState({ datos: datos })
+    const data = {
+      username: JSON.parse(localStorage.getItem('datos')).username,
+      password: JSON.parse(localStorage.getItem('datos')).username
+    }
+    console.log(data)
+    const envio = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'Origin': 'https://veterinariapetshop.herokuapp.com/',
+        'Accept': 'application/json'
+      }),
+    };
+    fetch('https://veterinariapetshop.herokuapp.com/auth/login', envio)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+        throw new Error('Usuario no existe')
+      })
+      .then(token => {
+        if (token.message === 'PASSWORD INCORRECTA') {
+        } else {
+          this.toggleModal('formModal2')
+        }
+        return;
+      })
+      .catch(e => {
+        this.setState({ mensaje: e.message })
+      })
   }
 
   cotizacionesvencidas(){
@@ -36,11 +72,11 @@ export default class nav extends Component {
       method: 'GET',
       headers: new Headers({
           'Content-Type': 'application/json',
-          'Origin': 'http://localhost:4000',
+          'Origin': 'https://veterinariapetshop.herokuapp.com/',
           'Accept': 'application/json'
       }),
   };
-  fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
+  fetch(`https://veterinariapetshop.herokuapp.com/cotizacion/comprovar`, envio)
   }
   actualizar2 = (e) => {
     e.preventDefault();
@@ -52,11 +88,11 @@ export default class nav extends Component {
       body: JSON.stringify(datos),
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:4000',
+        'Origin': 'https://veterinariapetshop.herokuapp.com/',
         'Accept': 'application/json'
       }),
     };
-    fetch(`http://localhost:4000/user/_id/${JSON.parse(localStorage.getItem('datos')).id}`, envio)
+    fetch(`https://veterinariapetshop.herokuapp.com/user/_id/${JSON.parse(localStorage.getItem('datos')).id}`, envio)
       .then(response => {
         if (response.ok) {
           return response.json()

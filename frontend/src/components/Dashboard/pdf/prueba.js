@@ -17,7 +17,7 @@ export default class prueba extends Component {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Origin': 'http://localhost:4000',
+            'Origin': 'https://veterinariapetshop.herokuapp.com/',
             'Accept': 'application/json',
             "Access-Control-Allow-Origin": '*',
             'Access-Control-Allow-Headers': 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method',
@@ -26,7 +26,7 @@ export default class prueba extends Component {
             'Authorization': `${token12}`
         }
     };
-    fetch('http://localhost:4000/user/', envio)
+    fetch('https://veterinariapetshop.herokuapp.com/user/', envio)
         .then(response => {
             if (response.ok) {
                 return response.json()

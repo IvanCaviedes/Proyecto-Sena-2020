@@ -22,11 +22,11 @@ export default class nosea extends Component {
       method: 'GET',
       headers: new Headers({
           'Content-Type': 'application/json',
-          'Origin': 'http://localhost:4000',
+          'Origin': 'https://veterinariapetshop.herokuapp.com/',
           'Accept': 'application/json'
       }),
   };
-  fetch('http://localhost:4000/cotizacion', envio)
+  fetch('https://veterinariapetshop.herokuapp.com/cotizacion', envio)
       .then(response => {
           if (response.ok) {
               return response.json()
@@ -47,11 +47,11 @@ export default class nosea extends Component {
       method: 'GET',
       headers: new Headers({
           'Content-Type': 'application/json',
-          'Origin': 'http://localhost:4000',
+          'Origin': 'https://veterinariapetshop.herokuapp.com/',
           'Accept': 'application/json'
       }),
   };
-  fetch('http://localhost:4000/ventas/', envio)
+  fetch('https://veterinariapetshop.herokuapp.com/ventas/', envio)
       .then(response => {
           if (response.ok) {
               return response.json()
@@ -72,11 +72,11 @@ export default class nosea extends Component {
       method: 'GET',
       headers: new Headers({
           'Content-Type': 'application/json',
-          'Origin': 'http://localhost:4000',
+          'Origin': 'https://veterinariapetshop.herokuapp.com/',
           'Accept': 'application/json'
       }),
   };
-  fetch('http://localhost:4000/product/', envio)
+  fetch('https://veterinariapetshop.herokuapp.com/product/', envio)
       .then(response => {
           if (response.ok) {
               return response.json()
@@ -98,11 +98,11 @@ export default class nosea extends Component {
       method: 'GET',
       headers: new Headers({
           'Content-Type': 'application/json',
-          'Origin': 'http://localhost:4000',
+          'Origin': 'https://veterinariapetshop.herokuapp.com/',
           'Accept': 'application/json'
       }),
   };
-  fetch('http://localhost:4000/user/', envio)
+  fetch('https://veterinariapetshop.herokuapp.com/user/', envio)
       .then(response => {
           if (response.ok) {
               return response.json()

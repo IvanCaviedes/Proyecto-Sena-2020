@@ -18,7 +18,7 @@ export default class nav extends Component {
     this.state = {
       datos: {},
       defaultModal: false,
-      mensaje:'',
+      mensaje: '',
       datoserror: {}
     }
   }
@@ -28,42 +28,40 @@ export default class nav extends Component {
     });
   };
   componentDidMount() {
-   this.cambiocontra();
-   this.cotizacionesvencidas();
+    this.cambiocontra();
+    this.cotizacionesvencidas();
   }
 
-cotizacionesvencidas(){
-  const envio = {
-    method: 'GET',
-    headers: new Headers({
+  cotizacionesvencidas() {
+    const envio = {
+      method: 'GET',
+      headers: new Headers({
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:4000',
+        'Origin': 'https://veterinariapetshop.herokuapp.com/',
         'Accept': 'application/json'
-    }),
-};
-fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
-}
+      }),
+    };
+    fetch(`https://veterinariapetshop.herokuapp.com/cotizacion/comprovar`, envio)
+  }
 
-  cambiocontra (){
+  cambiocontra() {
     const datos = localStorage.getItem('datos')
     this.setState({ datos: datos })
-
-
     const data = {
       username: JSON.parse(localStorage.getItem('datos')).username,
       password: JSON.parse(localStorage.getItem('datos')).username
     }
-
+    console.log(data)
     const envio = {
       method: 'POST',
       body: JSON.stringify(data),
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:4000',
+        'Origin': 'https://veterinariapetshop.herokuapp.com/',
         'Accept': 'application/json'
       }),
     };
-    fetch('http://localhost:4000/auth/login', envio)
+    fetch('https://veterinariapetshop.herokuapp.com/auth/login', envio)
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -91,11 +89,11 @@ fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
       body: JSON.stringify(datos),
       headers: new Headers({
         'Content-Type': 'application/json',
-        'Origin': 'http://localhost:4000',
+        'Origin': 'https://veterinariapetshop.herokuapp.com/',
         'Accept': 'application/json'
       }),
     };
-    fetch(`http://localhost:4000/user/_id/${JSON.parse(localStorage.getItem('datos')).id}`, envio)
+    fetch(`https://veterinariapetshop.herokuapp.com/user/_id/${JSON.parse(localStorage.getItem('datos')).id}`, envio)
       .then(response => {
         if (response.ok) {
           return response.json()
@@ -116,7 +114,7 @@ fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
   render() {
     return (
       <div >
-        <nav class="navbar navbar-top navbar-expand-md" id="navbar-main" style={{background:'linear-gradient(87deg, #306647 0, #418C60 100%)'}}>
+        <nav class="navbar navbar-top navbar-expand-md" id="navbar-main" style={{ background: 'linear-gradient(87deg, #306647 0, #418C60 100%)' }}>
           <div class="container-fluid">
             <a class="h2 mb-0 text-white text-uppercase d-none d-lg-inline-block">¡Bienvenido!</a>
             <ul class="navbar-nav align-items-center d-none d-md-flex">

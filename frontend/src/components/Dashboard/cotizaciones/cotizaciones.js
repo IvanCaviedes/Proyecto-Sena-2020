@@ -30,11 +30,11 @@ export default class cotizaciones extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
             }),
         };
-        fetch(`http://localhost:4000/cotizacion/comprovar`, envio)
+        fetch(`https://veterinariapetshop.herokuapp.com/cotizacion/comprovar`, envio)
     }
     toggleModal = state => {
         this.setState({
@@ -54,11 +54,11 @@ export default class cotizaciones extends Component {
                 method: 'DELETE',
                 headers: new Headers({
                     'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:4000',
+                    'Origin': 'https://veterinariapetshop.herokuapp.com/',
                     'Accept': 'application/json'
                 }),
             };
-            fetch(`http://localhost:4000/cotizacion/_id/${id}`, envio)
+            fetch(`https://veterinariapetshop.herokuapp.com/cotizacion/_id/${id}`, envio)
                 .then(alert('cotizacion eliminada'), this.listar())
                 .catch(e => console.log(e))
         }
@@ -73,11 +73,11 @@ export default class cotizaciones extends Component {
             body: JSON.stringify(datos),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json'
             }),
         };
-        fetch('http://localhost:4000/cotizacion/aceptada', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/cotizacion/aceptada', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -105,7 +105,7 @@ export default class cotizaciones extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token12}`,
                 'Access-Control-Allow-Origin': '*',
@@ -114,7 +114,7 @@ export default class cotizaciones extends Component {
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }),
         };
-        fetch('http://localhost:4000/cotizacion/', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/cotizacion/', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
@@ -141,7 +141,7 @@ export default class cotizaciones extends Component {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:4000',
+                'Origin': 'https://veterinariapetshop.herokuapp.com/',
                 'Accept': 'application/json',
                 'Authorization': `Bearer ${token12}`,
                 'Access-Control-Allow-Origin': '*',
@@ -150,7 +150,7 @@ export default class cotizaciones extends Component {
                 'Allow': 'GET, POST, OPTIONS, PUT, DELETE'
             }),
         };
-        fetch('http://localhost:4000/cotizacion/todos', envio)
+        fetch('https://veterinariapetshop.herokuapp.com/cotizacion/todos', envio)
             .then(response => {
                 if (response.ok) {
                     return response.json()
