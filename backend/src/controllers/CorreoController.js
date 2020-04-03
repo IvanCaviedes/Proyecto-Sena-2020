@@ -90,8 +90,8 @@ function nuevo (req,res,next){
             ciphers: 'SSLv3'
         },
         auth: {
-            user: process.env.CORREO,
-            pass: process.env.PASS
+            user: 'ivancaviedes99@outlook.com',
+            pass: '99120900389ivan'
         }
     });
 
