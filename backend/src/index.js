@@ -6,6 +6,9 @@ require('dotenv').config()
 const CONFIG = require('./config/config');
 //App
 const App = require('./App');
+App.use('/',(req,res)=>{
+    res.render('index')
+})
 //conectar con base de datos
 Database.connect();
 //iniciando servidor

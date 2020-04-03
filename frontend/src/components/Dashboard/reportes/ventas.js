@@ -6,6 +6,8 @@ import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 
+import {Link} from 'react-router-dom'
+
 import Footer from '../Footer'
 
 import {
@@ -142,13 +144,35 @@ export default class ventas extends Component {
                     <tbody>
                       <tr>
                         <th scope="row">
-                          Reporte numero #
+                          Reporte Total de Usuarios
                     </th>
                         <td>
-                          Este reporte se constitituye de.... 
+                          Este reporte se constitituye de una lista mostrando los ultimos usuarios registrados
                     </td>
                         <td>
-                          reporte.pdf
+                          <Link to="/pdfU"><i class="fas fa-eye"> ver</i></Link>
+                    </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          Reporte Total de Productos
+                    </th>
+                        <td>
+                          Este reporte se constitituye de una lista mostrando los ultimos productos registrados
+                    </td>
+                        <td>
+                          <Link to="/pdfP"><i class="fas fa-eye"> ver</i></Link>
+                    </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          Reporte Total de cotizaciones 
+                    </th>
+                        <td>
+                          Este reporte se constitituye de una lista mostrando los ultimas cotizaciones registradas
+                    </td>
+                        <td>
+                          <Link to="/pdfC"><i class="fas fa-eye"> ver</i></Link>
                     </td>
                       </tr>
                     </tbody>
